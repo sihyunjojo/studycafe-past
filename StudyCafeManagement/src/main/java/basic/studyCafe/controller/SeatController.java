@@ -52,4 +52,5 @@ public class SeatController {
 		return "redirect:/seat/register";
 	}
 
+	
 }
