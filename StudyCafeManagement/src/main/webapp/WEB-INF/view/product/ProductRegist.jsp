@@ -6,8 +6,6 @@
 <meta charset="UTF-8">
 <title>상품 리스트</title>
 <style>
-
-
 body { margin:0; padding:0; font-family:'맑은 고딕', verdana; }
 		a { color:#05f; text-decoration:none; }
 		
@@ -21,7 +19,7 @@ body { margin:0; padding:0; font-family:'맑은 고딕', verdana; }
          margin:5px;
          text-align: center;
    }
-    
+   
    header a{
       font-size :30px;
       font-weight: bold;
@@ -31,7 +29,7 @@ body { margin:0; padding:0; font-family:'맑은 고딕', verdana; }
       text-decoration:none;
    }
    
-    aside#aside { margin-left: 60px; margin-right: 200px; float:left; width:200px; height:650px; }
+     aside#aside { margin-left: 60px; margin-right: 200px; float:left; width:200px; height:650px; }
    
     section#container {}
 			section#content { margin: 50px; float:center; width:1700px; height:650px; }
@@ -43,10 +41,10 @@ body { margin:0; padding:0; font-family:'맑은 고딕', verdana; }
 	}	
 			
 	h3 { font-size:30px; margin-bottom:20px; text-align:center; }	
-				
+	
    section#container { }
    
-   aside#aside h3 { font-size:30px; margin-bottom:20px; text-align:center; }
+   aside#aside h3 { font-size:30px; margin-bottom:20px;  text-align:center;  }
 		aside#aside li { font-size:16px; text-align:center; }
 		aside#aside li a { color:#000; display:block; padding:10px 0; }
 		aside#aside li a:hover { text-decoration:none; background:#eee; }
@@ -164,10 +162,8 @@ body { margin:0; padding:0; font-family:'맑은 고딕', verdana; }
 			        
 	
 	<footer id = "content" style = "">
-		<a href="" style = "float:right" > 등록 </a>
 		<a href="" style = "float:right" > 취소 </a>
-<%-- 		<a href="dogCartAdd.dog?id=<%=dogVO.getId()%>" style = "float:right">장바구니담기</a>
- --%>	
+
  	</footer>
 </body>
 </html>
