@@ -12,15 +12,8 @@
 		document.cookie = name + "=" + escape(value) + "; path=/; expires="
 				+ todayDate.toGMTString() + ";";
 	}
-
-	$(window).bind("beforeunload", function(e) {
-		if ($("#option").is(":checked")) {
-			setCookie("name", "value");
-		}
-	});
-
 	function closeWin() {
-		if ($("#option").is(":checked")) {
+		if (document.getElementById("option").checked) {
 			setCookie("name", "value");
 			window.close();
 		}
@@ -30,7 +23,8 @@
 <body>
 	팝업창입니다.
 	<form>
-		<input type=checkbox value="option"> 
+		<label><input type=checkbox id="option">오늘 하루 보지 않기</label>
+		<button onclick="closeWin()">닫기</button>
 	</form> 
 </body> 
 </html>

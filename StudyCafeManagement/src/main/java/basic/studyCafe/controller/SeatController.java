@@ -35,19 +35,20 @@ public class SeatController {
 	}
 
 	@RequestMapping(value = "/reserve", method = RequestMethod.POST)
-	public String reserveSeat(@RequestParam("seatNum") int seatNum, @RequestParam("user_id") String user_id,
+	public String reserveSeat(@RequestParam int seatNum, @RequestParam String user_id,
 			SeatVO seat) {
 
-		seat.setSeat_number(seatNum);
-		seat.setUser_id(user_id);
-		seatService.registSeat(seat);
+			seat.setSeat_number(seatNum);
+			seat.setUser_id(user_id);
+			seatService.registSeat(seat);			
 
 		return "redirect:/seat/register";
 	}
 
 	@RequestMapping(value = "/return", method = RequestMethod.POST)
-	public String returnSeat(@RequestParam("seatNum") int seatNum, SeatVO seat) {
+	public String returnSeat(@RequestParam int seatNum, SeatVO seat, @RequestParam String user_id) {
 		seat.setSeat_number(seatNum);
+		seat.setUser_id(user_id);
 		seatService.returnSeat(seat);
 		return "redirect:/seat/register";
 	}

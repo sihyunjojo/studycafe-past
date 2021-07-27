@@ -191,6 +191,7 @@ public class LoginController {
 
 	}
 	
+	
 	@RequestMapping(value = "/popUp")
 	public String PopUp() {
 		return "common/PopUp";
