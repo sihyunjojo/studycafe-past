@@ -129,6 +129,7 @@ body { margin:0; padding:0; font-family:'맑은 고딕', verdana; }
 	  <c:if test="${not empty productList }">  
 	  
       <h3>상품목록</h3>
+      <a href="ProductRegist">상품 등록</a>
       <hr>
       
           <td><input type="hidden" name="user_id"
@@ -142,14 +143,17 @@ body { margin:0; padding:0; font-family:'맑은 고딕', verdana; }
 				<td>
 				<tr>
 	            <a href="ProductDetail?prod_number=${product.prod_number}">
-	            <img src = "images/${product.prod_image }" class = "productImage"/></a>
+	            <img src = "/StudyCafeManagement/resources/images/${product.prod_image }" class = "productImage"/></a>
 	            </tr>
 				<br><tr>상품 번호: ${product.prod_number }</tr>
 				<br><tr><a href="ProductDetail?prod_number=${product.prod_number}">
 				상품명 : ${product.prod_name }</a></tr>
 				<br><tr>가격 : ${product.prod_price }원 </tr>
 				<br>
+				<tr><a href="ProductDetailAdmin?prod_number=${product.prod_number}">
+				관리자 상품 디테일</a></tr>
 				</td>
+				<hr>
 				 <c:if test="${(status.index + 1) % 5 == 0}">
 			     </c:if>
 		</c:forEach>

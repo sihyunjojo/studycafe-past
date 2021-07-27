@@ -45,6 +45,28 @@
 	<insert id="insertCartProduct" > 
         INSERT INTO CartProduct(user_id, prod_number, prod_cartstate) VALUES (#{user_id}, #{prod_number}, 'T') 
 	</insert>
+	
+	<insert id="insertArticle" parameterType="ProductVO">
+		INSERT INTO Product
+		VALUES(Product_seq.nextval, 
+		#{prod_type}, #{prod_amount},
+		#{prod_name}, #{prod_price},
+		#{prod_image}, #{prod_content}, 0)
+	</insert>
+	
+	
+	
+	
+	<update id="updateProduct" parameterType="ProductVO">
+		UPDATE Product SET
+		prod_type = #{prod_type}, 
+		prod_amount = #{prod_amount}, 
+		prod_name = #{prod_name}, 
+		prod_price = #{prod_price}, 
+		prod_image = #{prod_image}, 
+		prod_content = #{prod_content}     
+		WHERE prod_number = #{prod_number}
+	</update>
 	 
 	
 </mapper>

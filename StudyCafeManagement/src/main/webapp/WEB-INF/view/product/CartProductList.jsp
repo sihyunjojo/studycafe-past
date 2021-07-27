@@ -99,7 +99,7 @@ body { margin:0; padding:0; font-family:'맑은 고딕', verdana; }
 		   </c:if>
 	  <c:if test="${not empty cartProductList }">  
 	  
-      <h3>상품목록</h3>
+      <h3>장바구니 상품 목록</h3>
       <hr>
       
           <td><input type="hidden" name="user_id"
@@ -123,6 +123,7 @@ body { margin:0; padding:0; font-family:'맑은 고딕', verdana; }
 				상품명 : ${cartProduct.prod_name }</a></tr>
 				<br><tr>가격 : ${cartProduct.prod_price }원 </tr>
 				<br>
+				
 				</td>
 				 <c:if test="${(status.index + 1) % 5 == 0}">
 			     </c:if>

@@ -114,6 +114,9 @@ body { margin:0; padding:0; font-family:'맑은 고딕', verdana; }
 	<form action="ProductUpdate" method = "POST">
 		<input type = "hidden" name = "prod_number" value = "${product.prod_number }">
 		<table>
+		
+		<h3>상품 수정 </h3>
+			<hr>
 		<tr>
 				<td>상품 이름</td>
 				<td><input type="text" name="prod_name" value = "${product.prod_name}"></td>
@@ -130,22 +133,22 @@ body { margin:0; padding:0; font-family:'맑은 고딕', verdana; }
 				<td>상품 가격</td>
 				<td><input type="text" name="prod_price" value = "${product.prod_price }"/></td>
 			</tr>
-			<tr> 
-				<td>상품 내용</td>
-				<td><input type="content" name="prod_content" value = "${product.prod_content }"/></td>
-				<textarea rows="20" cols= "40" id = content name = "content"></textarea>
+			<tr>
+				<td><label for = "prod_content">상품 내용 </label> </td>
+					<td>
+					<textarea rows="20" cols= "40" id = prod_content name = "prod_content" value = "${product.prod_content }"></textarea>
+				</td>
 			</tr>
 			<tr>
 				<td>상품 이미지 경로</td>
 				<td><input type="file" name="prod_image" readonly = "readonly" /></td>
 			</tr>
 			
-			<tr>
-				<input type="submit" value="상품 수정"> 
-			
+			<tr>	
 			</tr>
 			
 		</table>
+				<input type="submit" value="상품 수정"> 
 	</form>
 	</section>
 	

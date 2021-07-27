@@ -9,6 +9,7 @@ CREATE TABLE Product(
 	prod_readcount NUMBER(10) NOT NULL
 );
 
-CREATE SEQUENCE product_seq;
-
+CREATE SEQUENCE Product_seq;
 drop table Product;
+
+DROP SEQUENCE product_seq;
