@@ -206,8 +206,34 @@ header, section {
 	function fn_res_form() {
 		location.href = "/StudyCafeManagement/seat/register";
 	}
-	window.onload = function(){
-	    window.open("popUp", "mainPopUp", "width=700, height=500");
+	var noticeCookie = getCookie("name");
+	if(noticeCookie != "value"){
+	    window.open("popUp", "mainPopUp", "width=500, height=650, status=no, scrollbars= 0, toolbar=0, menubar=no");
+	}
+	function getCookie(name) {
+		var found = false
+		var start, end
+		var i = 0
+		
+		while(i <= document.cookie.length) {
+			start = i
+			end = start + name.length
+			
+			if(document.cookie.substring(start, end) == name) {
+				found = true
+				break
+			}
+			i++
+		}
+		
+		if(found==true) {
+			start = end + 1
+			end = document.cookie.indexOf(";", start)
+			if(end < start)
+				end = document.cookie.length
+				return document.cookie.substring(start, end)
+		}
+		return ""
 	}
 </script>
 
