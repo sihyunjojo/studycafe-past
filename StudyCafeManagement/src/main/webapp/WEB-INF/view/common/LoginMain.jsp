@@ -206,10 +206,15 @@ header, section {
 	function fn_res_form() {
 		location.href = "/StudyCafeManagement/seat/register";
 	}
+	window.onload = function(){
+	    window.open("popUp", "mainPopUp", "width=700, height=500");
+	}
 </script>
 
 </head>
 <body>
+
+
 	<header> 
 		<div class="nav_container">
 			<h7
