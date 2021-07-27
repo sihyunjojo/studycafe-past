@@ -13,7 +13,7 @@ public interface ProductMapper {
 	List<ProductVO> selectProductList();
 	ProductVO selectProduct(int prod_number);
 	List<CartProductVO> selectCartProductList(@Param("user_id") String user_id);
-	void insertCartProduct(@Param("user_id")String user_id, @Param("prod_number")int prod_number);
+	void insertCartProduct(@Param("user_id") String user_id, @Param("prod_number") int prod_number);
 	
 
 

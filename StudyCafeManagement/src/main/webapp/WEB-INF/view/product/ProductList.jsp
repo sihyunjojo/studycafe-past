@@ -70,7 +70,9 @@ body { margin:0; padding:0; font-family:'맑은 고딕', verdana; }
 <body>
 <header>
         <div class="nav_container">
+         <a href = "/StudyCafeManagement/common/LoginMain">
          <h7 style ="color:white; margin:3px; font-size:40px; font-weight:bold;">베이직 스터디 카페</h7>
+         </a>
         <div class="cafe_menus">
                     <img src="" class="logo_image" width="40" height="40" >
                     <a href="/" class="Seat" >좌석</a>

@@ -3,6 +3,7 @@ package basic.studyCafe.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
 
 import basic.studyCafe.vo.CartProductVO;
@@ -13,6 +14,6 @@ public interface ProductService {
 	public List<ProductVO> getproductList();
 	public ProductVO getProductDetail(int prod_number);
 	public List<CartProductVO> getCartProductList(String user_id);
-	public void addCartProduct(String user_id, int prod_number);
+	public void addCartProduct(@Param("user_id") String user_id, @Param("prod_number") int prod_number);
 
 }

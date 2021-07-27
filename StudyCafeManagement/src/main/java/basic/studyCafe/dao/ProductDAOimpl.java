@@ -3,12 +3,12 @@ package basic.studyCafe.dao;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import basic.studyCafe.mybatis.ProductMapper;
-import basic.studyCafe.mybatis.SeatMapper;
 import basic.studyCafe.vo.CartProductVO;
 import basic.studyCafe.vo.ProductVO;
 
@@ -45,7 +45,7 @@ public class ProductDAOimpl implements ProductDAO {
 
 
 	@Override
-	public void insertCartProduct(String user_id, int prod_number) {
+	public void insertCartProduct(@Param("user_id") String user_id, @Param("prod_number") int prod_number) {
 		// TODO Auto-generated method stub
 		ProductMapper productMapper = sqlSession.getMapper(ProductMapper.class);
 		productMapper.insertCartProduct(user_id,prod_number);

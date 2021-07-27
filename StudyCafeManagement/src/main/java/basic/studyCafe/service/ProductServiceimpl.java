@@ -3,6 +3,7 @@ package basic.studyCafe.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -38,7 +39,7 @@ public class ProductServiceimpl implements ProductService{
 	}
 
 	@Override
-	public void addCartProduct(String user_id, int prod_number) {
+	public void addCartProduct(@Param("user_id") String user_id, @Param("prod_number") int prod_number) {
 		// TODO Auto-generated method stub
 		productDAO.insertCartProduct(user_id,prod_number);
 

@@ -61,7 +61,7 @@ public class ProductController extends HttpServlet {
 	}
 	
 	@RequestMapping(value = "/addCartProduct", method = RequestMethod.POST)
-	public ModelAndView AddCartProduct(@RequestParam("user_id") String user_id, @RequestParam("prod_number") int prod_number, CartProductVO cartProduct) {
+	public ModelAndView AddCartProduct(@RequestParam("user_id") String user_id, @RequestParam("prod_number") int prod_number) {
 		productService.addCartProduct(user_id,prod_number);
 		
 		ModelAndView mav = new ModelAndView();
