@@ -41,7 +41,7 @@ public class ProductController extends HttpServlet {
 		List<ProductVO> productList = productService.getproductList();
 		mav.setViewName("product/ProductList");
 		mav.addObject("productList", productList);
-		return mav;
+		return mav; 
 	}
 	@RequestMapping(value = "/CartProductList", method = RequestMethod.GET)
 	public ModelAndView ViewCartProductList(@RequestParam String user_id) {
