@@ -109,7 +109,7 @@ public class LoginController {
 
 	@RequestMapping(value = "/join", method = RequestMethod.POST)
 	public String Join(MemberVO member, HttpServletResponse response) throws IOException {
-		String path = "";
+		String path = "common/JoinForm";
 		int duplicationCheck = memberService.checkUniqueId(member);
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = response.getWriter();
@@ -117,12 +117,21 @@ public class LoginController {
 		if (duplicationCheck == 1) {
 			out.println("<script>alert('경고!! 중복된 아이디입니다.');</script>");
 			out.flush();
-			path = "common/JoinForm";
 		} else {
-			memberService.joinMember(member);
-			out.println("<script>alert('회원가입이 완료되었습니다.');</script>");
-			out.flush();
-			path = "common/LoginMain";
+			if (!(member.getUser_password().equals(member.getUser_checkpw()))) {
+				out.println("<script>alert('경고!! 비밀번호를 다시 확인해주세요.');</script>");
+				out.flush();
+			} else {
+				if(member.getUser_id().equals("null")) {
+					out.println("<script>alert('경고!! null은 사용할 수 없습니다.');</script>");
+					out.flush();	
+				}else {
+				memberService.joinMember(member);
+				out.println("<script>alert('회원가입이 완료되었습니다.');</script>");
+				out.flush();
+				path = "common/LoginMain";
+				}
+			}
 		}
 
 		return path;
@@ -190,12 +199,10 @@ public class LoginController {
 		return mav;
 
 	}
-	
-	
+
 	@RequestMapping(value = "/popUp")
 	public String PopUp() {
 		return "common/PopUp";
 	}
-
 
 }

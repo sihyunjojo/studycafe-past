@@ -204,7 +204,7 @@ header, section {
 		location.href = "ProductList";
 	}
 	function fn_res_form() {
-		location.href = "/StudyCafeManagement/seat/register";
+		location.href = "/StudyCafeManagement/seat/register?user_id=${sessionScope.user_id}";
 	}
 	var noticeCookie = getCookie("name");
 	if(noticeCookie != "value"){
@@ -248,7 +248,7 @@ header, section {
         	 </a>
 			<div class="cafe_menus">
 				<img src="/StudyCafeManagement/resources/images/logo.jpg" class="logo_image" width="40" height="40">
-				  <a href="/StudyCafeManagement/seat/register" class="Seat">좌석</a> 
+				  <a href="/StudyCafeManagement/seat/register?user_id=${sessionScope.user_id}" class="Seat">좌석</a> 
 					<a href="/StudyCafeManagement/product/ProductList" class="Product">상품</a> 
 					<a href="/StudyCafeManagement/board/BoardList" class="Community">커뮤니티</a>
 					<a href="/StudyCafeManagement/notice/NoticeList?user_id=${sessionScope.user_id}" class="Notice">공지사항</a>
