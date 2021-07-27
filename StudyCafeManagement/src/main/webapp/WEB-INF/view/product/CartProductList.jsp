@@ -12,11 +12,10 @@
 		location.href = "BoardInsert";
 	}
 </script>
-
 <style>
 body { margin:0; padding:0; font-family:'맑은 고딕', verdana; }
 		a { color:#05f; text-decoration:none; }
-		 
+		
 		h1, h2, h3, h4, h5, h6 { margin:0; padding:0; }
 		ul, lo, li { margin:0; padding:0; list-style:none; }
 		
@@ -41,7 +40,7 @@ body { margin:0; padding:0; font-family:'맑은 고딕', verdana; }
    
     section#container {}
 			section#content { margin: 50px; float:center; width:1700px; height:650px; }
-			aside#aside { float:left; width:180px; }
+			aside#aside { float:left; width:180px; height:2000px}
 			section#container::after { content:""; display:block; clear:both; }	
 			
 	section h1{
@@ -68,20 +67,22 @@ body { margin:0; padding:0; font-family:'맑은 고딕', verdana; }
   
 </head>
 <body>
-<header>
-        <div class="nav_container">
-         <h7 style ="color:white; margin:3px; font-size:40px; font-weight:bold;">베이직 스터디 카페</h7>
-        <div class="cafe_menus">
-                    <img src="" class="logo_image" width="40" height="40" >
-                    <a href="/" class="Seat" >좌석</a>
-                    <a href="/" class="Product" >상품</a>
-                    <a href="/" class="Community" >커뮤니티</a>
-                    <a href="/" class="Board" >공지사항</a>
-                    <a href="/" class="Message" >메시지</a>
-            </div>
+<header> 
+		<div class="nav_container">
+			 <a href = "/StudyCafeManagement/common/LoginMain">
+         		<h7 style ="color:white; margin:3px; font-size:40px; font-weight:bold;">베이직 스터디 카페</h7>
+        	 </a>
+			<div class="cafe_menus">
+				<img src="/StudyCafeManagement/resources/images/logo.jpg" class="logo_image" width="40" height="40">
+				  <a href="/StudyCafeManagement/seat/register" class="Seat">좌석</a> 
+					<a href="/StudyCafeManagement/product/ProductList" class="Product">상품</a> 
+					<a href="/StudyCafeManagement/board/BoardList" class="Community">커뮤니티</a>
+					<a href="/StudyCafeManagement/notice/NoticeList?user_id=${sessionScope.user_id}" class="Notice">공지사항</a>
+					<a href="/" class="Message">메시지</a>
+			</div>
 
-        </div>
-    </header>
+		</div>
+	</header>
      
     
    <section id="container">
@@ -99,7 +100,7 @@ body { margin:0; padding:0; font-family:'맑은 고딕', verdana; }
 		   </c:if>
 	  <c:if test="${not empty cartProductList }">  
 	  
-      <h3>상품목록</h3>
+      <h3>장바구니 상품 목록</h3>
       <hr>
       
           <td><input type="hidden" name="user_id"
@@ -123,6 +124,7 @@ body { margin:0; padding:0; font-family:'맑은 고딕', verdana; }
 				상품명 : ${cartProduct.prod_name }</a></tr>
 				<br><tr>가격 : ${cartProduct.prod_price }원 </tr>
 				<br>
+				
 				</td>
 				 <c:if test="${(status.index + 1) % 5 == 0}">
 			     </c:if>

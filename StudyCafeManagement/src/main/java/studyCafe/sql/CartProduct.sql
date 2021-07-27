@@ -10,5 +10,5 @@ CREATE TABLE CartProduct(
 
 CREATE SEQUENCE product_seq;
 
-drop table cartproduct;
+drop table CartProduct;
 

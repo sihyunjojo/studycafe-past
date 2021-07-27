@@ -43,7 +43,28 @@ public class ProductServiceimpl implements ProductService{
 		// TODO Auto-generated method stub
 		productDAO.insertCartProduct(user_id,prod_number);
 
-	} 
+	}
+
+	@Override
+	public void registArticle(ProductVO productVO) {
+		// TODO Auto-generated method stub
+		productDAO.insertArticle(productVO);
+	}
+
+	@Override
+	public void modifyProduct(ProductVO productVO) {
+		// TODO Auto-generated method stub
+		productDAO.updateProduct(productVO);
+
+	}
+
+	@Override
+	public void removeProduct(int prod_number) {
+		// TODO Auto-generated method stub
+		productDAO.deleteProduct(prod_number);
+	}
+
+
 
 
 

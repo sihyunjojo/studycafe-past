@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import basic.studyCafe.service.ProductService;
+import basic.studyCafe.vo.BoardVO;
 import basic.studyCafe.vo.CartProductVO;
 import basic.studyCafe.vo.ProductVO;
 import basic.studyCafe.vo.SeatVO;
@@ -60,6 +61,17 @@ public class ProductController extends HttpServlet {
 		return mav;
 	}
 	
+	@RequestMapping("/ProductDetailAdmin")
+	public ModelAndView ProductDetailAdmin(@RequestParam int prod_number) {
+		ModelAndView mav = new ModelAndView();
+		ProductVO product = productService.getProductDetail(prod_number);
+		mav.setViewName("product/ProductDetailAdmin");
+		mav.addObject("product", product);
+		return mav;
+	}
+	
+	
+	
 	@RequestMapping(value = "/addCartProduct", method = RequestMethod.POST)
 	public ModelAndView AddCartProduct(@RequestParam("user_id") String user_id, @RequestParam("prod_number") int prod_number) {
 		productService.addCartProduct(user_id,prod_number);
@@ -74,13 +86,41 @@ public class ProductController extends HttpServlet {
 	
 	
 	@RequestMapping(value = "/ProductRegist", method = RequestMethod.GET)
-	public String ProductRegist() {
-		return "product/ProductRegist";
+	public String boardWriteForm() {
+		return "/product/ProductRegist";
 	}
+	
+	@RequestMapping(value = "/ProductRegist", method = RequestMethod.POST)
+	public String ProductRegist(ProductVO productVO) {
+		productService.registArticle(productVO);
+		return "redirect:/product/ProductList";
+	}
+	
 	@RequestMapping(value = "/ProductUpdate", method = RequestMethod.GET)
-	public String ProductUpdate() {
-		return "product/ProductUpdate";
+	public ModelAndView ProductUpdateForm(@RequestParam int prod_number) {
+		ModelAndView mav = new ModelAndView();
+		ProductVO product = productService.getProductDetail(prod_number);
+
+		mav.setViewName("product/ProductUpdate");
+		mav.addObject("product", product);
+		return mav;
 	}
+	
+	
+	@RequestMapping(value = "/ProductUpdate", method = RequestMethod.POST)
+	public String ProductUpdate(ProductVO product) {
+		productService.modifyProduct(product);
+		return "redirect:/product/ProductList";
+	}
+	
+	
+	
+	@RequestMapping("/ProductDelete")
+	public String Productremove(@RequestParam int prod_number) {
+		productService.removeProduct(prod_number);
+		return "redirect:/product/ProductList";
+	}
+	
 	@RequestMapping(value = "/ProductSearched", method = RequestMethod.GET)
 	public String ProductSearched() {
 		return "product/ProductSearched";

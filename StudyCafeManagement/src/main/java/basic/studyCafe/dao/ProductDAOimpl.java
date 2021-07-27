@@ -8,7 +8,9 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import basic.studyCafe.mybatis.BoardMapper;
 import basic.studyCafe.mybatis.ProductMapper;
+import basic.studyCafe.vo.BoardVO;
 import basic.studyCafe.vo.CartProductVO;
 import basic.studyCafe.vo.ProductVO;
 
@@ -50,6 +52,29 @@ public class ProductDAOimpl implements ProductDAO {
 		ProductMapper productMapper = sqlSession.getMapper(ProductMapper.class);
 		productMapper.insertCartProduct(user_id,prod_number);
 	}
+
+	@Override
+	public void insertArticle(ProductVO productVO) {
+		// TODO Auto-generated method stub
+		ProductMapper productMapper = sqlSession.getMapper(ProductMapper.class);
+		productMapper.insertArticle(productVO);
+	}	
+
+	@Override
+	public void updateProduct(ProductVO productVO) {
+		// TODO Auto-generated method stub
+		ProductMapper productMapper = sqlSession.getMapper(ProductMapper.class);
+		productMapper.updateProduct(productVO);
+	}
+
+	@Override
+	public void deleteProduct(int prod_number) {
+		// TODO Auto-generated method stub
+		ProductMapper productMapper = sqlSession.getMapper(ProductMapper.class);
+		productMapper.deleteProduct(prod_number);	
+	}
+
+
 
 
 
