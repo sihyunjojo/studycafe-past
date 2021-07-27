@@ -190,5 +190,11 @@ public class LoginController {
 		return mav;
 
 	}
+	
+	@RequestMapping(value = "/popUp")
+	public String PopUp() {
+		return "common/PopUp";
+	}
+
 
 }
