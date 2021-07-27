@@ -171,7 +171,7 @@ body { margin:0; padding:0; font-family:'맑은 고딕', verdana; }
 	</section>
 
     
-    
+     
 <footer id = "content" style = "">
 		<a href="" style = "float:right" >쇼핑 계속하기</a>
 <%-- 		<a href="dogCartAdd.dog?id=<%=dogVO.getId()%>" style = "float:right">장바구니담기</a>

@@ -95,7 +95,7 @@ body { margin:0; padding:0; font-family:'맑은 고딕', verdana; }
 				<ul>
 					<br>
 					<li><a href="/shop/list?c=100&l=1">과자</a>
-				
+				  
 						<ul class="low">
 							<li><a href="/shop/list?c=101&l=2">베스트과자</a></li>
 							<li><a href="/shop/list?c=102&l=2">달콤한과자</a></li>

@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
-<html>
+<html> 
 <head>
 <meta charset="UTF-8">
 <title>장바구니 상품 리스트</title>
@@ -16,7 +16,7 @@
 <style>
 body { margin:0; padding:0; font-family:'맑은 고딕', verdana; }
 		a { color:#05f; text-decoration:none; }
-		
+		 
 		h1, h2, h3, h4, h5, h6 { margin:0; padding:0; }
 		ul, lo, li { margin:0; padding:0; list-style:none; }
 		

@@ -67,7 +67,7 @@ body { margin:0; padding:0; font-family:'맑은 고딕', verdana; }
    </style>
   
 </head>
-<body>
+<body> 
 <header>
         <div class="nav_container">
          <a href = "/StudyCafeManagement/common/LoginMain">

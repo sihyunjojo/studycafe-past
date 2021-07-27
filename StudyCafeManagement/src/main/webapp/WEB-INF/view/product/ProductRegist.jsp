@@ -21,7 +21,7 @@ body { margin:0; padding:0; font-family:'맑은 고딕', verdana; }
          margin:5px;
          text-align: center;
    }
-   
+    
    header a{
       font-size :30px;
       font-weight: bold;
