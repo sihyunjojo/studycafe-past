@@ -14,6 +14,7 @@
 form{
 	text-align: center;
 	margin: 0 auto;
+	
 }
 .border {
 	margin: 0 auto;
