@@ -110,9 +110,44 @@ body { margin:0; padding:0; font-family:'맑은 고딕', verdana; }
 			<br>
 	</aside>
 	
-	
-	
-	
+	<section class = "content">
+	<form action="ProductUpdate" method = "POST">
+		<input type = "hidden" name = "prod_number" value = "${product.prod_number }">
+		<table>
+		<tr>
+				<td>상품 이름</td>
+				<td><input type="text" name="prod_name" value = "${product.prod_name}"></td>
+			</tr>
+			<tr>
+				<td>상품 타입</td>
+				<td><input type="text" name="prod_type" value = "${product.prod_type}"/></td>
+			</tr>
+			<tr>
+				<td>상품 수량</td>
+				<td><input type="text" name="prod_amount" value = "${product.prod_amount }"/></td>
+			</tr>
+			<tr>
+				<td>상품 가격</td>
+				<td><input type="text" name="prod_price" value = "${product.prod_price }"/></td>
+			</tr>
+			<tr> 
+				<td>상품 내용</td>
+				<td><input type="content" name="prod_content" value = "${product.prod_content }"/></td>
+				<textarea rows="20" cols= "40" id = content name = "content"></textarea>
+			</tr>
+			<tr>
+				<td>상품 이미지 경로</td>
+				<td><input type="file" name="prod_image" readonly = "readonly" /></td>
+			</tr>
+			
+			<tr>
+				<input type="submit" value="상품 수정"> 
+			
+			</tr>
+			
+		</table>
+	</form>
+	</section>
 	
 	
 	
@@ -121,15 +156,11 @@ body { margin:0; padding:0; font-family:'맑은 고딕', verdana; }
 <%-- <%
    if(todayImageList != null && todayImageList.size() > 0){
 %> --%>
-			
-		
-	</section>
 	
-	<footer id = "content" style = "">
-		<a href="" style = "float:right" > 수정 </a>
-		<a href="" style = "float:right" > 취소 </a>
-<%-- 		<a href="dogCartAdd.dog?id=<%=dogVO.getId()%>" style = "float:right">장바구니담기</a>
- --%>	
- 	</footer>
+	
+		<footer id = "content" style = "">		
+			<input type="submit" value="상품 취소">		
+
+ 		</footer>
 </body>
 </html>

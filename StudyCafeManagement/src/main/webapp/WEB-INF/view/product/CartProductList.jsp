@@ -1,13 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>상품 리스트</title>
+<title>장바구니 상품 리스트</title>
+
+<script type="text/javascript">
+	function fn_insert_form(){
+		location.href = "BoardInsert";
+	}
+</script>
+
 <style>
-
-
 body { margin:0; padding:0; font-family:'맑은 고딕', verdana; }
 		a { color:#05f; text-decoration:none; }
 		
@@ -31,20 +37,22 @@ body { margin:0; padding:0; font-family:'맑은 고딕', verdana; }
       text-decoration:none;
    }
    
-   aside#aside { margin-left: 60px; margin-top: 20px; float:left; width:180px; height:600px; }
+     aside#aside { margin-left: 60px; margin-right: 200px; float:left; width:200px; height:650px; }
    
     section#container {}
-			section#content { margin: 20px; float:center; width:700px; }
+			section#content { margin: 50px; float:center; width:1700px; height:650px; }
 			aside#aside { float:left; width:180px; }
 			section#container::after { content:""; display:block; clear:both; }	
 			
 	section h1{
 			 font-size :30px;
 	}	
-		
+			
+	h3 { font-size:30px; margin-bottom:20px; text-align:center; }	
+	
    section#container { }
    
-   aside#aside h3 { font-size:30px; margin-bottom:20px; text-align:center; }
+   aside#aside h3 { font-size:30px; margin-bottom:20px;  text-align:center;  }
 		aside#aside li { font-size:16px; text-align:center; }
 		aside#aside li a { color:#000; display:block; padding:10px 0; }
 		aside#aside li a:hover { text-decoration:none; background:#eee; }
@@ -74,109 +82,57 @@ body { margin:0; padding:0; font-family:'맑은 고딕', verdana; }
 
         </div>
     </header>
- 	   
+     
     
    <section id="container">
 		<div id="container_box">
 		
-		 	
-<aside id="aside">
+		<aside id="aside">
 				<h3>장바구니</h3>
 				<hr>
-				
-</aside>	   
-
-		<section id = "content">
-   <%-- <%
-      if(cartList == null || cartList.size() == 0) { 
-   %> --%>
-   <c:if test="${empty cartList }">
-      <h1>등록된 장바구니 항목이 없습니다.</h1>
-   </c:if>
-   <%-- <%
-      }
-      else{   
-   %> --%>
-      <c:if test="${not empty cartList }">
-      <h1>장바구니목록</h1>
-      <form action="dogCartRemove.dog" method = "POST" name = "myForm">
-      <table>
-      <tr class = "tr_title">
-          <td>
-            <input type="checkbox" name = "allDelete" id = "allDelete"
-            onclick = "checkAll()"/>
-         </td>
-         <td>번호</td>
-         <td>상품이미지</td>
-         <td>상품명</td>
-         <td>가격</td>
-         <td>수량</td>
-      </tr>
-      <c:set var = "num" value = "${0 }"></c:set>
-         <%-- <%
-            int num = 1;
-            for(int i = 0;i < cartList.size();i++) {
-         %> --%>
-         <c:forEach var = "cart" items = "${cartList }">
-         <c:set var = "num" value = "${num + 1 }"></c:set>
-         
-      <tr>
-      <td>
-            <input type="checkbox" name = "delete1" 
-            value = "${cart.kind }"/>
-         </td>
-          <td>${num}</td>
-         <td><img src = "images/${cart.image }"
-         class = "cartImage"/></td>
-         <td>${cart.kind }</td>
-         <td>${cart.price }</td>
-         <td>
-         <a href = "javascript:upQty('dogCartQtyUp.dog?kind=${cart.kind }')"><img src = "images/up.jpg" class = "upDownImage"/></a><br>
-         ${cart.qty }개<br>
-         <a href = "javascript:checkQty('${cart.kind }', ${cart.qty })"><img src = "images/down.jpg" class = "upDownImage"/></a><br>
-         </td>         
-         
-         
-      </tr>
-      
-      </tr>
-      </c:forEach>
-         <%-- <%
-      }
-       %> --%>
-       <tr>
-          <td colspan = "6" style = "text-align: right ;font-size: x-Large;">
-          ${totalMoney}원
-          </td>
-       </tr>
-       <tr>
-          <td colspan = "6" style = "text-align: right ;font-size: x-Large;">
-             <input type = "submit" value = "삭제"/>
-          </td>
-       </tr>
-      </table>
-      </form>
-      </c:if>
-      <%-- <%
-      }
-      %> --%>
-</section>
-
-
-<%-- <%
-   if(todayImageList != null && todayImageList.size() > 0){
-%> --%>
+			</aside>
 			
-		</div>
-	</section>
+			<section id = "content">
 
+		   <c:if test="${empty cartProductList }">
+		      <h1>등록된 장바구니 상품 정보가 없습니다.< /h1>
+		   </c:if>
+	  <c:if test="${not empty cartProductList }">  
+	  
+      <h3>상품목록</h3>
+      <hr>
+      
+          <td><input type="hidden" name="user_id"
+			value="${sessionScope.user_id}" /></td>
+			
+			
+      <td><input type="hidden" name="user_id"
+			value="${sessionScope.user_id}" /></td>
+      <table>
+		<td>
+		<c:forEach var = "cartProduct" items = "${cartProductList}" varStatus="status">
+	         <!-- varStatus : forEach 블록에서 반복 상태를 저장하는 속성 -->
+				
+				<td>
+				<tr>
+<%-- 	            <a href="ProductDetail?prod_number=${product.prod_number}">
+	            <img src = "images/${product.prod_image }" class = "productImage"/></a> --%>
+	            </tr>
+				<br><tr>상품 번호: ${cartProduct.prod_number }</tr>
+				<br><tr><a href="ProductDetail?prod_number=${cartProduct.prod_number}">
+				상품명 : ${cartProduct.prod_name }</a></tr>
+				<br><tr>가격 : ${cartProduct.prod_price }원 </tr>
+				<br>
+				</td>
+				 <c:if test="${(status.index + 1) % 5 == 0}">
+			     </c:if>
+		</c:forEach>
+		</td>		
+		</c:if>  
+	</section>			
+			
+	</div>
+</section>
     
-    
-<footer id = "content" style = "">
-		<a href="" style = "float:right" >쇼핑 계속하기</a>
-<%-- 		<a href="dogCartAdd.dog?id=<%=dogVO.getId()%>" style = "float:right">장바구니담기</a>
- --%>	
- 	</footer>
-
 </body>
 </html>

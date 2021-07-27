@@ -1,13 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>상품 리스트</title>
+<title>${product.prod_name } </title>
+
+<script type="text/javascript">
+	function fn_insert_form(){
+		location.href = "BoardInsert";
+	}
+</script>
+
 <style>
-
-
 body { margin:0; padding:0; font-family:'맑은 고딕', verdana; }
 		a { color:#05f; text-decoration:none; }
 		
@@ -31,20 +37,22 @@ body { margin:0; padding:0; font-family:'맑은 고딕', verdana; }
       text-decoration:none;
    }
    
-     aside#aside { margin-left: 60px; margin-top: 20px; float:left; width:180px; height:600px; }
+       aside#aside { margin-left: 60px; margin-right: 200px; float:left; width:200px; height:650px; clear:both; }
    
     section#container {}
-			section#content { margin: 20px; float:center; width:700px; }
-			aside#aside { float:left; width:180px; }
+			section#content { margin: 50px; width:1700px; height:650px; }
+			aside#aside { float:left; width:180px; clear:both; }
 			section#container::after { content:""; display:block; clear:both; }	
 			
 	section h1{
 			 font-size :30px;
 	}	
-				
+			
+	h3 { font-size:30px; margin-bottom:20px; text-align:center; }	
+	
    section#container { }
    
-   aside#aside h3 { font-size:30px; margin-bottom:20px; text-align:center; }
+   aside#aside h3 { font-size:30px; margin-bottom:20px;  text-align:center;  }
 		aside#aside li { font-size:16px; text-align:center; }
 		aside#aside li a { color:#000; display:block; padding:10px 0; }
 		aside#aside li a:hover { text-decoration:none; background:#eee; }
@@ -70,20 +78,22 @@ body { margin:0; padding:0; font-family:'맑은 고딕', verdana; }
                     <a href="/" class="Community" >커뮤니티</a>
                     <a href="/" class="Board" >공지사항</a>
                     <a href="/" class="Message" >메시지</a>
+                    <span>"user_id:" ${sessionScope.user_id}</span>
             </div>
 
         </div>
     </header>
     
     
-   <section id = "container">
- 
- 	<aside id="aside">
+   <section id="container">
+		<div id="container_box">
+		
+		<aside id="aside">
 				<h3>카테고리</h3>
 			<hr>
-			<br>
+				
 				<ul>
-					
+					<br>
 					<li><a href="/shop/list?c=100&l=1">과자</a>
 				
 						<ul class="low">
@@ -105,41 +115,66 @@ body { margin:0; padding:0; font-family:'맑은 고딕', verdana; }
 					<li><a href="/shop/list?c=400&l=1">기타</a></li>
 					
 				</ul>
-			<br>
-			<hr>
-			<br>
-	</aside>
-	
+				<br>
+				<hr>
+				<br>
+			</aside>
+			
 	<section id = "content">
-		<aside id = "left_main">
-<%-- 			<img src = "images/<%=dogVO.getImage() %>" --%>
-			class = "productViewImage"/>
-		</aside>
-		<section id = "right_main">
-			<%-- <h1>개 이름: <%=dogVO.getKind() %></h1>
-			<h1>개 가격: <%=dogVO.getPrice() %></h1>
-			<h1>개 원산지: <%=dogVO.getCountry() %></h1>
-			<h1>개 설명: <%=dogVO.getContent() %></h1> --%>
-		</section>
-	</section>
-	
-	<div style = "clear: both;"></div>
-
+ 
+      <h3> ${product.prod_name }</h3>
+      <hr>
+      
+      <td><input type="hidden" name="user_id"
+			value="${sessionScope.user_id}" /></td>
+      
+      <table>
+		<td>
+				<td>
+				<tr>
+	            <img src = "images/${product.prod_image }" class = "productImage"/></tr>
+				<br><tr>상품 번호: ${product.prod_number }</tr>
+				<br><tr>상품 이름: ${product.prod_name }</tr>
+				<br><tr>상품 종류: ${product.prod_type }</tr>
+				<br><tr>상품 가격: ${product.prod_price }원</tr>
+				<br><tr>상품 내용: ${product.prod_content }</tr>
+				<br><tr>조회수 : ${product.prod_readcount } </tr>
+				<br>
+				</td>     
+		</td> 
+	</section>	
+			
+			           
 	</div>
-		
 </section>
 
-<%-- <%
-   if(todayImageList != null && todayImageList.size() > 0){
-%> --%>
-			
-		
-	</section>
+    <div style = "clear: both;">
+	<span id = "footer" style = "font-size: xx-large;  margin-left:400px; float:right; clear:both;">
 	
-	<footer id = "content" style = "">
-		<a href="" style = "float:right" >장바구니 보기</a>
-<%-- 		<a href="dogCartAdd.dog?id=<%=dogVO.getId()%>" style = "float:right">장바구니담기</a>
- --%>	
- 	</footer>
+		<input type="submit" href=" /StudyCafeManagement/product/ProductList" value="쇼핑 계속하기" style = "margin-right:100px;"> 
+		
+		<form action="addCartProduct" method = "post" name = "addCartProductForm">		
+			<input type="hidden" name="prod_number" id="prod_name"
+					value="${product.prod_number}" >
+			<input type="hidden" name="user_id" id="user_id" 
+					value="${sessionScope.user_id}" >
+			<input type = "submit" value = "장바구니 담기"/>
+		</form>
+			
+		     
+		
+		
+			<%-- <form action="reserve" method = "post" name = "reserveForm">
+				<label>좌석 번호 : </label><input type = "text" name = "seatNum" id ="seatNum">
+				<input type="hidden" name="user_id"
+							value="${sessionScope.user_id}" />
+				<br>
+				
+			</form> --%>
+		
+	</span>
+	</div>
+    
+
 </body>
 </html>

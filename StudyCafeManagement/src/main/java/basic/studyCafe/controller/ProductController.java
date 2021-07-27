@@ -1,6 +1,8 @@
 package basic.studyCafe.controller;
 
 import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -13,8 +15,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import basic.studyCafe.service.ProductService;
+import basic.studyCafe.vo.CartProductVO;
+import basic.studyCafe.vo.ProductVO;
+import basic.studyCafe.vo.SeatVO;
 
 
 @Controller
@@ -26,18 +33,46 @@ public class ProductController extends HttpServlet {
 	@Autowired
 	private ProductService productService;
 
-	@RequestMapping(value = "/ProductList", method = RequestMethod.GET)
-	public String ProductList() {
-		return "product/ProductList";
+	@RequestMapping("/ProductList")
+	public ModelAndView ProductList() {
+
+		ModelAndView mav = new ModelAndView();
+		List<ProductVO> productList = productService.getproductList();
+		mav.setViewName("product/ProductList");
+		mav.addObject("productList", productList);
+		return mav;
 	}
 	@RequestMapping(value = "/CartProductList", method = RequestMethod.GET)
-	public String CartProductList() {
-		return "product/CartProductList";
+	public ModelAndView ViewCartProductList(@RequestParam String user_id) {
+		ModelAndView mav = new ModelAndView();
+		List<CartProductVO> cartProductList = productService.getCartProductList(user_id);
+		mav.setViewName("product/CartProductList");
+		mav.addObject("cartProductList", cartProductList);
+		return mav;
 	} 
-	@RequestMapping(value = "/ProductDetail", method = RequestMethod.GET)
-	public String ProductDetail() {
-		return "product/ProductDetail";
+	
+	@RequestMapping("/ProductDetail")
+	public ModelAndView ProductDetail(@RequestParam int prod_number) {
+		ModelAndView mav = new ModelAndView();
+		ProductVO product = productService.getProductDetail(prod_number);
+		mav.setViewName("product/ProductDetail");
+		mav.addObject("product", product);
+		return mav;
 	}
+	
+	@RequestMapping(value = "/addCartProduct", method = RequestMethod.POST)
+	public ModelAndView AddCartProduct(@RequestParam("user_id") String user_id, @RequestParam("prod_number") int prod_number, CartProductVO cartProduct) {
+		productService.addCartProduct(user_id,prod_number);
+		
+		ModelAndView mav = new ModelAndView();
+		List<CartProductVO> cartProductList = productService.getCartProductList(user_id);
+		mav.setViewName("product/CartProductList");
+		mav.addObject("cartProductList", cartProductList);
+
+		return mav;
+	}
+	
+	
 	@RequestMapping(value = "/ProductRegist", method = RequestMethod.GET)
 	public String ProductRegist() {
 		return "product/ProductRegist";
@@ -49,5 +84,6 @@ public class ProductController extends HttpServlet {
 	@RequestMapping(value = "/ProductSearched", method = RequestMethod.GET)
 	public String ProductSearched() {
 		return "product/ProductSearched";
+
 	}
 }

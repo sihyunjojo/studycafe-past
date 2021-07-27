@@ -217,9 +217,9 @@ header, section {
 			스터디 카페</h7>
 			<div class="cafe_menus">
 				<img src="/StudyCafeManagement/resources/images/logo.jpg" class="logo_image" width="40" height="40">
-				  <a
-					href="/StudyCafeManagement/seat/register" class="Seat">좌석</a> <a href="/" class="Product">상품</a> <a
-					href="/StudyCafeManagement/board/BoardList" class="Community">커뮤니티</a>
+				  <a href="/StudyCafeManagement/seat/register" class="Seat">좌석</a> 
+					<a href="/StudyCafeManagement/product/ProductList" class="Product">상품</a> 
+					<a href="/StudyCafeManagement/board/BoardList" class="Community">커뮤니티</a>
 					<a href="/StudyCafeManagement/notice/NoticeList?user_id=${sessionScope.user_id}" class="Notice">공지사항</a>
 					<a href="/" class="Message">메시지</a>
 			</div>

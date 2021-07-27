@@ -2,7 +2,7 @@ CREATE TABLE Notice_info(
 	notice_number number primary key not null,
 	user_id varchar2(100) NOT NULL,
 	notice_pagenumber number not null,
-	notice_title varchar2(20) not null,
+	notice_title varchar2(100) not null,
 	notice_kind varchar2(10) not null,
 	notice_time date not null,
 	notice_readcount number not null,

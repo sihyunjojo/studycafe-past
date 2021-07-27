@@ -6,12 +6,45 @@
 	<!-- namespace가 Mapper 인터페이스의 풀패스와 동일해야 함 -->
 	
 	<resultMap type = "ProductVO" id="ProductVOREsultMap">
-		<result property="user_id" column="user_id"/>
+		<result property="prod_number" column="prod_number"/>
+		<result property="prod_type" column="prod_type"/>
+		<result property="prod_price" column="prod_price"/>
+		<result property="prod_amount" column="prod_amount"/>
 		<result property="prod_name" column="prod_name"/>
+		<result property="prod_image" column="prod_image"/>
+		<result property="prod_content" column="prod_content"/>
+		<result property="prod_readcount" column="prod_readcount"/>
 	</resultMap>
 	
-	<select id="getProducts" resultType = "productVO">
-		SELECT * FROM Product
+	<resultMap type = "CartProductVO" id="CartProductVOResultMap">
+		<result property="user_id" column="user_id"/>
+		<result property="prod_number" column="prod_number"/>
+		<result property="prod_cartstate" column="prod_cartstate"/>
+	</resultMap>
+	
+	
+	<select id="selectProductList" resultType = "ProductVO">
+		SELECT * FROM Product ORDER BY prod_number ASC
 	</select>
+	
+	<select id="selectProduct" resultType = "ProductVO" 
+	parameterType="int"> 
+		SELECT * FROM Product WHERE prod_number = #{prod_number}
+	</select>
+	
+	<select id="selectCartProductList" resultType = "ProductVO" parameterType="CartProductVO" > 
+	
+		SELECT *
+		FROM Product A join CartProduct B 
+		on A.prod_number = B.prod_number
+		Where B.prod_cartstate = 'T'
+		ORDER BY A.prod_number ASC
+		
+	</select>
+	
+	<insert id="insertCartProduct" > 
+        INSERT INTO CartProduct(user_id, prod_number, prod_cartstate) VALUES (#{user_id}, #{prod_number}, 'T') 
+	</insert>
+	 
 	
 </mapper>

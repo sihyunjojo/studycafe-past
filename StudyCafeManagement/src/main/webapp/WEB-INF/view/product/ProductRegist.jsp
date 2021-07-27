@@ -111,7 +111,42 @@ body { margin:0; padding:0; font-family:'맑은 고딕', verdana; }
 	</aside>
 	
 	
-	
+ <section id = "content">	
+	<form action="ProductRegist" method="POST">
+		<table>
+		
+			<tr>
+				<td>상품 이름</td>
+				<td><input type="text" name="prod_name" /></td>
+			</tr>
+			<tr>
+				<td>상품 타입</td>
+				<td><input type="text" name="prod_type" /></td>
+			</tr>
+			<tr>
+				<td>상품 수량</td>
+				<td><input type="text" name="prod_amount" /></td>
+			</tr>
+			<tr>
+				<td>상품 가격</td>
+				<td><input type="text" name="prod_price" /></td>
+			</tr>
+			<tr>
+				<td>상품 내용</td>
+				<td><input type="content" name="prod_content" /></td>
+				<textarea rows="20" cols= "40" id = content name = "content"></textarea>
+			</tr>
+			<tr>
+				<td>상품 이미지 경로</td>
+				<td><input type="file" name="prod_image" readonly = "readonly" /></td>
+			</tr>
+			
+			<tr>
+				<td colspan="3"><input type="submit" value="상품 등록"></td>
+			</tr>
+		</table>
+	</form>
+</section>
 	
 	
 	
@@ -121,9 +156,7 @@ body { margin:0; padding:0; font-family:'맑은 고딕', verdana; }
 <%-- <%
    if(todayImageList != null && todayImageList.size() > 0){
 %> --%>
-			
-		
-	</section>
+			        
 	
 	<footer id = "content" style = "">
 		<a href="" style = "float:right" > 등록 </a>
