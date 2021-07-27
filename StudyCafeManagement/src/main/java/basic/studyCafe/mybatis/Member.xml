@@ -5,7 +5,7 @@
 <mapper namespace = "basic.studyCafe.mybatis.MemberMapper">
 	<!-- namespace가 Mapper 인터페이스의 풀패스와 동일해야 함 -->
 	
-	<resultMap type = "MemberVO" id="MemberVOREsultMap">
+	<resultMap type = "MemberVO" id="MemberVOResultMap">
 		<result property="user_id" column="user_id"/>
 		<result property="user_password" column="user_password"/>
 		<result property="user_checkpw" column="user_checkpw"/>
