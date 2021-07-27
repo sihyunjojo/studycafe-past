@@ -115,6 +115,11 @@ public class ProductController extends HttpServlet {
 	
 	
 	
+	@RequestMapping("/ProductDelete")
+	public String Productremove(@RequestParam int prod_number) {
+		productService.removeProduct(prod_number);
+		return "redirect:/product/ProductList";
+	}
 	
 	@RequestMapping(value = "/ProductSearched", method = RequestMethod.GET)
 	public String ProductSearched() {

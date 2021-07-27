@@ -67,6 +67,11 @@
 		prod_content = #{prod_content}     
 		WHERE prod_number = #{prod_number}
 	</update>
+	
+	<delete id="deleteProduct" parameterType="int">
+		DELETE Product WHERE
+		prod_number = #{prod_number}
+	</delete>
 	 
 	
 </mapper>

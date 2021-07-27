@@ -40,7 +40,7 @@ body { margin:0; padding:0; font-family:'맑은 고딕', verdana; }
    
     section#container {}
 			section#content { margin: 50px; float:center; width:1700px; height:650px; }
-			aside#aside { float:left; width:180px; }
+			aside#aside { float:left; width:180px; height:2000px}
 			section#container::after { content:""; display:block; clear:both; }	
 			
 	section h1{

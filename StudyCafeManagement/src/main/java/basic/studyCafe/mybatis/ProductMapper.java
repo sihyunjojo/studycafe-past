@@ -16,6 +16,7 @@ public interface ProductMapper {
 	void insertCartProduct(@Param("user_id") String user_id, @Param("prod_number") int prod_number);
 	void insertArticle(ProductVO productVO);
 	void updateProduct(ProductVO productVO);
+	void deleteProduct(@Param("prod_number") int prod_number);
 	
 
 

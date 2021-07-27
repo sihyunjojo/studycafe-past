@@ -40,7 +40,7 @@ body { margin:0; padding:0; font-family:'맑은 고딕', verdana; }
    
     section#container {}
 			section#content { margin: 50px; float:center; width:1700px; height:650px; }
-			aside#aside { float:left; width:180px; }
+			aside#aside { float:left; width:180px; height:700px}
 			section#container::after { content:""; display:block; clear:both; }	
 			
 	section h1{
@@ -132,7 +132,7 @@ body { margin:0; padding:0; font-family:'맑은 고딕', verdana; }
 		<td>
 				<td>
 				<tr>
-	            <img src = "images/${product.prod_image }" class = "productImage"/></tr>
+	            <img src = "/StudyCafeManagement/resources/images/${product.prod_image }" class = "productImage" width="300"/></tr>
 				<br><tr>상품 번호: ${product.prod_number }</tr>
 				<br><tr>상품 이름: ${product.prod_name }</tr>
 				<br><tr>상품 종류: ${product.prod_type }</tr>
@@ -162,6 +162,8 @@ body { margin:0; padding:0; font-family:'맑은 고딕', verdana; }
 		</form>
 		
 		<a href="ProductUpdate?prod_number=${product.prod_number}" >상품 수정</a>
+		<a href="ProductDelete?prod_number=${product.prod_number}" >상품 삭제</a>
+		
 			
 		
 			

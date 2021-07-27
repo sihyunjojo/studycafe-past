@@ -67,6 +67,13 @@ public class ProductDAOimpl implements ProductDAO {
 		productMapper.updateProduct(productVO);
 	}
 
+	@Override
+	public void deleteProduct(int prod_number) {
+		// TODO Auto-generated method stub
+		ProductMapper productMapper = sqlSession.getMapper(ProductMapper.class);
+		productMapper.deleteProduct(prod_number);	
+	}
+
 
 
 

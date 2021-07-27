@@ -58,6 +58,12 @@ public class ProductServiceimpl implements ProductService{
 
 	}
 
+	@Override
+	public void removeProduct(int prod_number) {
+		// TODO Auto-generated method stub
+		productDAO.deleteProduct(prod_number);
+	}
+
 
 
 

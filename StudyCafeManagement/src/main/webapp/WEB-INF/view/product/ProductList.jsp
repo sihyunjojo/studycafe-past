@@ -40,8 +40,8 @@ body { margin:0; padding:0; font-family:'맑은 고딕', verdana; }
      aside#aside { margin-left: 60px; margin-right: 200px; float:left; width:200px; height:650px; }
    
     section#container {}
-			section#content { margin: 50px; float:center; width:1700px; height:650px; }
-			aside#aside { float:left; width:180px; }
+			section#content { margin: 50px; float:center; width:1700px; height:850px; }
+			aside#aside { float:left; width:180px; height:2000px }
 			section#container::after { content:""; display:block; clear:both; }	
 			
 	section h1{
@@ -144,7 +144,7 @@ body { margin:0; padding:0; font-family:'맑은 고딕', verdana; }
 				<td>
 				<tr>
 	            <a href="ProductDetail?prod_number=${product.prod_number}">
-	            <img src = "/StudyCafeManagement/resources/images/${product.prod_image }" class = "productImage"/></a>
+	            <img src = "/StudyCafeManagement/resources/images/${product.prod_image }" class = "productImage" width="200"/></a>
 	            </tr>
 				<br><tr>상품 번호: ${product.prod_number }</tr>
 				<br><tr><a href="ProductDetail?prod_number=${product.prod_number}">

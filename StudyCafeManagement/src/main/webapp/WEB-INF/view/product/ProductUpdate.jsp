@@ -33,7 +33,7 @@ body { margin:0; padding:0; font-family:'맑은 고딕', verdana; }
    
     section#container {}
 			section#content { margin: 50px; float:center; width:1700px; height:650px; }
-			aside#aside { float:left; width:180px; }
+			aside#aside { float:left; width:180px; height:700px}
 			section#container::after { content:""; display:block; clear:both; }	
 			
 	section h1{
@@ -136,17 +136,18 @@ body { margin:0; padding:0; font-family:'맑은 고딕', verdana; }
 			<tr>
 				<td><label for = "prod_content">상품 내용 </label> </td>
 					<td>
-					<textarea rows="20" cols= "40" id = prod_content name = "prod_content" value = "${product.prod_content }"></textarea>
+					<textarea rows="20" cols= "40" id = prod_content name = "prod_content" >${product.prod_content}</textarea>
 				</td>
 			</tr>
 			<tr>
 				<td>상품 이미지 경로</td>
-				<td><input type="file" name="prod_image" readonly = "readonly" /></td>
+				<td>
+				<input type="text" name="prod_image" value = "${product.prod_image }"/>
+				<!-- <input type="file" name="prod_image" readonly = "readonly" /> -->
+				</td>
 			</tr>	
-			<tr>	
-				<input type="submit" value="상품 수정">
-			</tr>
 		</table>
+			<input type="submit" value="상품 수정">
 	</form>
 </section>
 	

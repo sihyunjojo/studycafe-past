@@ -17,5 +17,6 @@ public interface ProductService {
 	public void addCartProduct(@Param("user_id") String user_id, @Param("prod_number") int prod_number);
 	public void registArticle(ProductVO productVO);
 	public void modifyProduct(ProductVO productVO);
+	public void removeProduct(int prod_number);
 
 }
