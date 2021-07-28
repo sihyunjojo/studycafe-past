@@ -15,8 +15,8 @@
 	function closeWin() {
 		if (document.getElementById("option").checked) {
 			setCookie("name", "value");
-			window.close();
 		}
+		window.close();
 	}
 </script>
 <style>

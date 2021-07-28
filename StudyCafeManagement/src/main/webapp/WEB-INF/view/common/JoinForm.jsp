@@ -5,10 +5,16 @@
 <head>
 <meta charset="UTF-8">
 <title>회원가입</title>
+<script src="/StudyCafeManagement/webjars/jquery/3.6.0/jquery.min.js"></script>
 <script>
 	function gotoBack(){
 		location.href = "LoginMain";
 	}
+	$(document).ready(function(){
+		  $("p").click(function(){
+		    $(this).hide();
+		  });
+		});
 </script>
 <style>
 form{
@@ -101,6 +107,10 @@ input {
 		<button onclick="gotoBack()">취소하기</button>
 	</form>
 	</div>
+	
+	<p>If you click on me, I will disappear.</p>
+<p>Click me away!</p>
+<p>Click me too!</p>
 	
 
 </body>
