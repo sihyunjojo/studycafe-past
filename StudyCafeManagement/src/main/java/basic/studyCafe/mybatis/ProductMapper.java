@@ -14,9 +14,12 @@ public interface ProductMapper {
 	ProductVO selectProduct(int prod_number);
 	List<CartProductVO> selectCartProductList(@Param("user_id") String user_id);
 	void insertCartProduct(@Param("user_id") String user_id, @Param("prod_number") int prod_number);
+	void deleteCartProduct(@Param("user_id") String user_id, @Param("prod_number") int prod_number);
 	void insertArticle(ProductVO productVO);
 	void updateProduct(ProductVO productVO);
 	void deleteProduct(@Param("prod_number") int prod_number);
+	List<ProductVO> selectNameSearchList(ProductVO searchProduct);
+	List<ProductVO> selectTypeSearchList(ProductVO searchProduct);
 	
 
 

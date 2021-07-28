@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import basic.studyCafe.dao.ProductDAO;
+import basic.studyCafe.vo.BoardVO;
 import basic.studyCafe.vo.CartProductVO;
 import basic.studyCafe.vo.ProductVO;
 import basic.studyCafe.vo.SeatVO;
@@ -44,6 +45,12 @@ public class ProductServiceimpl implements ProductService{
 		productDAO.insertCartProduct(user_id,prod_number);
 
 	}
+	
+	@Override
+	public void deleteCartProduct(@Param("user_id") String user_id, @Param("prod_number") int prod_number) {
+		// TODO Auto-generated method stub
+		productDAO.deleteCartProduct(user_id,prod_number);
+	}
 
 	@Override
 	public void registArticle(ProductVO productVO) {
@@ -64,7 +71,19 @@ public class ProductServiceimpl implements ProductService{
 		productDAO.deleteProduct(prod_number);
 	}
 
+	@Override
+	public List<ProductVO> getNameSearchList(ProductVO searchProduct) {
+		// TODO Auto-generated method stub
+		List<ProductVO> productSearchList = productDAO.selectNameSearchList(searchProduct);
+		return productSearchList;
+	}
 
+	@Override
+	public List<ProductVO> getTypeSearchList(ProductVO searchProduct) {
+		// TODO Auto-generated method stub
+		List<ProductVO> productSearchList = productDAO.selectTypeSearchList(searchProduct);
+		return productSearchList;
+	}
 
 
 

@@ -96,7 +96,7 @@ body { margin:0; padding:0; font-family:'맑은 고딕', verdana; }
 			<section id = "content">
 
 		   <c:if test="${empty cartProductList }">
-		      <h1>등록된 장바구니 상품 정보가 없습니다.< /h1>
+		      <h1>등록된 장바구니 상품 정보가 없습니다.</h1>
 		   </c:if>
 	  <c:if test="${not empty cartProductList }">  
 	  
@@ -116,8 +116,8 @@ body { margin:0; padding:0; font-family:'맑은 고딕', verdana; }
 				
 				<td>
 				<tr>
-<%-- 	            <a href="ProductDetail?prod_number=${product.prod_number}">
-	            <img src = "images/${product.prod_image }" class = "productImage"/></a> --%>
+ 	            <a href="ProductDetail?prod_number=${product.prod_number}" >
+	            <img src = "/StudyCafeManagement/resources/images/${product.prod_image }" class = "productImage" width="200"/></a> 
 	            </tr>
 				<br><tr>상품 번호: ${cartProduct.prod_number }</tr>
 				<br><tr><a href="ProductDetail?prod_number=${cartProduct.prod_number}">

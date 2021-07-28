@@ -46,6 +46,11 @@
         INSERT INTO CartProduct(user_id, prod_number, prod_cartstate) VALUES (#{user_id}, #{prod_number}, 'T') 
 	</insert>
 	
+	<delete id="deleteCartProduct" > 
+         DELETE FROM CartProduct WHERE prod_number = #{prod_number} and user_id = #{user_id}
+	</delete>
+	
+	
 	<insert id="insertArticle" parameterType="ProductVO">
 		INSERT INTO Product
 		VALUES(Product_seq.nextval, 
@@ -72,6 +77,19 @@
 		DELETE Product WHERE
 		prod_number = #{prod_number}
 	</delete>
+	
+	
+	<select id="selectNameSearchList" resultType="ProductVO" parameterType="ProductVO">
+		SELECT * FROM Product WHERE prod_name LIKE
+		'%'||#{prod_name}||'%'
+		ORDER BY prod_number ASC
+	</select>
+	
+	<select id="selectTypeSearchList" resultType="ProductVO" parameterType="ProductVO">
+		SELECT * FROM Product WHERE prod_type LIKE
+		'%'||#{prod_type}||'%'
+		ORDER BY prod_number ASC
+	</select>
 	 
 	
 </mapper>

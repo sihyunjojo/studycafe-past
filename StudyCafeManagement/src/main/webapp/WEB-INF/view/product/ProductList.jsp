@@ -80,6 +80,7 @@ body { margin:0; padding:0; font-family:'맑은 고딕', verdana; }
 					<a href="/StudyCafeManagement/board/BoardList" class="Community">커뮤니티</a>
 					<a href="/StudyCafeManagement/notice/NoticeList?user_id=${sessionScope.user_id}" class="Notice">공지사항</a>
 					<a href="/" class="Message">메시지</a>
+					<h3 style = "display:inline">id = ${sessionScope.user_id}</h3>
 			</div>
 
 		</div>
@@ -122,45 +123,61 @@ body { margin:0; padding:0; font-family:'맑은 고딕', verdana; }
 				<br>
 			</aside>
 			
-			<section id = "content">
+<section id = "content">
 
-		   <c:if test="${empty productList }">
-		      <h1>등록된 상품 정보가 없습니다.< /h1>
-		   </c:if>
-	  <c:if test="${not empty productList }">  
-	  
-      <h3>상품 목록</h3>
-      <a href="ProductRegist">상품 등록</a>
-      <hr>
-      
-          <td><input type="hidden" name="user_id"
-			value="${sessionScope.user_id}" /></td>
-			
+			<h3>상품 목록</h3>
+		      <a href="ProductRegist">상품 등록</a>
+		      <hr>
+				   
+				   
+		<c:if test="${empty productList }">
+		     <h1>등록된 상품 정보가 없습니다.</h1>
+		</c:if>
+				   
+				   
+				   
+	<c:if test="${not empty productList }">  	
+	
+	<input type="hidden" name="user_id" value="${sessionScope.user_id}" />
+	
       <table>
-		<td>
-		<c:forEach var = "product" items = "${productList}" varStatus="status">
-	         <!-- varStatus : forEach 블록에서 반복 상태를 저장하는 속성 -->
-
-				<td>
-				<tr>
-	            <a href="ProductDetail?prod_number=${product.prod_number}">
-	            <img src = "/StudyCafeManagement/resources/images/${product.prod_image }" class = "productImage" width="200"/></a>
-	            </tr>
-				<br><tr>상품 번호: ${product.prod_number }</tr>
-				<br><tr><a href="ProductDetail?prod_number=${product.prod_number}">
-				상품명 : ${product.prod_name }</a></tr>
-				<br><tr>가격 : ${product.prod_price }원 </tr>
-				<br>
-				<tr><a href="ProductDetailAdmin?prod_number=${product.prod_number}">
-				관리자 상품 디테일</a></tr>
-				</td>
-				<hr>
-				 <c:if test="${(status.index + 1) % 5 == 0}">
-			     </c:if>
-		</c:forEach>
-		</td>		
-		</c:if>  
-	</section>			
+			<td>
+			<c:forEach var = "product" items = "${productList}" varStatus="status">
+		         <!-- varStatus : forEach 블록에서 반복 상태를 저장하는 속성 -->
+					
+					<td>
+					<tr>
+		            <a href="ProductDetail?prod_number=${product.prod_number}">
+		            <img src = "/StudyCafeManagement/resources/images/${product.prod_image }" class = "productImage" width="200"/></a>
+		            </tr><br>
+					<tr>상품 번호: ${product.prod_number }
+					</tr><br>
+					<tr><a href="ProductDetail?prod_number=${product.prod_number}">
+					상품이름 : ${product.prod_name }</a>
+					</tr><br>
+					<tr>가격 : ${product.prod_price }원 
+					</tr><br>
+					<tr><a href="ProductDetailAdmin?prod_number=${product.prod_number}"> 관리자 상품 디테일</a>
+					</tr>
+					</td>
+					<hr>
+					 <c:if test="${(status.index + 1) % 5 == 0}">
+				     </c:if>
+				    
+			</c:forEach>
+			</td>
+		</table>		
+	</c:if>
+	
+	<form action="ProductSearchList" method="POST">
+		<select name="search_option">
+			<option value="prod_name">상품 이름</option>
+			<option value="prod_tpye">상품 종류</option>
+		</select> 
+			<input type="text" name="keyword"> <input type="submit" value="검색">
+	</form> 
+	 
+</section>			
 			
 	</div>
 </section>

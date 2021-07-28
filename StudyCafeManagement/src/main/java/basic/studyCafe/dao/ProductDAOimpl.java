@@ -52,6 +52,13 @@ public class ProductDAOimpl implements ProductDAO {
 		ProductMapper productMapper = sqlSession.getMapper(ProductMapper.class);
 		productMapper.insertCartProduct(user_id,prod_number);
 	}
+	
+	@Override
+	public void deleteCartProduct(@Param("user_id") String user_id, @Param("prod_number") int prod_number) {
+		// TODO Auto-generated method stub
+		ProductMapper productMapper = sqlSession.getMapper(ProductMapper.class);
+		productMapper.deleteCartProduct(user_id,prod_number);
+	}
 
 	@Override
 	public void insertArticle(ProductVO productVO) {
@@ -73,6 +80,26 @@ public class ProductDAOimpl implements ProductDAO {
 		ProductMapper productMapper = sqlSession.getMapper(ProductMapper.class);
 		productMapper.deleteProduct(prod_number);	
 	}
+
+	@Override
+	public List<ProductVO> selectNameSearchList(ProductVO searchProduct) {
+		// TODO Auto-generated method stub
+		ProductMapper productMapper = sqlSession.getMapper(ProductMapper.class);
+		List<ProductVO> productSearchList = productMapper.selectNameSearchList(searchProduct);
+		return productSearchList;
+	}
+
+	@Override
+	public List<ProductVO> selectTypeSearchList(ProductVO searchProduct) {
+		// TODO Auto-generated method stub
+		ProductMapper productMapper = sqlSession.getMapper(ProductMapper.class);
+		List<ProductVO> productSearchList = productMapper.selectTypeSearchList(searchProduct);
+		return productSearchList;
+	}
+
+	
+
+
 
 
 

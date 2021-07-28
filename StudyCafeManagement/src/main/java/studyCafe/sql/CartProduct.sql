@@ -7,8 +7,5 @@ CREATE TABLE CartProduct(
 	constraint cart_PK PRIMARY KEY(user_id, prod_number)
 );
 
-
-CREATE SEQUENCE product_seq;
-
 drop table CartProduct;
 

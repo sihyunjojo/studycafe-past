@@ -84,6 +84,18 @@ public class ProductController extends HttpServlet {
 		return mav;
 	}
 	
+	@RequestMapping(value = "/deleteCartProduct", method = RequestMethod.POST)
+	public ModelAndView deleteCartProduct(@RequestParam("user_id") String user_id, @RequestParam("prod_number") int prod_number) {
+		productService.deleteCartProduct(user_id,prod_number);
+		
+		ModelAndView mav = new ModelAndView();
+		List<CartProductVO> cartProductList = productService.getCartProductList(user_id);
+		mav.setViewName("product/CartProductList");
+		mav.addObject("cartProductList", cartProductList);
+
+		return mav;
+	}
+	
 	
 	@RequestMapping(value = "/ProductRegist", method = RequestMethod.GET)
 	public String boardWriteForm() {
@@ -121,9 +133,25 @@ public class ProductController extends HttpServlet {
 		return "redirect:/product/ProductList";
 	}
 	
-	@RequestMapping(value = "/ProductSearched", method = RequestMethod.GET)
-	public String ProductSearched() {
-		return "product/ProductSearched";
+	
+	@RequestMapping(value = "/ProductSearchList", method = RequestMethod.POST)
+	public ModelAndView viewProductSearchList(@RequestParam(defaultValue = "prod_name") String search_option,
+			@RequestParam("keyword") String keyword, ProductVO searchProduct) {
+		ModelAndView mav = new ModelAndView();
 
+		List<ProductVO> productSearchList;
+		if (search_option.equals("prod_name")) {
+			searchProduct.setProd_name(keyword);
+			productSearchList = productService.getNameSearchList(searchProduct);
+		} 
+		else {
+			searchProduct.setProd_type(keyword);
+			productSearchList = productService.getTypeSearchList(searchProduct);
+		}
+
+		mav.setViewName("product/ProductSearchList");
+		mav.addObject("productSearchList", productSearchList);	
+
+		return mav;
 	}
 }
