@@ -208,7 +208,7 @@ header, section {
 	}
 	var noticeCookie = getCookie("name");
 	if(noticeCookie != "value"){
-	    window.open("popUp", "mainPopUp", "width=500, height=650, status=no, scrollbars= 0, toolbar=0, menubar=no");
+	    window.open("popUp", "mainPopUp", "width=500, height=650, status=no, scrollbars=no, toolbar=no, location=no, menubar=no");
 	}
 	function getCookie(name) {
 		var found = false
