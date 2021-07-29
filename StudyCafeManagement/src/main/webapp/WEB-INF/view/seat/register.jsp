@@ -70,6 +70,7 @@ button {
 	<form method="post" name="seatForm">
 		<label>좌석 번호 : </label><input type="text" name="seatNum" id="seatNum">
 		<input type="hidden" name="user_id" value="${sessionScope.user_id}" />
+		
 		<br> <input type="submit" value="예약"
 			onclick="javascript: seatForm.action='reserve';" /> <input
 			type="submit" value="반환"

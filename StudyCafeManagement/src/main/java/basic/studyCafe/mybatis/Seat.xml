@@ -19,13 +19,13 @@
 		UPDATE Seat SET
 		user_id = #{user_id}, seat_res =
 		'T' WHERE
-		seat_number = #{seat_number}
+		seat_number = #{seat_number} and seat_res = 'F'
 	</update>
 
 	<update id="updateReturnSeat" parameterType="SeatVO">
 		UPDATE Seat SET
 		user_id = 'admin', seat_res = 'F'
-		WHERE seat_number = #{seat_number}
+		WHERE seat_number = #{seat_number} and (user_id = #{user_id} or #{user_id} = 'admin')
 	</update>
 
 

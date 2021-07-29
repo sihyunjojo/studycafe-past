@@ -13,5 +13,11 @@ public interface ProductDAO {
 	public ProductVO selectProduct(int prod_number);
 	public List<CartProductVO> selectCartProductList(String user_id);
 	public void insertCartProduct(@Param("user_id") String user_id, @Param("prod_number") int prod_number);
+	public void deleteCartProduct(@Param("user_id") String user_id, @Param("prod_number") int prod_number);
+	public void insertArticle(ProductVO productVO);
+	public void updateProduct(ProductVO productVO);
+	public void deleteProduct(int prod_number);
+	public List<ProductVO> selectNameSearchList(ProductVO searchProduct);
+	public List<ProductVO> selectTypeSearchList(ProductVO searchProduct);
 }
  

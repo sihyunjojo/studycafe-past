@@ -204,11 +204,11 @@ header, section {
 		location.href = "ProductList";
 	}
 	function fn_res_form() {
-		location.href = "/StudyCafeManagement/seat/register";
+		location.href = "/StudyCafeManagement/seat/register?user_id=${sessionScope.user_id}";
 	}
 	var noticeCookie = getCookie("name");
 	if(noticeCookie != "value"){
-	    window.open("popUp", "mainPopUp", "width=500, height=650, status=no, scrollbars= 0, toolbar=0, menubar=no");
+	    window.open("popUp", "mainPopUp", "width=500, height=650, status=no, scrollbars=no, toolbar=no, location=no, menubar=no");
 	}
 	function getCookie(name) {
 		var found = false
@@ -248,11 +248,11 @@ header, section {
         	 </a>
 			<div class="cafe_menus">
 				<img src="/StudyCafeManagement/resources/images/logo.jpg" class="logo_image" width="40" height="40">
-				  <a href="/StudyCafeManagement/seat/register" class="Seat">좌석</a> 
+				  <a href="/StudyCafeManagement/seat/register?user_id=${sessionScope.user_id}" class="Seat">좌석</a> 
 					<a href="/StudyCafeManagement/product/ProductList" class="Product">상품</a> 
 					<a href="/StudyCafeManagement/board/BoardList" class="Community">커뮤니티</a>
 					<a href="/StudyCafeManagement/notice/NoticeList?user_id=${sessionScope.user_id}" class="Notice">공지사항</a>
-					<a href="/" class="Message">메시지</a>
+					<a href="/StudyCafeManagement/message/Chat?user_id=${sessionScope.user_id}" class="Message">메시지</a>
 			</div>
 
 		</div>

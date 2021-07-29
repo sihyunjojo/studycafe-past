@@ -6,8 +6,6 @@
 <meta charset="UTF-8">
 <title>상품 리스트</title>
 <style>
-
-
 body { margin:0; padding:0; font-family:'맑은 고딕', verdana; }
 		a { color:#05f; text-decoration:none; }
 		
@@ -21,7 +19,7 @@ body { margin:0; padding:0; font-family:'맑은 고딕', verdana; }
          margin:5px;
          text-align: center;
    }
-    
+   
    header a{
       font-size :30px;
       font-weight: bold;
@@ -31,20 +29,22 @@ body { margin:0; padding:0; font-family:'맑은 고딕', verdana; }
       text-decoration:none;
    }
    
-     aside#aside { margin-left: 60px; margin-top: 20px; float:left; width:180px; height:600px; }
+     aside#aside { margin-left: 60px; margin-right: 200px; float:left; width:200px; height:650px; }
    
     section#container {}
-			section#content { margin: 20px; float:center; width:700px; }
-			aside#aside { float:left; width:180px; }
+			section#content { margin: 50px; float:center; width:1700px; height:650px; }
+			aside#aside { float:left; width:180px; height:700px}
 			section#container::after { content:""; display:block; clear:both; }	
 			
 	section h1{
 			 font-size :30px;
 	}	
-				
+			
+	h3 { font-size:30px; margin-bottom:20px; text-align:center; }	
+	
    section#container { }
    
-   aside#aside h3 { font-size:30px; margin-bottom:20px; text-align:center; }
+   aside#aside h3 { font-size:30px; margin-bottom:20px;  text-align:center;  }
 		aside#aside li { font-size:16px; text-align:center; }
 		aside#aside li a { color:#000; display:block; padding:10px 0; }
 		aside#aside li a:hover { text-decoration:none; background:#eee; }
@@ -114,7 +114,8 @@ body { margin:0; padding:0; font-family:'맑은 고딕', verdana; }
  <section id = "content">	
 	<form action="ProductRegist" method="POST">
 		<table>
-		
+			<h3>상품 등록 </h3>
+			<hr>
 			<tr>
 				<td>상품 이름</td>
 				<td><input type="text" name="prod_name" /></td>
@@ -132,13 +133,15 @@ body { margin:0; padding:0; font-family:'맑은 고딕', verdana; }
 				<td><input type="text" name="prod_price" /></td>
 			</tr>
 			<tr>
-				<td>상품 내용</td>
-				<td><input type="content" name="prod_content" /></td>
-				<textarea rows="20" cols= "40" id = content name = "content"></textarea>
+				<td><label for = "prod_content">상품 내용 </label> </td>
+					<td>
+					<textarea rows="20" cols= "40" id = prod_content name = "prod_content"></textarea>
+				</td>
 			</tr>
 			<tr>
 				<td>상품 이미지 경로</td>
-				<td><input type="file" name="prod_image" readonly = "readonly" /></td>
+				<td><input type="text" name="prod_image" /></td>
+				<!-- <td><input type="file" name="prod_image" readonly = "readonly" /></td> -->
 			</tr>
 			
 			<tr>
@@ -159,10 +162,8 @@ body { margin:0; padding:0; font-family:'맑은 고딕', verdana; }
 			        
 	
 	<footer id = "content" style = "">
-		<a href="" style = "float:right" > 등록 </a>
 		<a href="" style = "float:right" > 취소 </a>
-<%-- 		<a href="dogCartAdd.dog?id=<%=dogVO.getId()%>" style = "float:right">장바구니담기</a>
- --%>	
+
  	</footer>
 </body>
 </html>

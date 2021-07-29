@@ -14,11 +14,12 @@ CREATE TABLE Board_info(
 );
 
 create sequence Board_info_seq;
+
+
+
 alter table Board_info modify board_title varchar2(100);
 
-
-
-INSERT INTO board_info VALUES(Board_info_seq.nextval, 'aaa', 1, 'dsfsd', 'Ä¿¹Â',  sysdate, 1, 'dsfds', 'º¸·ù', 'F')
+INSERT INTO board_info VALUES(Board_info_seq.nextval, 'aaa', 1, 'dsfsd', 'Ä¿ï¿½ï¿½',  sysdate, 1, 'dsfds', 'ï¿½ï¿½ï¿½ï¿½', 'F')
 
 
 drop table board_info;

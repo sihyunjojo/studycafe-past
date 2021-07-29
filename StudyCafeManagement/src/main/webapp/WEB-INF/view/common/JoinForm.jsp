@@ -56,7 +56,7 @@ button {
 	<h1>회원가입</h1>
 		<!-- 아이디 -->
 		<div class="form-group">
-			<label for="user_id" stype = "text-align: left;">아이디</label><br>
+			<label for="user_id" style = "text-align: left;">아이디</label><br>
 			<input type="text"
 				class="form-control" id="user_id" name="user_id" placeholder="ID"
 				required>

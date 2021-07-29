@@ -2,10 +2,10 @@
     pageEncoding="UTF-8"%>
 <%@taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
-<html> 
+<html>
 <head>
 <meta charset="UTF-8">
-<title>장바구니 상품 리스트</title>
+<title>${product.prod_name } </title>
 
 <script type="text/javascript">
 	function fn_insert_form(){
@@ -40,7 +40,7 @@ body { margin:0; padding:0; font-family:'맑은 고딕', verdana; }
    
     section#container {}
 			section#content { margin: 50px; float:center; width:1700px; height:650px; }
-			aside#aside { float:left; width:180px; height:2000px}
+			aside#aside { float:left; width:180px; height:700px}
 			section#container::after { content:""; display:block; clear:both; }	
 			
 	section h1{
@@ -83,58 +83,104 @@ body { margin:0; padding:0; font-family:'맑은 고딕', verdana; }
 
 		</div>
 	</header>
-     
+    
     
    <section id="container">
 		<div id="container_box">
 		
 		<aside id="aside">
-				<h3>장바구니</h3>
+				<h3>카테고리</h3>
+			<hr>
+				
+				<ul>
+					<br>
+					<li><a href="/shop/list?c=100&l=1">과자</a>
+				  
+						<ul class="low">
+							<li><a href="/shop/list?c=101&l=2">베스트과자</a></li>
+							<li><a href="/shop/list?c=102&l=2">달콤한과자</a></li>
+							<li><a href="/shop/list?c=103&l=2">그냥과자</a></li>
+						</ul>
+						
+					</li>
+					<li><a href="/shop/list?c=200&l=1">빵</a></li>
+					<li><a href="/shop/list?c=300&l=1">음료</a></li>
+						<ul class="low">
+								<li><a href="/shop/list?c=101&l=2">탄산음료</a></li>
+								<li><a href="/shop/list?c=102&l=2">주스</a></li>
+								<li><a href="/shop/list?c=103&l=2">음류수</a></li>
+							</ul>
+					<li><a href="/shop/list?c=400&l=1">커피</a></li>
+					<li><a href="/shop/list?c=400&l=1">티,스무디</a></li>
+					<li><a href="/shop/list?c=400&l=1">기타</a></li>
+					
+				</ul>
+				<br>
 				<hr>
+				<br>
 			</aside>
 			
-			<section id = "content">
-
-		   <c:if test="${empty cartProductList }">
-		      <h1>등록된 장바구니 상품 정보가 없습니다.</h1>
-		   </c:if>
-	  <c:if test="${not empty cartProductList }">  
-	  
-      <h3>장바구니 상품 목록</h3>
+	<section id = "content">
+ 
+      <h3> ${product.prod_name }</h3>
       <hr>
       
-          <td><input type="hidden" name="user_id"
-			value="${sessionScope.user_id}" /></td>
-			
-			
       <td><input type="hidden" name="user_id"
 			value="${sessionScope.user_id}" /></td>
+      
       <table>
 		<td>
-		<c:forEach var = "cartProduct" items = "${cartProductList}" varStatus="status">
-	         <!-- varStatus : forEach 블록에서 반복 상태를 저장하는 속성 -->
-				
 				<td>
 				<tr>
- 	            <a href="ProductDetail?prod_number=${product.prod_number}" >
-	            <img src = "/StudyCafeManagement/resources/images/${product.prod_image }" class = "productImage" width="200"/></a> 
-	            </tr>
-				<br><tr>상품 번호: ${cartProduct.prod_number }</tr>
-				<br><tr><a href="ProductDetail?prod_number=${cartProduct.prod_number}">
-				상품명 : ${cartProduct.prod_name }</a></tr>
-				<br><tr>가격 : ${cartProduct.prod_price }원 </tr>
+	            <img src = "/StudyCafeManagement/resources/images/${product.prod_image }" class = "productImage" width="300"/></tr>
+				<br><tr>상품 번호: ${product.prod_number }</tr>
+				<br><tr>상품 이름: ${product.prod_name }</tr>
+				<br><tr>상품 종류: ${product.prod_type }</tr>
+				<br><tr>상품 가격: ${product.prod_price }원</tr>
+				<br><tr>상품 내용: ${product.prod_content }</tr>
+				<br><tr>조회수 : ${product.prod_readcount } </tr>
 				<br>
-				
-				</td>
-				 <c:if test="${(status.index + 1) % 5 == 0}">
-			     </c:if>
-		</c:forEach>
-		</td>		
-		</c:if>  
-	</section>			
+				</td>     
+		</td> 
+	</section>	
 			
+			           
 	</div>
 </section>
+
+    <div style = "clear: both;">
+		<span id = "footer" style = "font-size: xx-large;  margin-left:400px; float:right; clear:both;">
+	
+		<input type="submit" href="product/ProductList" value="쇼핑 계속하기" style = "margin-right:100px;">
+		
+		<form action="addCartProduct" method = "post" name = "addCartProductForm">		
+			<input type="hidden" name="prod_number" id="prod_name"
+					value="${product.prod_number}" >
+			<input type="hidden" name="user_id" id="user_id" 
+					value="${sessionScope.user_id}" >
+			<input type = "submit" value = "장바구니 담기"/>
+		</form>
+		
+		<a href="ProductUpdate?prod_number=${product.prod_number}" >상품 수정</a>
+		<a href="ProductDelete?prod_number=${product.prod_number}" >상품 삭제</a>
+		
+			
+		
+			
+		     
+		
+		
+			<%-- <form action="reserve" method = "post" name = "reserveForm">
+				<label>좌석 번호 : </label><input type = "text" name = "seatNum" id ="seatNum">
+				<input type="hidden" name="user_id"
+							value="${sessionScope.user_id}" />
+				<br>
+				
+			</form> --%>
+		
+		</span>
+	</div>
     
+
 </body>
 </html>
