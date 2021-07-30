@@ -37,7 +37,7 @@ public class BoardController {
 		boardService.increaseCount(board_number);
 		mav.addObject("board", board);
 		
-		if(user_id.equals(writer)) {
+		if(user_id.equals(writer) || user_id.equals("admin")) {
 			mav.setViewName("board/BoardDetail");
 		}
 		else{

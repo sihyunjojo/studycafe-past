@@ -35,6 +35,11 @@ button {
 </style>
 </head>
 <body>
+		<header>
+		
+			<%@include file="../nav.jsp" %>
+			
+		</header>
 	<h1>좌석 예약</h1>
 
 	<div id="btnDiv">

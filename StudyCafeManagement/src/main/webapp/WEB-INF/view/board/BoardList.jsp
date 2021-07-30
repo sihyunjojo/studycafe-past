@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+ 
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,42 +14,14 @@
 <title>Insert title here</title>
 <style type="text/css">
 	li {list-style: none; display: inline; padding: 6px;}
-	header{
-         background-color:blueviolet;
-         height:150px;
-         padding:5px;
-         margin:5px;
-         text-align: center;
-   			}
-	header a{
-      font-size :30px;
-      font-weight: bold;
-      color:white;
-      padding:25px;
-      margin:auto;
-      text-decoration:none;
-		   }
 </style>
 </head>
 <body>
 
 		<header>
-			<div class="nav_container">
-				<a href = "/StudyCafeManagement/common/LoginMain">
-         			<h7 style ="color:white; margin:3px; font-size:40px; font-weight:bold;">베이직 스터디 카페</h7>
-        	 	</a>
-				<div class="cafe_menus">
-					<img src="/StudyCafeManagement/resources/images/logo.jpg" class="logo_image" width="40" height="40">
-					<a href="/StudyCafeManagement/seat/register" class="Seat">좌석</a> 
-					<a href="/StudyCafeManagement/product/ProductList" class="Product">상품</a> 
-					<a href="/StudyCafeManagement/board/BoardList" class="Community">커뮤니티</a>
-					<a href="/StudyCafeManagement/notice/NoticeList?user_id=${sessionScope.user_id}" class="Notice">공지사항</a>
-					<a href="/StudyCafeManagement/message/Chat?user_id=${sessionScope.user_id}" class="Message">메시지</a>
-					<h3 style = "display:inline">id = ${sessionScope.user_id}</h3>
-					
-				</div>
-
-			</div>
+		
+			<%@include file="../nav.jsp" %>
+			
 		</header>
 
 	<div class="container">
@@ -57,10 +31,12 @@
 		<hr />
 		
 		<div>
+			
 			<ul>
 				<li><a href="BoardInsert">글쓰기</a></li>
 				<li><a href="/StudyCafeManagement/common/LoginMain">메인화면</a></li>
 			</ul>
+			
 		</div>
 		<section>
 			<table class="table table-hover">
@@ -74,7 +50,9 @@
 						<td><a href="BoardDetail?board_number=${board.board_number }&user_id=${sessionScope.user_id}
 							&writer=${board.user_id }">${board.board_title}</a></td>
 						<td>${board.user_id}</td>
-						<td>${board.board_time}</td>
+						<td><fmt:parseDate value="${board.board_time }" var="today" pattern="yyyy-MM-dd">
+							</fmt:parseDate>
+							<fmt:formatDate value="${today }" pattern="yyyy-MM-dd" /></td>
 						<td>${board.board_readcount}</td>
 					</tr>
 				</c:forEach>
