@@ -2,25 +2,33 @@ package basic.studyCafe.service;
 
 import java.util.List;
 
-
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import basic.studyCafe.dao.BoardDAO;
 import basic.studyCafe.vo.BoardVO;
+import basic.studyCafe.vo.Criteria;
 
 @Service
 public class BoardServiceImpl implements BoardService{
 	
 	@Autowired
 	private BoardDAO boardDAO;
+
 	
 	@Override
-	public List<BoardVO> getBoardList() {
+	public List<BoardVO> getBoardList(Criteria cri) throws Exception{
 		// TODO Auto-generated method stub
-		List<BoardVO> boardList = boardDAO.selectBoardList();
-		return boardList;
-	}
+		List<BoardVO> boardSearchList = boardDAO.selectBoardList(cri);
+		return boardSearchList;
+		}
+	
+	@Override
+	public int getBoardListCount() throws Exception{
+		// TODO Auto-generated method stub
+		return boardDAO.selectBoardOne();
+
+		}
+	
 	
 	@Override
 	public BoardVO getBoardDetail(int board_number) {
@@ -66,6 +74,16 @@ public class BoardServiceImpl implements BoardService{
 		// TODO Auto-generated method stub
 		boardDAO.updateCount(board_number);
 	}
+	
+	/*
+	 * @Override public List<BoardVO> listSearch(SearchCriteria pageVO) throws
+	 * Exception { // TODO Auto-generated method stub return
+	 * boardDAO.listSearch(pageVO); }
+	 * 
+	 * @Override public int listSearchCount(SearchCriteria pageVO) throws Exception
+	 * { // TODO Auto-generated method stub return boardDAO.listSearchCount(pageVO);
+	 * }
+	 */
 
 	
 

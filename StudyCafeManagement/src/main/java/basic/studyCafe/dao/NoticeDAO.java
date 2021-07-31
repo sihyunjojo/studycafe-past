@@ -2,11 +2,13 @@ package basic.studyCafe.dao;
 
 import java.util.List;
 
+import basic.studyCafe.vo.Criteria;
 import basic.studyCafe.vo.NoticeVO;
 
 public interface NoticeDAO {
 
-	public List<NoticeVO> selectNoticeList();
+	public List<NoticeVO> selectNoticeList(Criteria cri) throws Exception;
+	public int selectNoticeOne() throws Exception;
 	public NoticeVO selectNotice(int notice_number);
 	public void insertArticle(NoticeVO notice);
 	public void updateNotice(NoticeVO notice);

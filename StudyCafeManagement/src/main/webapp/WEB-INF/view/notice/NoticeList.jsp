@@ -46,8 +46,8 @@
 				<c:forEach var="notice" items="${noticeList }">
 					<tr>
 						<td>${notice.notice_number }</td>
-						<td><a href="NoticeDetail?notice_number=${notice.notice_number }&user_id=${sessionScope.user_id}
-							&writer=${notice.user_id }">${notice.notice_title}</a></td>
+						<td><a href="NoticeDetail?notice_number=${notice.notice_number }&user_id=${sessionScope.user_id}">
+						${notice.notice_title}</a></td>
 						<td>${notice.user_id}</td>
 						<td><fmt:parseDate value="${notice.notice_time }" var="today" pattern="yyyy-MM-dd">
 							</fmt:parseDate>
@@ -76,6 +76,23 @@
 						</div>
 					</form>
 						
+			</div>
+			<div class="col-md-offset-3">
+				<ul class="pagination">
+					<c:if test="${pageMaker.prev}">
+    					<li><a href="NoticeList${pageMaker.makeQuery(pageMaker.startPage - 1)}&user_id=${sessionScope.user_id}">이전</a></li>
+    				</c:if> 
+
+    				<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
+    					<li> 
+    						<a href="NoticeList${pageMaker.makeQuery(idx)}&user_id=${sessionScope.user_id}">${idx}</a>
+    					</li>
+    				</c:forEach>
+
+    				<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
+				    	<li><a href="NoticeList${pageMaker.makeQuery(pageMaker.endPage + 1)}&user_id=${sessionScope.user_id}">다음</a></li>
+				    </c:if> 
+				</ul>
 			</div>
 		</section>
 	</div>

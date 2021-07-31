@@ -4,12 +4,15 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import basic.studyCafe.service.NoticeService;
+import basic.studyCafe.vo.Criteria;
 import basic.studyCafe.vo.NoticeVO;
+import basic.studyCafe.vo.PageMaker;
 
 @Controller
 @RequestMapping("/notice/*")
@@ -19,18 +22,22 @@ public class NoticeController {
 	private NoticeService noticeService;
 
 	@RequestMapping("/NoticeList")
-	public ModelAndView viewNoticeList(@RequestParam String user_id) {
-		ModelAndView mav = new ModelAndView();
-		List<NoticeVO> noticeList = noticeService.getNoticeList();
-		mav.addObject("noticeList", noticeList);
+	public String viewNoticeList(@RequestParam String user_id, Model model, Criteria cri) throws Exception {
+		String path = "";
+		model.addAttribute("noticeList", noticeService.getNoticeList(cri));
+		
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setCri(cri);
+		pageMaker.setTotalCount(noticeService.getNoticeListCount());
+		model.addAttribute("pageMaker", pageMaker);
 
 		if (user_id.equals("admin")) {
-			mav.setViewName("notice/NoticeList");
+			path = "notice/NoticeList";
 		} else {
-			mav.setViewName("notice/UserNoticeList");
+			path = "notice/UserNoticeList";
 		}
 
-		return mav;
+		return path;
 	}
 
 	@RequestMapping("/NoticeDetail")

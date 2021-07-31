@@ -2,9 +2,9 @@ package basic.studyCafe.controller;
 
 import java.util.List;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -12,6 +12,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import basic.studyCafe.service.BoardService;
 import basic.studyCafe.vo.BoardVO;
+import basic.studyCafe.vo.Criteria;
+import basic.studyCafe.vo.PageMaker;
 
 @Controller
 @RequestMapping("/board/*")
@@ -20,14 +22,16 @@ public class BoardController {
 	@Autowired
 	private BoardService boardService;
 
-
 	@RequestMapping("/BoardList")
-	public ModelAndView viewBoardList() {
-		ModelAndView mav = new ModelAndView();
-		List<BoardVO> boardList = boardService.getBoardList();
-		mav.setViewName("board/BoardList");
-		mav.addObject("boardList", boardList);
-		return mav;
+	public String viewBoardList(Model model, Criteria cri) throws Exception {
+		model.addAttribute("boardList", boardService.getBoardList(cri));
+		
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setCri(cri);
+		pageMaker.setTotalCount(boardService.getBoardListCount());
+		model.addAttribute("pageMaker", pageMaker);
+		
+		return "board/BoardList";
 	}
 
 	@RequestMapping("/BoardDetail")

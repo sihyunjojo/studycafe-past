@@ -8,20 +8,32 @@
 	<resultMap type="BoardVO" id="BoardVOResultMap">
 		<result property="board_number" column="board_number" />
 		<result property="user_id" column="user_id" />
-		<result property="board_pagenumber" column="board_pagenumber" />
 		<result property="board_title" column="board_title" />
-		<result property="board_kind" column="board_kind" />
 		<result property="board_time" column="board_time" />
 		<result property="board_readcount" column="board_readcount" />
 		<result property="board_content" column="board_content" />
-		<result property="board_filename" column="board_filename" />
-		<result property="board_popup" column="board_popup" />
 	</resultMap>
 
-
-	<select id="selectBoardList" resultType="BoardVO">
-		SELECT * FROM board_info
+	
+	<select id="selectBoardList" resultType="BoardVO" parameterType="Criteria">
+		SELECT board_number, user_id, board_title, board_content, board_time,
+			   board_readcount 
+		FROM (
+			SELECT board_number, user_id, board_title, board_content, 
+				   board_time, board_readcount,
+			       ROW_NUMBER() OVER(ORDER BY board_number DESC) AS RNUM
+			FROM board_info
+		)
+		WHERE RNUM BETWEEN #{rowStart} AND #{rowEnd}
 		ORDER BY board_number DESC
+	</select>
+	
+	<select id="selectBoardOne" resultType="int">
+	<![CDATA[
+		SELECT COUNT(board_number)
+		FROM board_info
+		WHERE board_number > 0
+	]]>
 	</select>
 
 	<select id="selectBoard" resultType="BoardVO"
@@ -37,18 +49,40 @@
 		ORDER BY board_number DESC
 	</select>
 
-	<select id="selectIdSearchList" resultType="BoardVO"
+	  <select id="selectIdSearchList" resultType="BoardVO"
 		parameterType="BoardVO">
 		SELECT * FROM board_info WHERE user_id LIKE
 		'%'||#{user_id}||'%'
 		ORDER BY board_number DESC
 	</select>
+	
+	<!--
+	<select id="listSearch" resultType="BoardVO">
+		SELECT * FROM (
+			SELECT a.*, rownum rnum
+			FROM (
+				SELECT * FROM board_info
+				WHERE board_number > 0
+				<include refid="search"></include>
+				ORDER BY board_time DESC) a
+			WHERE ((#{page} * #{perPageNum}) + 1) > rownum) 
+		WHERE rnum >= (((#{page}-1) * #{perPageNum}) + 1)
+		ORDER BY board_number DESC, board_time DESC
+	</select>
+	
+	
+	<select id="listSearchCount" resultType="int">
+		SELECT count(board_number) FROM board_info WHERE board_number > 0
+		<include refid="search"></include>	
+	</select>
+	
+	-->
+	
 
 	<insert id="insertArticle" parameterType="BoardVO">
 		INSERT INTO board_info
-		VALUES(Board_info_seq.nextval, #{user_id}, 1,
-		#{board_title}, '커뮤',
-		sysdate, 1, #{board_content}, '보류', 'F')
+		VALUES(Board_info_seq.nextval, #{user_id}, #{board_title},
+		sysdate, 0, #{board_content})
 	</insert>
 
 	<update id="updateBoard" parameterType="BoardVO">
@@ -63,7 +97,6 @@
 		board_readcount = board_readcount + 1
 		WHERE board_number =
 		#{board_number}
-
 	</update>
 
 	<delete id="deleteBoard" parameterType="int">

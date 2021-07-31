@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 import basic.studyCafe.mybatis.BoardMapper;
 import basic.studyCafe.mybatis.MemberMapper;
 import basic.studyCafe.vo.BoardVO;
-
+import basic.studyCafe.vo.Criteria;
 
 
 @Repository
@@ -21,13 +21,22 @@ public class BoardDAOImpl implements BoardDAO{
 	private SqlSession sqlSession;
 	
 	@Override
-	public List<BoardVO> selectBoardList() {
+	public List<BoardVO> selectBoardList(Criteria cri) throws Exception {
 		// TODO Auto-generated method stub
-		
 		BoardMapper boardMapper = sqlSession.getMapper(BoardMapper.class);
-		List<BoardVO> boardList = boardMapper.selectBoardList();
+		List<BoardVO> boardList = boardMapper.selectBoardList(cri);
 		return boardList;
 	}
+	
+
+	
+	@Override
+	public int selectBoardOne() throws Exception {
+		// TODO Auto-generated method stub
+		BoardMapper boardMapper = sqlSession.getMapper(BoardMapper.class);
+		return boardMapper.selectBoardOne();
+	}
+
 
 	@Override
 	public BoardVO selectBoard(int board_number) {
@@ -80,6 +89,18 @@ public class BoardDAOImpl implements BoardDAO{
 		BoardMapper boardMapper = sqlSession.getMapper(BoardMapper.class);
 		boardMapper.updateCount(board_number);
 	}
+	
+	/*
+	 * @Override public List<BoardVO> listSearch(SearchCriteria pageVO) throws
+	 * Exception { // TODO Auto-generated method stub BoardMapper boardMapper =
+	 * sqlSession.getMapper(BoardMapper.class); return
+	 * boardMapper.selectList(pageVO); }
+	 * 
+	 * @Override public int listSearchCount(SearchCriteria pageVO) throws Exception
+	 * { // TODO Auto-generated method stub BoardMapper boardMapper =
+	 * sqlSession.getMapper(BoardMapper.class); return
+	 * boardMapper.selectOne(pageVO); }
+	 */
 
 
 	
