@@ -21,7 +21,7 @@ h1 {
 .border {
 	margin: 0 auto;
 	height : 2000px;
-	background-color:#FFEAD0;
+	background-color:#F5F6F7;
 }
 input {
 	background-color: white; 

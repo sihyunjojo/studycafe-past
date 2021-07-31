@@ -55,7 +55,7 @@
 }
 
 header {
-	background-color: blueviolet;
+	background-color: #FFA500;
 	height: 150px;
 	padding: 5px;
 	margin: 5px;

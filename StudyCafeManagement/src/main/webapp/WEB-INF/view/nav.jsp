@@ -2,8 +2,8 @@
     pageEncoding="UTF-8"%>
 <style>
 	header{
-         background-color:blueviolet;
-         height:150px;
+         background-color:#FFA500;
+         height:120px;
          padding:5px;
          margin:5px;
          text-align: center;

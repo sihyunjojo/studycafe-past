@@ -11,6 +11,9 @@
 	}
 </script>
 <style>
+header{
+	background-color: #FFA500;
+}
 form{
 	text-align: center;
 	margin: 0 auto;
@@ -19,7 +22,7 @@ form{
 }
 .border {
 	margin: 0 auto;
-	background-color:#FFEAD0;
+	background-color:#F5F6F7;
 }
 input {
 	background-color: white; 
