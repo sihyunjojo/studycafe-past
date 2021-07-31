@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import basic.studyCafe.mybatis.BoardMapper;
 import basic.studyCafe.mybatis.NoticeMapper;
 import basic.studyCafe.vo.BoardVO;
+import basic.studyCafe.vo.Criteria;
 import basic.studyCafe.vo.NoticeVO;
 
 @Repository
@@ -18,13 +19,21 @@ public class NoticeDAOImpl implements NoticeDAO {
 	private SqlSession sqlSession;
 	
 	@Override
-	public List<NoticeVO> selectNoticeList() {
+	public List<NoticeVO> selectNoticeList(Criteria cri) throws Exception {
 		// TODO Auto-generated method stub
 		NoticeMapper noticeMapper = sqlSession.getMapper(NoticeMapper.class);
-		List<NoticeVO> noticeList = noticeMapper.selectNoticeList();
+		List<NoticeVO> noticeList = noticeMapper.selectNoticeList(cri);
 		return noticeList;	
 		}
+	
 
+	@Override
+	public int selectNoticeOne() throws Exception {
+		// TODO Auto-generated method stub
+		NoticeMapper noticeMapper = sqlSession.getMapper(NoticeMapper.class);
+		return noticeMapper.selectNoticeOne();
+		}
+	
 	@Override
 	public NoticeVO selectNotice(int notice_number) {
 		// TODO Auto-generated method stub

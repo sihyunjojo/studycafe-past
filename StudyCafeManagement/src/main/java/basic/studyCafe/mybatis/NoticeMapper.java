@@ -2,11 +2,14 @@ package basic.studyCafe.mybatis;
 
 import java.util.List;
 
+import basic.studyCafe.vo.Criteria;
 import basic.studyCafe.vo.NoticeVO;
 
 public interface NoticeMapper {
 	
-	public List<NoticeVO> selectNoticeList();
+	public List<NoticeVO> selectNoticeList(Criteria cri) throws Exception;
+	public int selectNoticeOne() throws Exception;
+
 	public NoticeVO selectNotice(int Notice_number);
 	public void insertArticle(NoticeVO Notice);
 	public void deleteNotice(int Notice_number);

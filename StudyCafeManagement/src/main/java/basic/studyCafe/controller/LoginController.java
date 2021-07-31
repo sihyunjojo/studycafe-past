@@ -2,18 +2,16 @@ package basic.studyCafe.controller;
 
 import java.io.IOException;
 
+
 import java.io.PrintWriter;
 import java.util.List;
 
-//import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-/*import org.mybatis.logging.Logger;
-import org.mybatis.logging.LoggerFactory;
-*/
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -23,14 +21,14 @@ import basic.studyCafe.service.BoardService;
 import basic.studyCafe.service.MemberService;
 import basic.studyCafe.service.NoticeService;
 import basic.studyCafe.vo.BoardVO;
+import basic.studyCafe.vo.Criteria;
 import basic.studyCafe.vo.MemberVO;
 import basic.studyCafe.vo.NoticeVO;
+import basic.studyCafe.vo.PageMaker;
 
 @Controller
 @RequestMapping("/common/*")
 public class LoginController {
-
-//	private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
 
 	@Autowired
 	private MemberService memberService;
@@ -42,27 +40,27 @@ public class LoginController {
 	private NoticeService noticeService;
 
 	@RequestMapping(value = "/LoginMain", method = RequestMethod.GET)
-	public ModelAndView LoginMain() {
-		ModelAndView mav = new ModelAndView();
+	public String LoginMain(Model model, Criteria cri) throws Exception {
+		model.addAttribute("boardList", boardService.getBoardList(cri));
+		model.addAttribute("noticeList", noticeService.getNoticeList(cri));
 
-		List<BoardVO> boardList = boardService.getBoardList();
-		mav.addObject("boardList", boardList);
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setCri(cri);
+		pageMaker.setTotalCount(boardService.getBoardListCount());
+		pageMaker.setTotalCount(noticeService.getNoticeListCount());
+		 			
+		model.addAttribute("pageMaker", pageMaker);
 
-		List<NoticeVO> noticeList = noticeService.getNoticeList();
-		mav.addObject("noticeList", noticeList);
-
-		mav.setViewName("common/LoginMain");
-
-		return mav;
+		return "common/LoginMain";
 	}
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public ModelAndView Login(@RequestParam("id") String id, @RequestParam("password") String password,
-			HttpSession session, HttpServletResponse response) throws IOException {
+	public String Login(@RequestParam("id") String id, @RequestParam("password") String password,
+			HttpSession session, HttpServletResponse response, Model model, Criteria cri) throws Exception {
 		MemberVO member = new MemberVO();
 		member.setUser_id(id);
 		member.setUser_password(password);
-
+		
 		int result = memberService.checkMember(member, session);
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = response.getWriter();
@@ -72,17 +70,16 @@ public class LoginController {
 			out.flush();
 		}
 
-		ModelAndView mav = new ModelAndView();
 
-		List<BoardVO> boardList = boardService.getBoardList();
-		mav.addObject("boardList", boardList);
-
-		List<NoticeVO> noticeList = noticeService.getNoticeList();
-		mav.addObject("noticeList", noticeList);
-
-		mav.setViewName("common/LoginMain");
-
-		return mav;
+		/*
+		 * List<BoardVO> boardList = boardService.getBoardList();
+		 * mav.addObject("boardList", boardList);
+		 */
+		/*
+		 * List<NoticeVO> noticeList = noticeService.getNoticeList();
+		 * model.addAttribute("noticeList", noticeList);
+		 */
+		return "common/LoginMain";
 	}
 
 	@RequestMapping(value = "/logout")
@@ -91,12 +88,14 @@ public class LoginController {
 
 		ModelAndView mav = new ModelAndView();
 
-		List<BoardVO> boardList = boardService.getBoardList();
-		mav.addObject("boardList", boardList);
-
-		List<NoticeVO> noticeList = noticeService.getNoticeList();
-		mav.addObject("noticeList", noticeList);
-
+		/*
+		 * List<BoardVO> boardList = boardService.getBoardList();
+		 * mav.addObject("boardList", boardList);
+		 */
+		/*
+		 * List<NoticeVO> noticeList = noticeService.getNoticeList();
+		 * mav.addObject("noticeList", noticeList);
+		 */
 		mav.setViewName("common/LoginMain");
 
 		return mav;

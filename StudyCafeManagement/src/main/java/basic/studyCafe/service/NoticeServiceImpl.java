@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import basic.studyCafe.dao.NoticeDAO;
+import basic.studyCafe.vo.Criteria;
 import basic.studyCafe.vo.NoticeVO;
 
 @Service
@@ -14,10 +15,17 @@ public class NoticeServiceImpl implements NoticeService {
 	private NoticeDAO noticeDAO;
 
 	@Override
-	public List<NoticeVO> getNoticeList() {
+	public List<NoticeVO> getNoticeList(Criteria cri) throws Exception{
 		// TODO Auto-generated method stub
-		List<NoticeVO> noticeList = noticeDAO.selectNoticeList();
+		List<NoticeVO> noticeList = noticeDAO.selectNoticeList(cri);
 		return noticeList;
+	}
+
+	
+	@Override
+	public int getNoticeListCount() throws Exception {
+		// TODO Auto-generated method stub
+		return noticeDAO.selectNoticeOne();
 	}
 
 	@Override

@@ -51,6 +51,11 @@ button {
 </style>
 </head>
 <body>
+		<header>
+		
+			<%@include file="../nav.jsp" %>
+			
+		</header>
 	<div class="border">
 	<form action ="join" method="POST">
 	<h1>회원가입</h1>

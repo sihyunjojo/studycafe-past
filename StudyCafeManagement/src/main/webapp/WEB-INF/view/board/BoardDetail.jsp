@@ -4,43 +4,72 @@
 <html>
 <head>
 <meta charset="UTF-8">
+	<!-- 합쳐지고 최소화된 최신 CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+	<!-- 부가적인 테마 -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 <title>Insert title here</title>
 <script>
-	function fn_list(){
-		location.href = "BoardList";
+	function fn_board_update(){
+		location.href = "BoardUpdate?board_number=${board.board_number}";
+	}	
+	function fn_board_delete(){
+		location.href = "BoardDelete?board_number=${board.board_number}";
 	}
+	
 </script>
 </head>
 <body>
-	<hr>
-		<input type = "button" value = "글목록보기" onclick = "fn_list()"/>
-	<hr>
-	<table border = "1">
-		<tr>
-			<th>번호</th>
-			<th>제목</th>
-			<th>등록자</th>
-			<th>작성일</th>
-		</tr>
-		<tr>
-			<td>${board.board_number }</td>
-			<td>${board.board_title}</td>
-			<td>${board.user_id}</td>
-			<td>${board.board_time}</td>
-		</tr>
-		<tr>
-			<td colspan = "4">
-				${board.board_content }
-			</td>
-		</tr>
-		<tr>
-			<td colspan = "4">
-				<a href = "BoardUpdate?board_number=${board.board_number}">글수정</a>
-				<a href = "BoardDelete?board_number=${board.board_number}">글삭제</a>
-			</td>
-		</tr>
-		    
-	</table>
-			<br><a href="/StudyCafeManagement/common/LoginMain">메인화면</a>
+		<header>
+		
+			<%@include file="../nav.jsp" %>
+			
+		</header>
+	<div class="container">		
+		<h1> 게시판</h1>
+		<hr />
+		
+
+		<div>
+			
+			<%@include file="../board_nav.jsp" %>
+			
+		</div>
+		
+		<section id="container">
+			<div class="form-group">
+				<label for="board_number" class="col-sm-2 control-label">번호</label>
+				<input type="text" id="board_number" class="form-control" 
+				value="${board.board_number }" readonly />
+			</div>
+			<div class="form-group">
+				<label for="board_title" class="col-sm-2 control-label">제목</label>
+				<input type="text" id="board_title" class="form-control" 
+				value="${board.board_title }" readonly />
+			</div>
+			<div class="form-group">
+				<label for="board_content" class="col-sm-2 control-label">내용</label>
+				<textarea id="board_content" cols = "20" rows = "10" class="form-control" 
+				 readonly>${board.board_content }</textarea>
+			</div>
+			<div class="form-group">
+				<label for="user_id" class="col-sm-2 control-label">등록자</label>
+				<input type="text" id="user_id" class="form-control" 
+				value="${board.user_id }" readonly />
+			</div>
+			<div class="form-group">
+				<label for="board_time" class="col-sm-2 control-label">작성일</label>
+				${board.board_time}
+			</div>
+			
+			<div>
+				<button type="button" class="update_btn btn btn-warning" 
+				onclick="fn_board_update();">글수정</button>
+				<button type="button" class="delete_btn btn btn-danger"
+				onclick="fn_board_delete();">글삭제</button>
+			</div>
+				
+		</section>
+	</div>
 </body>
 </html>

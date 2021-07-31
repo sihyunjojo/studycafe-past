@@ -1,30 +1,51 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
+	<!-- 합쳐지고 최소화된 최신 CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+	<!-- 부가적인 테마 -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 <title>Insert title here</title>
+
 </head>
 <body>
-	<form action="BoardInsert" method="POST">
-		<table>
-			<tr>
-				<td>게시글제목</td>
-				<td><input type="text" name="board_title" required/></td>
-			</tr>
-			<tr>
-				<td><input type="hidden" name="user_id"
-					value="${sessionScope.user_id}" /></td>
-			</tr>
-			<tr>
-				<td>게시글내용</td>
-				<td><textarea name="board_content" cols="20" rows="10" required></textarea></td>
-			</tr>
-			<tr>
-				<td colspan="3"><input type="submit" value="글등록"></td>
-			</tr>
-		</table>
-	</form>
+		<header>
+		
+			<%@include file="../nav.jsp" %>
+			
+		</header>
+	<div class="container">
+
+		<h1> 게시판</h1>
+		<hr />
+
+		<div>
+			
+			<%@include file="../board_nav.jsp" %>
+			
+		</div>
+		
+		<section id="container">
+			<form action="BoardInsert" method = "POST">
+				<input type = "hidden" name = "user_id" value = "${sessionScope.user_id }">
+				<div class="form-group">
+					<label for="board_title" class="col-sm-2 control-label">제목</label>
+					<input type = "text" name = "board_title" class="form-control"
+					required/>		
+				</div>
+				<div class="form-group">
+					<label for="board_title" class="col-sm-2 control-label">내용</label>
+					<textarea name = "board_content" cols = "20" rows = "10" class="form-control" 
+					required></textarea>
+				</div>
+				<div>
+					<input type = "submit" class="replyWriteBtn btn btn-success" value = "글작성">			
+				</div>			
+			</form>
+		</section>
+	</div>
 </body>
 </html>

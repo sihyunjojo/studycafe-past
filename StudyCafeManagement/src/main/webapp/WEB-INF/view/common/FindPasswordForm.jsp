@@ -39,6 +39,11 @@ div {
 </style>
 </head>
 <body>
+		<header>
+		
+			<%@include file="../nav.jsp" %>
+			
+		</header>
 	<div class="border">
 
 		<form action="findPasswordForm" method="post">

@@ -2,11 +2,13 @@ package basic.studyCafe.service;
 
 import java.util.List;
 
+import basic.studyCafe.vo.Criteria;
 import basic.studyCafe.vo.NoticeVO;
 
 public interface NoticeService {
 
-	public List<NoticeVO> getNoticeList();
+	public List<NoticeVO> getNoticeList(Criteria cri) throws Exception;
+	public int getNoticeListCount() throws Exception;
 	public NoticeVO getNoticeDetail(int notice_number);
 	public void increaseCount(int notice_number);
 	public void registArticle(NoticeVO notice);

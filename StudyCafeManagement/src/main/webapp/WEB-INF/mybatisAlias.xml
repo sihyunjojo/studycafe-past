@@ -6,10 +6,11 @@
   	<typeAliases>
   		<typeAlias type="basic.studyCafe.vo.MemberVO" alias = "MemberVO"/>
   		<typeAlias type="basic.studyCafe.vo.BoardVO" alias = "BoardVO"/>
+  		<typeAlias type="basic.studyCafe.vo.Criteria" alias = "Criteria"/>
   		<typeAlias type="basic.studyCafe.vo.ProductVO" alias = "ProductVO"/>
   		<typeAlias type="basic.studyCafe.vo.CartProductVO" alias = "CartProductVO"/>
   		<typeAlias type="basic.studyCafe.vo.SeatVO" alias = "SeatVO"/>
   		<typeAlias type="basic.studyCafe.vo.NoticeVO" alias = "NoticeVO"/>
-  		
+
   	</typeAliases>
   </configuration>

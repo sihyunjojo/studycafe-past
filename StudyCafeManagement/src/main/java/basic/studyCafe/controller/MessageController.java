@@ -47,6 +47,7 @@ public class MessageController {
 		}
 		return mav;
 	}
+	
 	@OnOpen
 	public void onOpen(Session session) {
 		logger.info("Open session id:"+session.getId());
@@ -57,7 +58,7 @@ public class MessageController {
 		try {
 			for(Session session : MessageController.sessionList) {
 				if(!self.getId().equals(session.getId())) {
-					session.getBasicRemote().sendText(message.split(",")[1]+" : "+message);
+					session.getBasicRemote().sendText(message);
 				}
 			}
 		}catch (Exception e) {
@@ -70,7 +71,7 @@ public class MessageController {
 		logger.info("Message From "+message.split(":")[1]+": "+message.split(":")[0]);
 		try {
 			final Basic basic = session.getBasicRemote();
-			basic.sendText(message);
+			basic.sendText("me : "+message.split(":")[1]);
 		}catch (Exception e) {
 			System.out.println(e.getMessage());
 		}

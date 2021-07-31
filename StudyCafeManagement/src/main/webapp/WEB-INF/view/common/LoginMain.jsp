@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 
 <!DOCTYPE html> 
 
@@ -197,6 +199,28 @@ tbody {
 header, section {
 	text-aligen: center;
 }
+ul {
+	list-style:none;
+	float:left;
+	display:inline;
+}
+ul li {
+	float:left;
+}
+ul li a {
+	padding:4px;
+	margin-right:25px;
+	width:30px;
+	color:#000;
+	font:bold 20px tahoma;
+	border:1px solid #eee;
+	text-decoration:none;
+}
+ul li a:hover, ul li a:focus {
+	color:#fff;
+	border:1px solid #f40;
+	background-color:#f40;
+}
 </style>
 
 <script>
@@ -283,11 +307,33 @@ header, section {
 					<td class="even"><a href="/StudyCafeManagement/board/BoardDetail?board_number=${board.board_number }&user_id=${sessionScope.user_id}
 					&writer=${board.user_id }">${board.board_title}</a></td>
 					<td class="even">${board.user_id}</td>
-					<td class="even">${board.board_time}</td>
+					<td class="even">
+						<fmt:parseDate value="${board.board_time }" var="today" pattern="yyyy-MM-dd">
+						</fmt:parseDate>
+						<fmt:formatDate value="${today }" pattern="yyyy-MM-dd" />
+					</td>
 					<td class="even">${board.board_readcount}</td>
 			    </tr>
 		  	</c:forEach>
   		</table>
+  		
+  		<div>
+				<ul>
+					<c:if test="${pageMaker.prev}">
+    					<li><a href="LoginMain${pageMaker.makeQuery(pageMaker.startPage - 1)}">&laquo;</a></li>
+    				</c:if> 
+
+    				<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
+    					<li> 
+    						<a href="LoginMain${pageMaker.makeQuery(idx)}">${idx}</a>
+    					</li>
+    				</c:forEach>
+
+    				<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
+				    	<li><a href="LoginMain${pageMaker.makeQuery(pageMaker.endPage + 1)}">&raquo;</a></li>
+				    </c:if> 
+				</ul>
+		</div>
 
 
 
@@ -359,11 +405,33 @@ header, section {
 		  			<td class="even">${notice.notice_number }</td>
 					<td class="even"><a href="/StudyCafeManagement/notice/NoticeDetail?notice_number=${notice.notice_number }&user_id=${sessionScope.user_id}">${notice.notice_title}</a></td>
 					<td class="even">${notice.user_id}</td>
-					<td class="even">${notice.notice_time}</td>
+					<td class="even">
+						<fmt:parseDate value="${notice.notice_time }" var="today" pattern="yyyy-MM-dd">
+						</fmt:parseDate>
+						<fmt:formatDate value="${today }" pattern="yyyy-MM-dd" />
+					</td>
 					<td class="even">${notice.notice_readcount}</td>
 			    </tr>
 		  	</c:forEach>
   		</table>
+  		
+		<div>
+				<ul>
+					<c:if test="${pageMaker.prev}">
+    					<li><a href="LoginMain${pageMaker.makeQuery(pageMaker.startPage - 1)}">&laquo;</a></li>
+    				</c:if> 
+
+    				<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
+    					<li> 
+    						<a href="LoginMain${pageMaker.makeQuery(idx)}">${idx}</a>
+    					</li>
+    				</c:forEach>
+
+    				<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
+				    	<li><a href="LoginMain${pageMaker.makeQuery(pageMaker.endPage + 1)}">&raquo;</a></li>
+				    </c:if> 
+				</ul>
+		</div>
 
 			</div>
 

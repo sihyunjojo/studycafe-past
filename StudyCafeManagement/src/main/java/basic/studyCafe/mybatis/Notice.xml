@@ -8,21 +8,33 @@
 	<resultMap type="NoticeVO" id="NoticeVOResultMap">
 		<result property="notice_number" column="notice_number" />
 		<result property="user_id" column="user_id" />
-		<result property="notice_pagenumber" column="notice_pagenumber" />
 		<result property="notice_title" column="notice_title" />
-		<result property="notice_kind" column="notice_kind" />
 		<result property="notice_time" column="notice_time" />
 		<result property="notice_readcount" column="notice_readcount" />
 		<result property="notice_content" column="notice_content" />
-		<result property="notice_filename" column="notice_filename" />
-		<result property="notice_popup" column="notice_popup" />
 	</resultMap>
 
-
-	<select id="selectNoticeList" resultType="NoticeVO">
-		SELECT * FROM notice_info
+	<select id="selectNoticeList" resultType="NoticeVO" parameterType="Criteria">
+		SELECT notice_number, user_id, notice_title, notice_content, notice_time,
+			   notice_readcount 
+		FROM (
+			SELECT notice_number, user_id, notice_title, notice_content, 
+				   notice_time, notice_readcount,
+			       ROW_NUMBER() OVER(ORDER BY notice_number DESC) AS RNUM
+			FROM notice_info
+		)
+		WHERE RNUM BETWEEN #{rowStart} AND #{rowEnd}
 		ORDER BY notice_number DESC
 	</select>
+	
+	<select id="selectNoticeOne" resultType="int">
+	<![CDATA[
+		SELECT COUNT(notice_number)
+		FROM notice_info
+		WHERE notice_number > 0
+	]]>
+	</select>
+
 
 	<select id="selectNotice" resultType="NoticeVO"
 		parameterType="int">
@@ -46,9 +58,9 @@
 
 	<insert id="insertArticle" parameterType="NoticeVO">
 		INSERT INTO notice_info
-		VALUES(notice_info_seq.nextval, #{user_id}, 1,
-		#{notice_title}, '커뮤',
-		sysdate, 1, #{notice_content}, '보류', 'F')
+		VALUES(notice_info_seq.nextval, #{user_id},
+		#{notice_title},
+		sysdate, 0, #{notice_content})
 	</insert>
 
 	<update id="updateNotice" parameterType="NoticeVO">
