@@ -2,16 +2,13 @@ package basic.studyCafe.controller;
 
 import java.io.IOException;
 
+
 import java.io.PrintWriter;
 import java.util.List;
 
-//import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-/*import org.mybatis.logging.Logger;
-import org.mybatis.logging.LoggerFactory;
-*/
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,8 +26,6 @@ import basic.studyCafe.vo.NoticeVO;
 @Controller
 @RequestMapping("/common/*")
 public class LoginController {
-
-//	private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
 
 	@Autowired
 	private MemberService memberService;
@@ -62,7 +57,7 @@ public class LoginController {
 		MemberVO member = new MemberVO();
 		member.setUser_id(id);
 		member.setUser_password(password);
-
+		
 		int result = memberService.checkMember(member, session);
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = response.getWriter();
