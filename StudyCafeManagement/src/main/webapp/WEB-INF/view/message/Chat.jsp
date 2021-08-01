@@ -7,20 +7,33 @@
 <link rel='stylesheet' href='/webjars/bootstrap/3.3.7/css/bootstrap.min.css'>
 <title>Insert title here</title>
 <style>
-/* .messageTotalFrame{
-text-align: center;
+@import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap');
+.container {
+
 }
-input{
-width: 100px;
-height: 50px;
+.form-group{
+	text-align: center;
+	margin: 0 auto;
+	font-family: 'Do Hyeon', sans-serif;
+	font-size : 20px;
+}
+body {
+	background-color:#F5F6F7;
+	margin: 0 auto;
 }
 button{
-width: 100px;
-height: 100px;
-
+	background-color : #FFAF00; 
+	width : 300px; height : 50px; border : 1px; border-radius: 0%;
+	font-family: 'Do Hyeon', sans-serif;
+	font-size:20px; 
 }
- */
-
+.chat {
+	overflow-y : auto; width:auto; height:500px;
+	text-align: center;
+	margin: 0 auto;
+	font-family: 'Do Hyeon', sans-serif;
+	font-size : 20px;
+}
 </style>
 </head>
 <body>
@@ -29,43 +42,38 @@ height: 100px;
 			<%@include file="../nav.jsp" %>
 			
 		</header>
-<h1>메시지</h1><br><br>
 <div class="container">
 	<div class="container bootstrap snippet">
 		<div class="row">
 			<div class="col-xs-12">
 				<div class="portlet portlet-default">
-					<div class="portlet-title">
-						<h4><i class="fa fa-circle text-green">채팅방</i></h4>
+					<div class="form-group">
+						<h1><i class="fa fa-circle text-green">채팅방</i></h1>
 						<hr>
 					</div>
 					<div class="clearfix"></div>
 				</div>
 				<div id="chat" class="panel-collapse collapse in">
-					<div id="messages" class="portlet-body chat-widget" style="overflow-y : auto; width:auto; height:500px;">
+					<div id="messages" class = "chat">
 				    </div>
 				    <div class="portlet-footer">
-				    	<div class="row">
-				    		<div class="form-group col-xs-4">
-				    		</div>
-				    	</div>
 				    	<div class="row" style="height:90px">
-				    		<div class="form-group col-xs-10">
+				    		<div class="form-group">
 				    			<br><br>
 				    			<input type="text" id="sender" value="${sessionScope.user_id}"
 								style="display: none;">
-				    			<textarea style="height:80px;" id="messageinput" class="form-control" 
-				    			placeholder="메시지를 입력하세요." maxlength="100%">
+				    			<textarea placeholder="메시지를 입력하세요." style="height:80px; width:600px;
+				    			margin: 0 auto;	font-family: 'Do Hyeon', sans-serif; font-size : 20px;" id="messageinput">
 				    			</textarea>
 				    		</div>
-				    		<div class="form-group col-xs-2">
-				    			
+				    		<div class="form-group">
+				  
 				    			<button type="button" class="btn btn-default pull-right" onclick="send();">보내기
 				    			</button>
 				    			<div class="clearfix"></div>
 				    			<br><br>
 				    		</div>
-				    		<div class="form-group col-xs-2">
+				    		<div class="form-group">
 				    			<button type="button" onclick="openSocket();">입장</button>&emsp;
 								<button type="button" onclick="closeSocket();">나가기</button>
 				    			<div class="clearfix"></div>								
