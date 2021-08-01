@@ -27,10 +27,11 @@
 			<%@include file="../board_nav.jsp" %>
 			
 		</div>
-		
 		<section id="container">
 			<form action="BoardUpdate" method = "POST">
 			`	<input type = "hidden" name = "board_number" value = "${board.board_number }">
+				<input type = "hidden" name = "page" value = "${cri.page }">
+				<input type = "hidden" name = "perPageNum" value = "${cri.perPageNum }">
 				<div class="form-group">
 					<label for="board_title" class="col-sm-2 control-label">제목</label>
 					<input type = "text" name = "board_title" class="form-control"

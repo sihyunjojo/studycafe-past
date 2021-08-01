@@ -29,11 +29,11 @@
 		<hr />
 		
 		<div>
-			<ul>
-				<li><a href="BoardInsert">글쓰기</a></li>
-				<li><a href="/StudyCafeManagement/common/LoginMain">메인화면</a></li>
-			</ul>
+			
+			<%@include file="../board_nav.jsp" %>
+			
 		</div>
+		
 		<section>
 			<table class="table table-hover">
 				<thead>

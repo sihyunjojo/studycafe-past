@@ -287,12 +287,6 @@ ul li a:hover, ul li a:focus {
 				커뮤니티
 				<hr>
 
-
-				<%-- 	<%
-			if (count == 0) {
-		%> --%>
-
-
 		<table class="type01">
 				<tr>
 			    	<th scope="row">글번호</th>
@@ -478,41 +472,5 @@ ul li a:hover, ul li a:focus {
 
 		</div>
 	</section>
-
-	<%--   <section>
-    
-
-     <table border = "1">
-      <tr>
-         <th>번호</th>
-         <th>제목</th>
-         <th>등록자</th>
-         <th>작성일</th>
-      </tr>
-      <c:forEach var = "board" items = "${boardList }">
-         <tr>
-         <td>${board.seq }</td>
-         <td><a href = "board_detail.do?seq=${board.seq }">${board.title}</a></td>
-         <td>${board.writer}</td>
-         <td>${board.regdate}</td>
-         </tr>
-      </c:forEach>
-   </table>
-   
-   <table>
- <div class="top_btns">
- 
-        <button class="board_management_btn top_btn">
-            카테고리/게시판 관리
-        </button>
-        <button class="report_management_btn top_btn">
-            신고 리스트 관리
-        </button>
-        <button class="user_management_btn top_btn">
-            회원 관리
-        </button>
-    </div>
-    </table>
-</section> --%>
 </body>
 </html>

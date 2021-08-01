@@ -63,8 +63,7 @@ button{
 				    			<input type="text" id="sender" value="${sessionScope.user_id}"
 								style="display: none;">
 				    			<textarea placeholder="메시지를 입력하세요." style="height:80px; width:600px;
-				    			margin: 0 auto;	font-family: 'Do Hyeon', sans-serif; font-size : 20px;" id="messageinput">
-				    			</textarea>
+				    			margin: 0 auto;	font-family: 'Do Hyeon', sans-serif; font-size : 20px;" id="messageinput"></textarea>
 				    		</div>
 				    		<div class="form-group">
 				  

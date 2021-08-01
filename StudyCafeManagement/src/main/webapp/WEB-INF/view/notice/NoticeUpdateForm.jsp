@@ -30,7 +30,7 @@
 
 		
 		<section id="container">
-			<form action="NoticeUpdate?user_id=${sessionScope.user_id}" method = "POST">
+			<form action="NoticeUpdate?user_id=${sessionScope.user_id}&page=${cri.page }&perPageNum=${cri.perPageNum }" method = "POST">
 			`	<input type = "hidden" name = "notice_number" value = "${notice.notice_number }">
 				<div class="form-group">
 					<label for="notice_title" class="col-sm-2 control-label">제목</label>

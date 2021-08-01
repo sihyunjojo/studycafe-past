@@ -33,7 +33,7 @@
 		<div>
 			
 			<ul>
-				<li><a href="BoardInsert">글쓰기</a></li>
+				<li><a href="BoardInsert${pageMaker.makeQuery(pageMaker.cri.page)}">글쓰기</a></li>
 				<li><a href="/StudyCafeManagement/common/LoginMain">메인화면</a></li>
 			</ul>
 			
@@ -47,7 +47,7 @@
 				<c:forEach var="board" items="${boardList }">
 					<tr>
 						<td>${board.board_number }</td>
-						<td><a href="BoardDetail?board_number=${board.board_number }&user_id=${sessionScope.user_id}
+						<td><a href="BoardDetail${pageMaker.makeQuery(pageMaker.cri.page)}&board_number=${board.board_number }&user_id=${sessionScope.user_id}
 							&writer=${board.user_id }">${board.board_title}</a></td>
 						<td>${board.user_id}</td>
 						<td><fmt:parseDate value="${board.board_time }" var="today" pattern="yyyy-MM-dd">
@@ -59,7 +59,7 @@
 				
 			</table>
 			<div class="search row">
-					<form action="BoardSearch" method="POST">
+					<form action="BoardSearch${pageMaker.makeQuery(pageMaker.cri.page)}" method="POST">
 						<div class="col-xs-2 col-sm-2">
 							<select name="search_option" class="form-control">
 								<option value="board_title">제목</option>

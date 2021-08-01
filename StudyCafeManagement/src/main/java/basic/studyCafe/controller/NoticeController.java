@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -41,23 +42,24 @@ public class NoticeController {
 	}
 
 	@RequestMapping("/NoticeDetail")
-	public ModelAndView showNoticeDetail(@RequestParam int notice_number, @RequestParam String user_id) {
-		ModelAndView mav = new ModelAndView();
+	public String showNoticeDetail(@RequestParam int notice_number, @RequestParam String user_id, @ModelAttribute("cri") Criteria cri, 
+			Model model) {
+		String path = "";
 		NoticeVO notice = noticeService.getNoticeDetail(notice_number);
 		noticeService.increaseCount(notice_number);
-		mav.addObject("notice", notice);
+		model.addAttribute("notice", notice);
 
 		if (user_id.equals("admin")) {
-			mav.setViewName("notice/NoticeDetail");
+			path = "notice/NoticeDetail";
 		} else {
-			mav.setViewName("notice/UserNoticeDetail");
+			path = "notice/UserNoticeDetail";
 		}
-
-		return mav;
+		return path;
 	}
 
 	@RequestMapping(value = "/NoticeInsert", method = RequestMethod.GET)
-	public String NoticeWriteForm() {
+	public String NoticeWriteForm(@ModelAttribute("cri") Criteria cri, 
+			Model model) {
 		return "/notice/NoticeWriteForm";
 	}
 
@@ -71,32 +73,37 @@ public class NoticeController {
 	}
 
 	@RequestMapping(value = "/NoticeUpdate", method = RequestMethod.GET)
-	public ModelAndView NoticeUpdateForm(@RequestParam int notice_number) {
-		ModelAndView mav = new ModelAndView();
+	public String NoticeUpdateForm(@RequestParam int notice_number, @ModelAttribute("cri") Criteria cri, 
+			Model model) {
 		NoticeVO notice = noticeService.getNoticeDetail(notice_number);
 
-		mav.setViewName("notice/NoticeUpdateForm");
-		mav.addObject("notice", notice);
+		model.addAttribute("notice", notice);
 
-		return mav;
+		return "notice/NoticeUpdateForm";
 	}
 
 	@RequestMapping(value = "/NoticeUpdate", method = RequestMethod.POST)
-	public String updateNotice(NoticeVO notice, @RequestParam String user_id) {
+	public String updateNotice(NoticeVO notice, @RequestParam String user_id, @ModelAttribute("cri") Criteria cri, 
+			Model model) {
 		noticeService.modifyNotice(notice);
-		return "redirect:/notice/NoticeList?user_id=" + user_id;
+		
+		return "redirect:/notice/NoticeList?user_id=" + user_id + "&page=" + cri.getPage() + "&perPageNum=" + cri.getPerPageNum();
+
 	}
 
 	@RequestMapping("/NoticeDelete")
-	public String removeNotice(@RequestParam int notice_number, @RequestParam String user_id) {
+	public String removeNotice(@RequestParam int notice_number, @RequestParam String user_id, @ModelAttribute("cri") Criteria cri, 
+			Model model) {
 		noticeService.removeNotice(notice_number);
-		return "redirect:/notice/NoticeList?user_id=" +user_id;
+		return "redirect:/notice/NoticeList?user_id=" + user_id + "&page=" + cri.getPage() + "&perPageNum=" + cri.getPerPageNum();
 	}
 
 	@RequestMapping(value = "/NoticeSearch", method = RequestMethod.POST)
-	public ModelAndView viewNoticeSearchList(@RequestParam(defaultValue = "notice_title") String search_option,
-			@RequestParam("keyword") String keyword, NoticeVO searchNotice, @RequestParam String user_id) {
-		ModelAndView mav = new ModelAndView();
+	public String viewNoticeSearchList(@RequestParam(defaultValue = "notice_title") String search_option,
+			@RequestParam("keyword") String keyword, NoticeVO searchNotice, @RequestParam String user_id, @ModelAttribute("cri") Criteria cri, 
+			Model model) {
+		String path = "";
+		
 		List<NoticeVO> noticeSearchList;
 		if (search_option.equals("notice_title")) {
 			searchNotice.setNotice_title(keyword);
@@ -106,15 +113,15 @@ public class NoticeController {
 			noticeSearchList = noticeService.getIdSearchNoticeList(searchNotice);
 		}
 
-		mav.addObject("noticeSearchList", noticeSearchList);
+		model.addAttribute("noticeSearchList", noticeSearchList);
 
 		if (user_id.equals("admin")) {
-			mav.setViewName("notice/NoticeSearchList");
+			path = "notice/NoticeSearchList";
 		} else {
-			mav.setViewName("notice/UserNoticeSearchList");
+			path = "notice/UserNoticeSearchList";
 		}
 
-		return mav;
+		return path;
 	}
 
 }

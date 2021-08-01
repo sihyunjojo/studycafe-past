@@ -12,10 +12,10 @@
 <title>Insert title here</title>
 <script>
 	function fn_notice_update(){
-		location.href = "NoticeUpdate?notice_number=${notice.notice_number}";
+		location.href = "NoticeUpdate?notice_number=${notice.notice_number}&page=${cri.page }&perPageNum=${cri.perPageNum }";
 	}	
 	function fn_notice_delete(){
-		location.href = "NoticeDelete?notice_number=${notice.notice_number}&user_id=${sessionScope.user_id }";
+		location.href = "NoticeDelete?notice_number=${notice.notice_number}&user_id=${sessionScope.user_id }&page=${cri.page }&perPageNum=${cri.perPageNum }";
 	}
 	
 </script>

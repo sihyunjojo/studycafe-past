@@ -71,4 +71,13 @@ public class PageMaker {
 		   
 		return uriComponents.toUriString();
 	}
+	
+	
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return "PageMaker [totalCount=" + totalCount + ", startPage=" + startPage +
+				", endPage=" + endPage + ", prev=" + prev + ", next=" + next +
+				", displayPageNum=" + displayPageNum + ", Criteria=" + cri;
+		}
 }

@@ -32,10 +32,11 @@
 		<hr />
 		
 		<div>
-			<ul>
-				<li><a href="/StudyCafeManagement/common/LoginMain">메인화면</a></li>
-			</ul>
+		
+			<%@include file="../notice_nav.jsp" %>
+		
 		</div>
+		
 		<section>
 			<table class="table table-hover">
 				<thead>

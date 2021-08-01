@@ -33,7 +33,7 @@
 		
 		<div>
 			<ul>
-				<li><a href="NoticeInsert">글쓰기</a></li>
+				<li><a href="NoticeInsert${pageMaker.makeQuery(pageMaker.cri.page)}">글쓰기</a></li>
 				<li><a href="/StudyCafeManagement/common/LoginMain">메인화면</a></li>
 			</ul>
 		</div>
@@ -46,7 +46,7 @@
 				<c:forEach var="notice" items="${noticeList }">
 					<tr>
 						<td>${notice.notice_number }</td>
-						<td><a href="NoticeDetail?notice_number=${notice.notice_number }&user_id=${sessionScope.user_id}">
+						<td><a href="NoticeDetail${pageMaker.makeQuery(pageMaker.cri.page)}&notice_number=${notice.notice_number }&user_id=${sessionScope.user_id}">
 						${notice.notice_title}</a></td>
 						<td>${notice.user_id}</td>
 						<td><fmt:parseDate value="${notice.notice_time }" var="today" pattern="yyyy-MM-dd">
@@ -58,7 +58,7 @@
 				
 			</table>
 			<div class="search row">
-					<form action="NoticeSearch?user_id=${sessionScope.user_id}" method="POST">
+					<form action="NoticeSearch${pageMaker.makeQuery(pageMaker.cri.page)}&user_id=${sessionScope.user_id}" method="POST">
 						<div class="col-xs-2 col-sm-2">
 							<select name="search_option" class="form-control">
 								<option value="notice_title">제목</option>

@@ -11,10 +11,10 @@
 <title>Insert title here</title>
 <script>
 	function fn_board_update(){
-		location.href = "BoardUpdate?board_number=${board.board_number}";
+		location.href = "BoardUpdate?board_number=${board.board_number}&page=${cri.page }&perPageNum=${cri.perPageNum }";
 	}	
 	function fn_board_delete(){
-		location.href = "BoardDelete?board_number=${board.board_number}";
+		location.href = "BoardDelete?board_number=${board.board_number}&page=${cri.page }&perPageNum=${cri.perPageNum }";
 	}
 	
 </script>
@@ -35,6 +35,7 @@
 			<%@include file="../board_nav.jsp" %>
 			
 		</div>
+		
 		
 		<section id="container">
 			<div class="form-group">

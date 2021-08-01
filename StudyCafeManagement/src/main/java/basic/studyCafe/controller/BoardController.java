@@ -5,13 +5,13 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 
 import basic.studyCafe.service.BoardService;
-import basic.studyCafe.vo.BoardVO;
+import basic.studyCafe.vo.BoardVO; 
 import basic.studyCafe.vo.Criteria;
 import basic.studyCafe.vo.PageMaker;
 
@@ -24,34 +24,43 @@ public class BoardController {
 
 	@RequestMapping("/BoardList")
 	public String viewBoardList(Model model, Criteria cri) throws Exception {
+		System.out.println(model);
+		System.out.println(cri);
 		model.addAttribute("boardList", boardService.getBoardList(cri));
+		System.out.println(boardService.getBoardList(cri));
 		
 		PageMaker pageMaker = new PageMaker();
+		System.out.println(pageMaker);
+		
 		pageMaker.setCri(cri);
 		pageMaker.setTotalCount(boardService.getBoardListCount());
-		model.addAttribute("pageMaker", pageMaker);
+		System.out.println(pageMaker);
 		
+		model.addAttribute("pageMaker", pageMaker);
 		return "board/BoardList";
 	}
 
 	@RequestMapping("/BoardDetail")
-	public ModelAndView showBoardDetail(@RequestParam int board_number, @RequestParam String user_id, @RequestParam String writer) {
-		ModelAndView mav = new ModelAndView();
+	public String showBoardDetail(@RequestParam int board_number, 
+			@ModelAttribute("cri") Criteria cri, @RequestParam String user_id, @RequestParam String writer, 
+			Model model) throws Exception {
+		String path = "";
 		BoardVO board = boardService.getBoardDetail(board_number);
 		boardService.increaseCount(board_number);
-		mav.addObject("board", board);
+		model.addAttribute("board", board);
 		
 		if(user_id.equals(writer) || user_id.equals("admin")) {
-			mav.setViewName("board/BoardDetail");
+			path = "board/BoardDetail";
 		}
 		else{
-			mav.setViewName("board/BoardReadOnlyDetail");
+			path = "board/BoardReadOnlyDetail";
 		}
 
-		return mav;
+		return path;
 	}
+	
 	@RequestMapping(value = "/BoardInsert", method = RequestMethod.GET)
-	public String boardWriteForm() {
+	public String boardWriteForm(@ModelAttribute("cri") Criteria cri, Model model) {
 		return "/board/BoardWriteForm";
 	}
 
@@ -65,32 +74,27 @@ public class BoardController {
 	}
 
 	@RequestMapping(value = "/BoardUpdate", method = RequestMethod.GET)
-	public ModelAndView boardUpdateForm(@RequestParam int board_number) {
-		ModelAndView mav = new ModelAndView();
+	public String boardUpdateForm(@RequestParam int board_number, @ModelAttribute("cri") Criteria cri, Model model) {
+				
 		BoardVO board = boardService.getBoardDetail(board_number);
-
-		mav.setViewName("board/BoardUpdateForm");
-		mav.addObject("board", board);
-
-		return mav;
+		model.addAttribute("board", board);
+		return "board/BoardUpdateForm";
 	}
 
 	@RequestMapping(value = "/BoardUpdate", method = RequestMethod.POST)
-	public String updateBoard(BoardVO board) {
+	public String updateBoard(BoardVO board, @ModelAttribute("cri") Criteria cri, Model model) {
 		boardService.modifyBoard(board);
-		return "redirect:/board/BoardList";
+		return "redirect:/board/BoardList?page=" + cri.getPage() + "&perPageNum=" + cri.getPerPageNum();
 	}
 
 	@RequestMapping("/BoardDelete")
-	public String removeBoard(@RequestParam int board_number) {
+	public String removeBoard(@RequestParam int board_number, @ModelAttribute("cri") Criteria cri, Model model) {
 		boardService.removeBoard(board_number);
-		return "redirect:/board/BoardList";
-	}
+		return "redirect:/board/BoardList?page=" + cri.getPage() + "&perPageNum=" + cri.getPerPageNum();	}
 
 	@RequestMapping(value = "/BoardSearch", method = RequestMethod.POST)
-	public ModelAndView viewBoardSearchList(@RequestParam(defaultValue = "board_title") String search_option,
-			@RequestParam("keyword") String keyword, BoardVO searchBoard) {
-		ModelAndView mav = new ModelAndView();
+	public String viewBoardSearchList(@RequestParam(defaultValue = "board_title") String search_option,
+			@RequestParam("keyword") String keyword, BoardVO searchBoard, @ModelAttribute("cri") Criteria cri, Model model) {
 
 		List<BoardVO> boardSearchList;
 		if (search_option.equals("board_title")) {
@@ -101,10 +105,9 @@ public class BoardController {
 			boardSearchList = boardService.getIdSearchBoardList(searchBoard);
 		}
 
-		mav.setViewName("board/BoardSearchList");
-		mav.addObject("boardSearchList", boardSearchList);	
+		model.addAttribute("boardSearchList", boardSearchList);	
 
-		return mav;
+		return "board/BoardSearchList";
 	}
 	
 
