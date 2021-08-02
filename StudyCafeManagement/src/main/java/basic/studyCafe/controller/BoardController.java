@@ -34,6 +34,7 @@ public class BoardController {
 		model.addAttribute("pageMaker", pageMaker);
 		return "board/BoardList";
 	}
+	
 
 	@RequestMapping("/BoardDetail")
 	public String showBoardDetail(@RequestParam int board_number, 
