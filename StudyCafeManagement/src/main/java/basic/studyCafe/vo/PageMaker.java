@@ -58,6 +58,7 @@ public class PageMaker {
 		if (endPage > tempEndPage) {
 			endPage = tempEndPage;
 		}
+		
 		prev = startPage == 1 ? false : true;
 		next = endPage * cri.getPerPageNum() >= totalCount ? false : true;
 	}
@@ -69,6 +70,27 @@ public class PageMaker {
 							.queryParam("perPageNum", cri.getPerPageNum())
 							.build();
 		   
+		return uriComponents.toUriString();
+	}
+
+	public String makeBoardQuery(int page) {
+		UriComponents uriComponents =
+				UriComponentsBuilder.newInstance()
+				.queryParam("page", page)
+				.queryParam("perPageNum", cri.getPerPageNum())
+				.queryParam("kind", "board")
+				.build();
+		
+		return uriComponents.toUriString();
+	}
+	public String makeNoticeQuery(int page) {
+		UriComponents uriComponents =
+				UriComponentsBuilder.newInstance()
+				.queryParam("page", page)
+				.queryParam("perPageNum", cri.getPerPageNum())
+				.queryParam("kind", "notice")
+				.build();
+		
 		return uriComponents.toUriString();
 	}
 	

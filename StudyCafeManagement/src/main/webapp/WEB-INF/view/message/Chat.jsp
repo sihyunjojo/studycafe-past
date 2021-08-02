@@ -8,9 +8,7 @@
 <title>Insert title here</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap');
-.container {
 
-}
 .form-group{
 	text-align: center;
 	margin: 0 auto;

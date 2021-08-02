@@ -2,9 +2,7 @@ package basic.studyCafe.controller;
 
 import java.io.IOException;
 
-
 import java.io.PrintWriter;
-import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -20,10 +18,8 @@ import org.springframework.web.servlet.ModelAndView;
 import basic.studyCafe.service.BoardService;
 import basic.studyCafe.service.MemberService;
 import basic.studyCafe.service.NoticeService;
-import basic.studyCafe.vo.BoardVO;
 import basic.studyCafe.vo.Criteria;
 import basic.studyCafe.vo.MemberVO;
-import basic.studyCafe.vo.NoticeVO;
 import basic.studyCafe.vo.PageMaker;
 
 @Controller
@@ -40,27 +36,65 @@ public class LoginController {
 	private NoticeService noticeService;
 
 	@RequestMapping(value = "/LoginMain", method = RequestMethod.GET)
-	public String LoginMain(Model model, Criteria cri) throws Exception {
-		model.addAttribute("boardList", boardService.getBoardList(cri));
-		model.addAttribute("noticeList", noticeService.getNoticeList(cri));
+	public ModelAndView LoginMain(@RequestParam(defaultValue = "null") String page,
+			@RequestParam(defaultValue = "null") String perPageNum, @RequestParam(defaultValue = "null") String kind)
+			throws Exception {
+		ModelAndView mav = new ModelAndView();
+		Criteria boardCri = new Criteria();
+		Criteria noticeCri = new Criteria();
 
-		PageMaker pageMaker = new PageMaker();
-		pageMaker.setCri(cri);
-		pageMaker.setTotalCount(boardService.getBoardListCount());
-		pageMaker.setTotalCount(noticeService.getNoticeListCount());
-		 			
-		model.addAttribute("pageMaker", pageMaker);
+		if (kind.equals("board")) {
+			boardCri.setPage(Integer.parseInt(page));
+			boardCri.setPerPageNum(Integer.parseInt(perPageNum));
+		} else if (kind.equals("notice")) {
+			noticeCri.setPage(Integer.parseInt(page));
+			noticeCri.setPerPageNum(Integer.parseInt(perPageNum));
+		}
 
-		return "common/LoginMain";
+		mav.addObject("boardList", boardService.getBoardList(boardCri));
+		mav.addObject("noticeList", noticeService.getNoticeList(noticeCri));
+
+		PageMaker boardPageMaker = new PageMaker();
+		PageMaker noticePageMaker = new PageMaker();
+
+		boardPageMaker.setCri(boardCri);
+		noticePageMaker.setCri(noticeCri);
+		boardPageMaker.setTotalCount(boardService.getBoardListCount());
+		noticePageMaker.setTotalCount(noticeService.getNoticeListCount());
+
+		mav.addObject("boardPageMaker", boardPageMaker);
+		mav.addObject("noticePageMaker", noticePageMaker);
+
+		mav.setViewName("common/LoginMain");
+
+		return mav;
 	}
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public String Login(@RequestParam("id") String id, @RequestParam("password") String password,
-			HttpSession session, HttpServletResponse response, Model model, Criteria cri) throws Exception {
+	public ModelAndView Login(@RequestParam("id") String id, @RequestParam("password") String password,
+			HttpSession session, HttpServletResponse response) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		Criteria boardCri = new Criteria();
+		Criteria noticeCri = new Criteria();
+
+		mav.addObject("boardList", boardService.getBoardList(boardCri));
+		mav.addObject("noticeList", noticeService.getNoticeList(noticeCri));
+
+		PageMaker boardPageMaker = new PageMaker();
+		PageMaker noticePageMaker = new PageMaker();
+
+		boardPageMaker.setCri(boardCri);
+		noticePageMaker.setCri(noticeCri);
+		boardPageMaker.setTotalCount(boardService.getBoardListCount());
+		noticePageMaker.setTotalCount(noticeService.getNoticeListCount());
+
+		mav.addObject("boardPageMaker", boardPageMaker);
+		mav.addObject("noticePageMaker", noticePageMaker);
+
 		MemberVO member = new MemberVO();
 		member.setUser_id(id);
 		member.setUser_password(password);
-		
+
 		int result = memberService.checkMember(member, session);
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = response.getWriter();
@@ -70,32 +104,31 @@ public class LoginController {
 			out.flush();
 		}
 
+		mav.setViewName("common/LoginMain");
 
-		/*
-		 * List<BoardVO> boardList = boardService.getBoardList();
-		 * mav.addObject("boardList", boardList);
-		 */
-		/*
-		 * List<NoticeVO> noticeList = noticeService.getNoticeList();
-		 * model.addAttribute("noticeList", noticeList);
-		 */
-		return "common/LoginMain";
+		return mav;
 	}
 
 	@RequestMapping(value = "/logout")
-	public ModelAndView Logout(HttpSession session) {
-		memberService.logoutMember(session);
-
+	public ModelAndView Logout(HttpSession session) throws Exception {
 		ModelAndView mav = new ModelAndView();
+		Criteria boardCri = new Criteria();
+		Criteria noticeCri = new Criteria();
+		mav.addObject("boardList", boardService.getBoardList(boardCri));
+		mav.addObject("noticeList", noticeService.getNoticeList(noticeCri));
 
-		/*
-		 * List<BoardVO> boardList = boardService.getBoardList();
-		 * mav.addObject("boardList", boardList);
-		 */
-		/*
-		 * List<NoticeVO> noticeList = noticeService.getNoticeList();
-		 * mav.addObject("noticeList", noticeList);
-		 */
+		PageMaker boardPageMaker = new PageMaker();
+		PageMaker noticePageMaker = new PageMaker();
+
+		boardPageMaker.setCri(boardCri);
+		noticePageMaker.setCri(noticeCri);
+		boardPageMaker.setTotalCount(boardService.getBoardListCount());
+		noticePageMaker.setTotalCount(noticeService.getNoticeListCount());
+
+		mav.addObject("boardPageMaker", boardPageMaker);
+		mav.addObject("noticePageMaker", noticePageMaker);
+
+		memberService.logoutMember(session);
 		mav.setViewName("common/LoginMain");
 
 		return mav;
@@ -107,33 +140,45 @@ public class LoginController {
 	}
 
 	@RequestMapping(value = "/join", method = RequestMethod.POST)
-	public String Join(MemberVO member, HttpServletResponse response) throws IOException {
-		String path = "common/JoinForm";
+	public ModelAndView Join(MemberVO member, HttpServletResponse response) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		Criteria boardCri = new Criteria();
+		Criteria noticeCri = new Criteria();
+		mav.addObject("boardList", boardService.getBoardList(boardCri));
+		mav.addObject("noticeList", noticeService.getNoticeList(noticeCri));
+
+		PageMaker boardPageMaker = new PageMaker();
+		PageMaker noticePageMaker = new PageMaker();
+
+		boardPageMaker.setCri(boardCri);
+		noticePageMaker.setCri(noticeCri);
+		boardPageMaker.setTotalCount(boardService.getBoardListCount());
+		noticePageMaker.setTotalCount(noticeService.getNoticeListCount());
+
+		mav.addObject("boardPageMaker", boardPageMaker);
+		mav.addObject("noticePageMaker", noticePageMaker);
+
 		int duplicationCheck = memberService.checkUniqueId(member);
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = response.getWriter();
 
 		if (duplicationCheck == 1) {
-			out.println("<script>alert('경고!! 중복된 아이디입니다.');</script>");
+			out.println("<script>alert('경고!! 중복된 아이디입니다.');history.back()</script>");
+			out.flush();
+		} else if (!(member.getUser_password().equals(member.getUser_checkpw()))) {
+			out.println("<script>alert('경고!! 비밀번호를 다시 확인해주세요.');history.back()</script>");
+			out.flush();
+		} else if (member.getUser_id().equals("null")) {
+			out.println("<script>alert('경고!! null은 사용할 수 없습니다.');history.back()</script>");
 			out.flush();
 		} else {
-			if (!(member.getUser_password().equals(member.getUser_checkpw()))) {
-				out.println("<script>alert('경고!! 비밀번호를 다시 확인해주세요.');</script>");
-				out.flush();
-			} else {
-				if(member.getUser_id().equals("null")) {
-					out.println("<script>alert('경고!! null은 사용할 수 없습니다.');</script>");
-					out.flush();	
-				}else {
-				memberService.joinMember(member);
-				out.println("<script>alert('회원가입이 완료되었습니다.');</script>");
-				out.flush();
-				path = "common/LoginMain";
-				}
-			}
+			memberService.joinMember(member);
+			out.println("<script>alert('회원가입이 완료되었습니다.');</script>");
+			out.flush();
 		}
 
-		return path;
+		mav.setViewName("common/LoginMain");
+		return mav;
 	}
 
 	@RequestMapping(value = "/findIdForm", method = RequestMethod.GET)

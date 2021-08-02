@@ -18,7 +18,6 @@ public interface BoardService {
 	
 	public List<BoardVO> getIdSearchBoardList(BoardVO searchBoard);
 	
-	
 	public void increaseCount(int board_number); // 조회수 증가
 
 }

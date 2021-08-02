@@ -24,17 +24,12 @@ public class BoardController {
 
 	@RequestMapping("/BoardList")
 	public String viewBoardList(Model model, Criteria cri) throws Exception {
-		System.out.println(model);
-		System.out.println(cri);
 		model.addAttribute("boardList", boardService.getBoardList(cri));
-		System.out.println(boardService.getBoardList(cri));
 		
 		PageMaker pageMaker = new PageMaker();
-		System.out.println(pageMaker);
 		
 		pageMaker.setCri(cri);
 		pageMaker.setTotalCount(boardService.getBoardListCount());
-		System.out.println(pageMaker);
 		
 		model.addAttribute("pageMaker", pageMaker);
 		return "board/BoardList";

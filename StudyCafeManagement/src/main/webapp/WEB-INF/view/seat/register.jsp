@@ -15,6 +15,13 @@
 
 </script>
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap');
+
+body {
+	background-color:#F5F6F7;
+	margin: 0 auto;
+}
+
 button {
 	width: 50px;
 	height: 50px;
@@ -32,14 +39,35 @@ button {
 .greenBackground {
 	background-color: green;
 }
+
+.submit {
+	background-color : #FFAF00; 
+	width : 200px; height : 50px; border : 1px; border-radius: 0%;
+	font-family: 'Do Hyeon', sans-serif;
+	font-size:20px; 
+}
+
+.form-group{
+	text-align: center;
+	margin: 0 auto;
+	font-family: 'Do Hyeon', sans-serif;
+	font-size : 20px;
+}
+
+#seatNum {
+	height:40px; width:100px;
+	margin: 0 auto;	font-family: 'Do Hyeon', sans-serif; font-size : 20px;
+	text-align: center;
+}
 </style>
 </head>
 <body>
-		<header>
+	<header>
 		
 			<%@include file="../nav.jsp" %>
 			
-		</header>
+	</header>
+	<div class="form-group">
 	<h1>좌석 예약</h1>
 
 	<div id="btnDiv">
@@ -76,9 +104,9 @@ button {
 		<label>좌석 번호 : </label><input type="text" name="seatNum" id="seatNum">
 		<input type="hidden" name="user_id" value="${sessionScope.user_id}" />
 		
-		<br> <input type="submit" value="예약"
-			onclick="javascript: seatForm.action='reserve';" /> <input
-			type="submit" value="반환"
+		<br><br> <input class="submit" type="submit" value="예약"
+			onclick="javascript: seatForm.action='reserve';" />
+			<input class="submit" type="submit" value="반환"
 			onclick="javascript: seatForm.action='return';" />
 
 	</form>
@@ -86,6 +114,6 @@ button {
 
 
 	<a href="/StudyCafeManagement/common/LoginMain">뒤로가기</a>
-
+	</div>
 </body>
 </html>
