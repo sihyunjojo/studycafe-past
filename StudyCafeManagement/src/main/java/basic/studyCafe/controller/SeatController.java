@@ -44,20 +44,26 @@ public class SeatController {
 	}
 
 	@RequestMapping(value = "/reserve", method = RequestMethod.POST)
-	public String reserveSeat(@RequestParam int seatNum, @RequestParam String user_id, SeatVO seat) {
-
-		seat.setSeat_number(seatNum);
+	public String reserveSeat(@RequestParam(defaultValue = "null") String seatNum, @RequestParam String user_id, 
+			SeatVO seat) {
+		if(!seatNum.equals("null")) {
+		seat.setSeat_number(Integer.parseInt(seatNum));
 		seat.setUser_id(user_id);
 		seatService.registSeat(seat);
-
+		}
+		
 		return "redirect:/seat/register?user_id=" + user_id;
 	}
 
 	@RequestMapping(value = "/return", method = RequestMethod.POST)
-	public String returnSeat(@RequestParam int seatNum, SeatVO seat, @RequestParam String user_id) {
-		seat.setSeat_number(seatNum);
+	public String returnSeat(@RequestParam(defaultValue = "null") String seatNum, SeatVO seat, 
+			@RequestParam String user_id) {
+		if(!seatNum.equals("null")) {
+		seat.setSeat_number(Integer.parseInt(seatNum));
 		seat.setUser_id(user_id);
 		seatService.returnSeat(seat);
+		}
+		
 		return "redirect:/seat/register?user_id=" + user_id;
 	}
 
