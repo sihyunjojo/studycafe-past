@@ -41,7 +41,7 @@ div {
 <body>
 		<header>
 		
-			<%@include file="../nav.jsp" %>
+			<%@include file="../nav_noId.jsp" %>
 			
 		</header>
 	<div class="border">

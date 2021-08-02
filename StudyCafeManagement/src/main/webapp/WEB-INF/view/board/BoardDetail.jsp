@@ -26,7 +26,7 @@
 			
 		</header>
 	<div class="container">		
-		<h1> 게시판</h1>
+		<h1> 커뮤니티</h1>
 		<hr />
 		
 

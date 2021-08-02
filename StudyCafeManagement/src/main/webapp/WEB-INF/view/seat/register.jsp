@@ -62,7 +62,7 @@ button {
 </style>
 </head>
 <body>
-	<header>
+	<header> 
 		
 			<%@include file="../nav.jsp" %>
 			

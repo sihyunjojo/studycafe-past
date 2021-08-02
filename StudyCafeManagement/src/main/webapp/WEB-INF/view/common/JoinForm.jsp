@@ -11,6 +11,11 @@
 	}
 </script>
 <style>
+body {
+	background-color:#F5F6F7;
+	margin: 0 auto;
+}
+
 header{
 	background-color: #FFA500;
 }
@@ -20,10 +25,7 @@ form{
 	font-family: 'Do Hyeon', sans-serif;
 	font-size : 20px;
 }
-.border {
-	margin: 0 auto;
-	background-color:#F5F6F7;
-}
+
 input {
 	background-color: white; 
 	width: 400px;
@@ -56,7 +58,7 @@ button {
 <body>
 		<header>
 		
-			<%@include file="../nav.jsp" %>
+			<%@include file="../nav_noId.jsp" %>
 			
 		</header>
 	<div class="border">
