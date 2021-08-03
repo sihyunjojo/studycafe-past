@@ -11,6 +11,10 @@
 	function fn_insert_form(){
 		location.href = "BoardInsert";
 	}
+	function search_type_product_form(){
+		String product_type= "빵";
+		location.href = "ProductTypeList?prod_type = product_type"
+	}
 </script>
 
 <style>
@@ -95,27 +99,32 @@ body { margin:0; padding:0; font-family:'맑은 고딕', verdana; }
 			<br>
 			<hr>
 				
+				<a href="ProductDetail?prod_number=${product.prod_number}">
+				
 				<ul>
 					<br>
-					<li><a href="/shop/list?c=100&l=1">과자</a>
-				
+					
+					<li>과자<c:url value="ProductTypeList" var="url">
+							<c:param name="prod_type" value ="과자"/>
+						</c:url>
 						<ul class="low">
-							<li><a href="/shop/list?c=101&l=2">베스트과자</a></li>
-							<li><a href="/shop/list?c=102&l=2">달콤한과자</a></li>
-							<li><a href="/shop/list?c=103&l=2">그냥과자</a></li>
+							<li><a href="ProductTypeList?prod_type = 베스트 과자">베스트과자</a></li>
+							<li><a href="ProductTypeList?prod_type = 달콤한 과자">달콤한과자</a></li>
 						</ul>
-						
-					</li>
-					<li><a href="/shop/list?c=200&l=1">빵</a></li>
-					<li><a href="/shop/list?c=300&l=1">음료</a></li>
+						</li>
+					<li><a href="search_type_product_form()" >빵</a></li>
+					<li><a href="ProductTypeList?prod_type =라면">라면</a></li>
+					<li><a href="ProductTypeList?prod_type ='햄버거'">햄버거</a></li>
+					<li><a href="ProductTypeList?prod_type =음료">음료</a>
 						<ul class="low">
-								<li><a href="/shop/list?c=101&l=2">탄산음료</a></li>
-								<li><a href="/shop/list?c=102&l=2">주스</a></li>
-								<li><a href="/shop/list?c=103&l=2">음류수</a></li>
-							</ul>
-					<li><a href="/shop/list?c=400&l=1">커피</a></li>
-					<li><a href="/shop/list?c=400&l=1">티,스무디</a></li>
-					<li><a href="/shop/list?c=400&l=1">기타</a></li>
+								<li><a href="ProductTypeList?prod_type =탄산음료">탄산음료</a></li>
+								<li><a href="ProductTypeList?prod_type =주스">주스</a></li>
+								<li><a href="ProductTypeList?prod_type =음류수">음류수</a></li>
+						</ul>
+						</li>
+					<li><a href="ProductTypeList?prod_type = 커피">커피</a></li>
+					<li><a href="ProductTypeList?prod_type =티">티</a></li>
+					<li><a href="ProductTypeList?prod_type =기타">기타</a></li>
 					
 				</ul>
 				<br>
@@ -126,8 +135,8 @@ body { margin:0; padding:0; font-family:'맑은 고딕', verdana; }
 <section id = "content">
 
 			<h3>상품 목록</h3>
-		      <a href="ProductRegist">상품 등록</a>
-		      <hr>
+			<br>
+		    <hr>
 				   
 				   
 		<c:if test="${empty productList }">
@@ -138,8 +147,6 @@ body { margin:0; padding:0; font-family:'맑은 고딕', verdana; }
 				   
 	<c:if test="${not empty productList }">  	
 	
-	<input type="hidden" name="user_id" value="${sessionScope.user_id}" />
-	
       <table>
 			<td>
 			<c:forEach var = "product" items = "${productList}" varStatus="status">
@@ -147,18 +154,16 @@ body { margin:0; padding:0; font-family:'맑은 고딕', verdana; }
 					
 					<td>
 					<tr>
-		            <a href="ProductDetail?prod_number=${product.prod_number}">
+		            <a href="ProductDetail?prod_number=${product.prod_number}&&user_id=${sessionScope.user_id}">
 		            <img src = "/StudyCafeManagement/resources/images/${product.prod_image }" class = "productImage" width="200"/></a>
 		            </tr><br>
 					<tr>상품 번호: ${product.prod_number }
 					</tr><br>
-					<tr><a href="ProductDetail?prod_number=${product.prod_number}">
+					<tr><a href="ProductDetail?prod_number=${product.prod_number}&&user_id=${sessionScope.user_id}">
 					상품이름 : ${product.prod_name }</a>
 					</tr><br>
 					<tr>가격 : ${product.prod_price }원 
 					</tr><br>
-					<tr><a href="ProductDetailAdmin?prod_number=${product.prod_number}"> 관리자 상품 디테일</a>
-					</tr>
 					</td>
 					<hr>
 					 <c:if test="${(status.index + 1) % 5 == 0}">

@@ -273,7 +273,7 @@ ul li a:hover, ul li a:focus {
 			<div class="cafe_menus">
 				<img src="/StudyCafeManagement/resources/images/logo.jpg" class="logo_image" width="40" height="40">
 				  <a href="/StudyCafeManagement/seat/register?user_id=${sessionScope.user_id}" class="Seat">좌석</a> 
-					<a href="/StudyCafeManagement/product/ProductList" class="Product">상품</a> 
+					<a href="/StudyCafeManagement/product/ProductList?user_id=${sessionScope.user_id}" class="Product">상품</a> 
 					<a href="/StudyCafeManagement/board/BoardList" class="Community">커뮤니티</a>
 					<a href="/StudyCafeManagement/notice/NoticeList?user_id=${sessionScope.user_id}" class="Notice">공지사항</a>
 					<a href="/StudyCafeManagement/message/Chat?user_id=${sessionScope.user_id}" class="Message">메시지</a>
@@ -313,18 +313,18 @@ ul li a:hover, ul li a:focus {
   		
   		<div>
 				<ul>
-					<c:if test="${boardPageMaker.prev}">
-    					<li><a href="LoginMain${boardPageMaker.makeBoardQuery(boardPageMaker.startPage - 1)}">&laquo;</a></li>
+					<c:if test="${pageMaker.prev}">
+    					<li><a href="LoginMain${pageMaker.makeQuery(pageMaker.startPage - 1)}">&laquo;</a></li>
     				</c:if> 
 
-    				<c:forEach begin="${boardPageMaker.startPage}" end="${boardPageMaker.endPage}" var="idx">
+    				<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
     					<li> 
-    						<a href="LoginMain${boardPageMaker.makeBoardQuery(idx)}">${idx}</a>
+    						<a href="LoginMain${pageMaker.makeQuery(idx)}">${idx}</a>
     					</li>
     				</c:forEach>
 
-    				<c:if test="${boardPageMaker.next && boardPageMaker.endPage > 0}">
-				    	<li><a href="LoginMain${boardPageMaker.makeBoardQuery(boardPageMaker.endPage + 1)}">&raquo;</a></li>
+    				<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
+				    	<li><a href="LoginMain${pageMaker.makeQuery(pageMaker.endPage + 1)}">&raquo;</a></li>
 				    </c:if> 
 				</ul>
 		</div>
@@ -402,7 +402,7 @@ ul li a:hover, ul li a:focus {
 					<td class="even">
 						<fmt:parseDate value="${notice.notice_time }" var="today" pattern="yyyy-MM-dd">
 						</fmt:parseDate>
-						<fmt:formatDate value="${today }" pattern="yyyy-MM-dd"/>
+						<fmt:formatDate value="${today }" pattern="yyyy-MM-dd" />
 					</td>
 					<td class="even">${notice.notice_readcount}</td>
 			    </tr>
@@ -411,18 +411,18 @@ ul li a:hover, ul li a:focus {
   		
 		<div>
 				<ul>
-					<c:if test="${noticePageMaker.prev}">
-    					<li><a href="LoginMain${noticePageMaker.makeNoticeQuery(noticePageMaker.startPage - 1)}">&laquo;</a></li>
+					<c:if test="${pageMaker.prev}">
+    					<li><a href="LoginMain${pageMaker.makeQuery(pageMaker.startPage - 1)}">&laquo;</a></li>
     				</c:if> 
 
-    				<c:forEach begin="${noticePageMaker.startPage}" end="${noticePageMaker.endPage}" var="idx">
+    				<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
     					<li> 
-    						<a href="LoginMain${noticePageMaker.makeNoticeQuery(idx)}">${idx}</a>
+    						<a href="LoginMain${pageMaker.makeQuery(idx)}">${idx}</a>
     					</li>
     				</c:forEach>
 
-    				<c:if test="${noticePageMaker.next && noticePageMaker.endPage > 0}">
-				    	<li><a href="LoginMain${noticePageMaker.makeNoticeQuery(noticePageMaker.endPage + 1)}">&raquo;</a></li>
+    				<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
+				    	<li><a href="LoginMain${pageMaker.makeQuery(pageMaker.endPage + 1)}">&raquo;</a></li>
 				    </c:if> 
 				</ul>
 		</div>

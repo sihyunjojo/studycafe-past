@@ -36,10 +36,16 @@ public class ProductController extends HttpServlet {
 	private ProductService productService;
 
 	@RequestMapping("/ProductList")
-	public ModelAndView ProductList() {
-
+	public ModelAndView ProductList(@RequestParam(value="user_id",required = false) String user_id) {
+		String path = "";
 		ModelAndView mav = new ModelAndView();
 		List<ProductVO> productList = productService.getproductList();
+		if (user_id.equals("admin")) {
+			path = "product/ProductDetailAdmin";
+		} else {
+			path = "product/ProductList";
+		}
+		
 		mav.setViewName("product/ProductList");
 		mav.addObject("productList", productList);
 		return mav; 
@@ -54,10 +60,18 @@ public class ProductController extends HttpServlet {
 	} 
 	
 	@RequestMapping("/ProductDetail")
-	public ModelAndView ProductDetail(@RequestParam int prod_number) {
+	public ModelAndView ProductDetail(@RequestParam(value="user_id",required = false) String user_id, @RequestParam int prod_number) {
+		String path = "";
 		ModelAndView mav = new ModelAndView();
 		ProductVO product = productService.getProductDetail(prod_number);
-		mav.setViewName("product/ProductDetail");
+		
+		if (user_id.equals("admin")) {
+			path = "product/ProductDetailAdmin";
+		} else {
+			path = "product/ProductDetail";
+		}
+		
+		mav.setViewName(path);
 		mav.addObject("product", product);
 		return mav;
 	}
@@ -70,6 +84,17 @@ public class ProductController extends HttpServlet {
 		mav.addObject("product", product);
 		return mav;
 	}
+	
+	@RequestMapping("/ProductListAdmin")
+	public ModelAndView ProductListAdmin() {
+		ModelAndView mav = new ModelAndView();
+		List<ProductVO> productList = productService.getproductList();
+	
+		mav.setViewName("product/ProductListAdmin");
+		mav.addObject("productList", productList);
+		return mav; 
+	}
+	
 	
 	
 	
@@ -155,4 +180,19 @@ public class ProductController extends HttpServlet {
 
 		return mav;
 	}
+	
+	@RequestMapping(value = "/ProductTypeList")
+	public ModelAndView viewProductTypeList(@RequestParam String prod_type, ProductVO searchProduct ) {
+		ModelAndView mav = new ModelAndView();
+
+		List<ProductVO> productSearchList;
+		searchProduct.setProd_type(prod_type);
+		productSearchList = productService.getTypeSearchList(searchProduct);
+		
+		mav.setViewName("product/ProductSearchList");
+		mav.addObject("productSearchList", productSearchList);	
+
+		return mav;
+	}
+	
 }
