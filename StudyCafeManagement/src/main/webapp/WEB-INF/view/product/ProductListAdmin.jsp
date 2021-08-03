@@ -5,13 +5,18 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>${product.prod_name } </title>
+<title>상품 리스트</title>
 
 <script type="text/javascript">
 	function fn_insert_form(){
 		location.href = "BoardInsert";
 	}
+	function search_type_product_form(){
+		String product_type= "빵";
+		location.href = "ProductTypeList?prod_type = product_type"
+	}
 </script>
+
 <style>
 body { margin:0; padding:0; font-family:'맑은 고딕', verdana; }
 		a { color:#05f; text-decoration:none; }
@@ -39,8 +44,8 @@ body { margin:0; padding:0; font-family:'맑은 고딕', verdana; }
      aside#aside { margin-left: 60px; margin-right: 200px; float:left; width:200px; height:650px; }
    
     section#container {}
-			section#content { margin: 50px; float:center; width:1700px; height:650px; }
-			aside#aside { float:left; width:180px; height:700px}
+			section#content { margin: 50px; float:center; width:1700px; height:850px; }
+			aside#aside { float:left; width:180px; height:2000px }
 			section#container::after { content:""; display:block; clear:both; }	
 			
 	section h1{
@@ -66,7 +71,7 @@ body { margin:0; padding:0; font-family:'맑은 고딕', verdana; }
    </style>
   
 </head>
-<body>
+<body> 
 <header> 
 		<div class="nav_container">
 			 <a href = "/StudyCafeManagement/common/LoginMain">
@@ -74,25 +79,29 @@ body { margin:0; padding:0; font-family:'맑은 고딕', verdana; }
         	 </a>
 			<div class="cafe_menus">
 				<img src="/StudyCafeManagement/resources/images/logo.jpg" class="logo_image" width="40" height="40">
-				  <a href="/StudyCafeManagement/seat/register" class="Seat">좌석</a> 
+				  <a href="/StudyCafeManagement/seat/register?user_id=${sessionScope.user_id}" class="Seat">좌석</a> 
 					<a href="/StudyCafeManagement/product/ProductList" class="Product">상품</a> 
 					<a href="/StudyCafeManagement/board/BoardList" class="Community">커뮤니티</a>
 					<a href="/StudyCafeManagement/notice/NoticeList?user_id=${sessionScope.user_id}" class="Notice">공지사항</a>
 					<a href="/" class="Message">메시지</a>
+					<h3 style = "display:inline">id = ${sessionScope.user_id}</h3>
 			</div>
 
 		</div>
 	</header>
-    
+     
     
    <section id="container">
 		<div id="container_box">
 		
 		<aside id="aside">
 				<h3>카테고리</h3>
+			<br>
 			<hr>
 				
-			 <ul>
+				<a href="ProductDetail?prod_number=${product.prod_number}">
+				
+				<ul>
 					<br>
 					<li><a href="search_type_product_form()" >과자</a>
 						<ul class="low">
@@ -120,43 +129,61 @@ body { margin:0; padding:0; font-family:'맑은 고딕', verdana; }
 				<br>
 			</aside>
 			
-	<section id = "content">
- 
-      <h3> ${product.prod_name } 관리</h3>
-      <hr>
-      
-      <td><input type="hidden" name="user_id"
-			value="${sessionScope.user_id}" /></td>
-      
+<section id = "content">
+
+			<h3>관리자 상품 목록</h3>
+			<br>
+		    <hr>
+				   
+				   
+		<c:if test="${empty productList }">
+		     <h1>등록된 상품 정보가 없습니다.</h1>
+		</c:if>
+				   
+				   
+				   
+	<c:if test="${not empty productList }">  	
+	
       <table>
-		<td>
-				<td>
-				<tr>상품 번호: ${product.prod_number }</tr>
-				<br><tr>
-	            <img src = "/StudyCafeManagement/resources/images/${product.prod_image }" class = "productImage" width="300"/></tr>
-				<br><tr>상품 이름: ${product.prod_name }</tr>
-				<br><tr>상품 종류: ${product.prod_type }</tr>
-				<br><tr>상품 가격: ${product.prod_price }원</tr>
-				<br><tr>상품 내용: ${product.prod_content }</tr>
-				<br><tr>조회수 : ${product.prod_readcount } </tr>
-				<br>
-				</td>     
-		</td> 
-	</section>		           
+			<td>
+			<c:forEach var = "product" items = "${productList}" varStatus="status">
+		         <!-- varStatus : forEach 블록에서 반복 상태를 저장하는 속성 -->
+					
+					<td>
+					<br>
+					<tr>상품 번호: ${product.prod_number }
+					</tr>
+					<tr>
+		            <a href="ProductDetail?prod_number=${product.prod_number}&&user_id=${sessionScope.user_id}">
+		            <img src = "/StudyCafeManagement/resources/images/${product.prod_image }" class = "productImage" width="200"/></a>
+		            </tr><br>
+					<tr><a href="ProductDetail?prod_number=${product.prod_number}&&user_id=${sessionScope.user_id}">
+					상품이름 : ${product.prod_name }</a>
+					</tr><br>
+					<tr>가격 : ${product.prod_price }원 
+					</tr><br>
+					</td>
+					<hr>
+					 <c:if test="${(status.index + 1) % 5 == 0}">
+				     </c:if>
+				    
+			</c:forEach>
+			</td>
+		</table>		
+	</c:if>
+	
+	<form action="ProductSearchList" method="POST">
+		<select name="search_option">
+			<option value="prod_name">상품 이름</option>
+			<option value="prod_tpye">상품 종류</option>
+		</select> 
+			<input type="text" name="keyword"> <input type="submit" value="검색">
+	</form> 
+	 
+</section>			
+			
 	</div>
 </section>
-
-    <div style = "clear: both;">
-		<span id = "footer" style = "font-size: xx-large;  margin-left:300px; float:right; clear:both;">
-	
-		<a href="ProductListAdmin" style = "color:#0d1d1f; text-decoration:none; margin-right: 20px">목록 보기</a>
-		<a href="ProductUpdate?prod_number=${product.prod_number}" style = "color:#0d1d1f; text-decoration:none; margin-right: 20px">상품 수정</a>
-		<a href="ProductDelete?prod_number=${product.prod_number}" style = "color:#0d1d1f; text-decoration:none;">상품 삭제</a>
-		
-		
-		</span>
-	</div>
     
-
 </body>
 </html>

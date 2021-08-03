@@ -85,6 +85,16 @@ public class ProductServiceimpl implements ProductService{
 		return productSearchList;
 	}
 
+	@Override
+	public void increaseCount(int prod_number) {
+		// TODO Auto-generated method stub
+		productDAO.updateCount(prod_number);
+	}
+
+
+
+
+
 
 
 

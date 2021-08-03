@@ -96,17 +96,11 @@ body { margin:0; padding:0; font-family:'맑은 고딕', verdana; }
 		
 		<aside id="aside">
 				<h3>카테고리</h3>
-			<br>
 			<hr>
-				
-				<a href="ProductDetail?prod_number=${product.prod_number}">
 				
 				<ul>
 					<br>
-					
-					<li>과자<c:url value="ProductTypeList" var="url">
-							<c:param name="prod_type" value ="과자"/>
-						</c:url>
+					<li><a href="search_type_product_form()" >과자</a>
 						<ul class="low">
 							<li><a href="ProductTypeList?prod_type = 베스트 과자">베스트과자</a></li>
 							<li><a href="ProductTypeList?prod_type = 달콤한 과자">달콤한과자</a></li>
@@ -135,7 +129,7 @@ body { margin:0; padding:0; font-family:'맑은 고딕', verdana; }
 <section id = "content">
 
 			<h3>상품 목록</h3>
-			<br>
+			<a href= "CartProductList?user_id=${sessionScope.user_id}" >장바구니 보기</a>
 		    <hr>
 				   
 				   
@@ -153,12 +147,13 @@ body { margin:0; padding:0; font-family:'맑은 고딕', verdana; }
 		         <!-- varStatus : forEach 블록에서 반복 상태를 저장하는 속성 -->
 					
 					<td>
+					
+					<tr>상품 번호: ${product.prod_number }
+					</tr><br>
 					<tr>
 		            <a href="ProductDetail?prod_number=${product.prod_number}&&user_id=${sessionScope.user_id}">
 		            <img src = "/StudyCafeManagement/resources/images/${product.prod_image }" class = "productImage" width="200"/></a>
 		            </tr><br>
-					<tr>상품 번호: ${product.prod_number }
-					</tr><br>
 					<tr><a href="ProductDetail?prod_number=${product.prod_number}&&user_id=${sessionScope.user_id}">
 					상품이름 : ${product.prod_name }</a>
 					</tr><br>

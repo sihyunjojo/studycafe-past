@@ -41,15 +41,16 @@ public class ProductController extends HttpServlet {
 		ModelAndView mav = new ModelAndView();
 		List<ProductVO> productList = productService.getproductList();
 		if (user_id.equals("admin")) {
-			path = "product/ProductDetailAdmin";
+			path = "product/ProductListAdmin";
 		} else {
 			path = "product/ProductList";
 		}
 		
-		mav.setViewName("product/ProductList");
+		mav.setViewName(path);
 		mav.addObject("productList", productList);
 		return mav; 
 	}
+	
 	@RequestMapping(value = "/CartProductList", method = RequestMethod.GET)
 	public ModelAndView ViewCartProductList(@RequestParam String user_id) {
 		ModelAndView mav = new ModelAndView();
@@ -63,7 +64,9 @@ public class ProductController extends HttpServlet {
 	public ModelAndView ProductDetail(@RequestParam(value="user_id",required = false) String user_id, @RequestParam int prod_number) {
 		String path = "";
 		ModelAndView mav = new ModelAndView();
+		productService.increaseCount(prod_number);
 		ProductVO product = productService.getProductDetail(prod_number);
+		
 		
 		if (user_id.equals("admin")) {
 			path = "product/ProductDetailAdmin";

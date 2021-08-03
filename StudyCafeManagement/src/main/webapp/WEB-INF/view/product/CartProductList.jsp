@@ -115,19 +115,20 @@ body { margin:0; padding:0; font-family:'맑은 고딕', verdana; }
 	         <!-- varStatus : forEach 블록에서 반복 상태를 저장하는 속성 -->
 				
 				<td>
-				<tr>
+				<tr>상품 번호: ${cartProduct.prod_number }</tr>
+				<br><tr>
  	            <a href="ProductDetail?prod_number=${product.prod_number}" >
-	            <img src = "/StudyCafeManagement/resources/images/${product.prod_image }" class = "productImage" width="200"/></a> 
+	             <img src = "/StudyCafeManagement/resources/images/${cartProduct.prod_image }" class = "productImage" width="200"/></a> 
 	            </tr>
-				<br><tr>상품 번호: ${cartProduct.prod_number }</tr>
 				<br><tr><a href="ProductDetail?prod_number=${cartProduct.prod_number}">
 				상품명 : ${cartProduct.prod_name }</a></tr>
 				<br><tr>가격 : ${cartProduct.prod_price }원 </tr>
 				<br>
-				
 				</td>
-				 <c:if test="${(status.index + 1) % 5 == 0}">
-			     </c:if>
+				<hr>
+				<%--  <c:if test="${(status.index + 1) % 5 == 0}">
+			     </c:if> --%>
+			     
 		</c:forEach>
 		</td>		
 		</c:if>  

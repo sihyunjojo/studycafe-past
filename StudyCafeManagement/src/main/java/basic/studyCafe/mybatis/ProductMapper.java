@@ -20,6 +20,7 @@ public interface ProductMapper {
 	void deleteProduct(@Param("prod_number") int prod_number);
 	List<ProductVO> selectNameSearchList(ProductVO searchProduct);
 	List<ProductVO> selectTypeSearchList(ProductVO searchProduct);
+	void updateCount(int prod_number);
 	
 
 

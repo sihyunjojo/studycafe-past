@@ -21,5 +21,6 @@ public interface ProductService {
 	public void removeProduct(int prod_number);
 	public List<ProductVO> getNameSearchList(ProductVO searchProduct);
 	public List<ProductVO> getTypeSearchList(ProductVO searchProduct);
+	public void increaseCount(int prod_number);
 
 }

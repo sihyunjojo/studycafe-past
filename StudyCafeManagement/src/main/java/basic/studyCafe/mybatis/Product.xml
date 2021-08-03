@@ -91,5 +91,13 @@
 		ORDER BY prod_number ASC
 	</select>
 	 
+	 <update id="updateCount" parameterType="int">
+		UPDATE Product SET
+		prod_readcount = prod_readcount + 1
+		WHERE prod_number =
+		#{prod_number}
+
+	</update>
+	
 	
 </mapper>

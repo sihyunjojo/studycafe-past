@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import basic.studyCafe.mybatis.BoardMapper;
+import basic.studyCafe.mybatis.NoticeMapper;
 import basic.studyCafe.mybatis.ProductMapper;
 import basic.studyCafe.vo.BoardVO;
 import basic.studyCafe.vo.CartProductVO;
@@ -95,6 +96,13 @@ public class ProductDAOimpl implements ProductDAO {
 		ProductMapper productMapper = sqlSession.getMapper(ProductMapper.class);
 		List<ProductVO> productSearchList = productMapper.selectTypeSearchList(searchProduct);
 		return productSearchList;
+	}
+
+	@Override
+	public void updateCount(int prod_number) {
+		// TODO Auto-generated method stub
+		ProductMapper productMapper = sqlSession.getMapper(ProductMapper.class);
+		productMapper.updateCount(prod_number);
 	}
 
 	

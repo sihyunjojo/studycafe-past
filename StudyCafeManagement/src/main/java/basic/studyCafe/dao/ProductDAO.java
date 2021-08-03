@@ -19,5 +19,6 @@ public interface ProductDAO {
 	public void deleteProduct(int prod_number);
 	public List<ProductVO> selectNameSearchList(ProductVO searchProduct);
 	public List<ProductVO> selectTypeSearchList(ProductVO searchProduct);
+	public void updateCount(int prod_number);
 }
  
