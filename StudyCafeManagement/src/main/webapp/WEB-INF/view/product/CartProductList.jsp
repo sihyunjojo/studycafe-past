@@ -107,8 +107,7 @@ body { margin:0; padding:0; font-family:'맑은 고딕', verdana; }
 			value="${sessionScope.user_id}" /></td>
 			
 			
-      <td><input type="hidden" name="user_id"
-			value="${sessionScope.user_id}" /></td>
+      <input type="hidden" name="user_id" value="${sessionScope.user_id}" />
       <table>
 		<td>
 		<c:forEach var = "cartProduct" items = "${cartProductList}" varStatus="status">
@@ -117,10 +116,10 @@ body { margin:0; padding:0; font-family:'맑은 고딕', verdana; }
 				<td>
 				<tr>상품 번호: ${cartProduct.prod_number }</tr>
 				<br><tr>
- 	            <a href="ProductDetail?prod_number=${product.prod_number}" >
+		         <a href="ProductDetail?prod_number=${cartProduct.prod_number}&&user_id=${sessionScope.user_id}">
 	             <img src = "/StudyCafeManagement/resources/images/${cartProduct.prod_image }" class = "productImage" width="200"/></a> 
 	            </tr>
-				<br><tr><a href="ProductDetail?prod_number=${cartProduct.prod_number}">
+				<br><tr><a href="ProductDetail?prod_number=${cartProduct.prod_number}&&user_id=${sessionScope.user_id}">
 				상품명 : ${cartProduct.prod_name }</a></tr>
 				<br><tr>가격 : ${cartProduct.prod_price }원 </tr>
 				<br>
