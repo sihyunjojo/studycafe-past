@@ -12,15 +12,6 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 <title>Insert title here</title>
 
-<script>
-	function fn_board_update(){
-		location.href = "BoardUpdate?board_number=${board.board_number}";
-	}	
-	function fn_board_delete(){
-		location.href = "BoardDelete?board_number=${board.board_number}";
-	}
-	
-</script>
 </head>
 <body>
 		<header>

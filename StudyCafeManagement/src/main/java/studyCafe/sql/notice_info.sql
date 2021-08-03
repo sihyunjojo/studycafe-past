@@ -14,8 +14,15 @@ create sequence Notice_info_seq;
 
 
 alter table Notice_info modify notice_title varchar2(100);
-INSERT INTO notice_info VALUES(notice_info_seq.nextval, 'admin', 'test', sysdate, 0, 'test_content');
 
+begin
+   for i in 1..100 loop
+      INSERT INTO notice_info VALUES(Notice_info_seq.nextval, 'admin', 
+      'test', sysdate, 0, 'test_content');
+   end loop; 
+end;
+/
+commit;
 
 drop table Notice_info;
 DROP SEQUENCE Notice_info_seq;

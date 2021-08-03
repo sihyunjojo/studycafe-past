@@ -12,7 +12,7 @@ begin
 	end loop; 
 end;
 /
-commit
+commit;
 
 
 drop table sea

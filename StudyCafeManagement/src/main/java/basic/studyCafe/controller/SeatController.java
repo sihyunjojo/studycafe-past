@@ -24,7 +24,7 @@ public class SeatController {
 	private SeatService seatService;
 
 	@RequestMapping(value = "/register")
-	public ModelAndView registPOST(@RequestParam(defaultValue = "null") String user_id, 
+	public ModelAndView gotoRegist(@RequestParam(defaultValue = "null") String user_id, 
 			HttpServletResponse response) throws IOException {
 		ModelAndView mav = new ModelAndView();
 		
