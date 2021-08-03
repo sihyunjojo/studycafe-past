@@ -134,7 +134,7 @@ public class ProductController extends HttpServlet {
 	@RequestMapping(value = "/ProductRegist", method = RequestMethod.POST)
 	public String ProductRegist(ProductVO productVO) {
 		productService.registArticle(productVO);
-		return "redirect:/product/ProductList";
+		return "redirect:/product/ProductListAdmin";
 	}
 	
 	@RequestMapping(value = "/ProductUpdate", method = RequestMethod.GET)
@@ -151,7 +151,7 @@ public class ProductController extends HttpServlet {
 	@RequestMapping(value = "/ProductUpdate", method = RequestMethod.POST)
 	public String ProductUpdate(ProductVO product) {
 		productService.modifyProduct(product);
-		return "redirect:/product/ProductList";
+		return "redirect:/product/ProductListAdmin";
 	}
 	
 	
@@ -165,7 +165,8 @@ public class ProductController extends HttpServlet {
 	
 	@RequestMapping(value = "/ProductSearchList", method = RequestMethod.POST)
 	public ModelAndView viewProductSearchList(@RequestParam(defaultValue = "prod_name") String search_option,
-			@RequestParam("keyword") String keyword, ProductVO searchProduct) {
+			@RequestParam("keyword") String keyword,@RequestParam("user_id") String user_id, ProductVO searchProduct) {
+		String path = "";
 		ModelAndView mav = new ModelAndView();
 
 		List<ProductVO> productSearchList;
@@ -178,7 +179,13 @@ public class ProductController extends HttpServlet {
 			productSearchList = productService.getTypeSearchList(searchProduct);
 		}
 
-		mav.setViewName("product/ProductSearchList");
+		if (user_id.equals("admin")) {
+			path = "product/ProductSearchListAdmin";
+		} else {
+			path = "product/ProductSearchList";
+		}
+		
+		mav.setViewName(path);
 		mav.addObject("productSearchList", productSearchList);	
 
 		return mav;

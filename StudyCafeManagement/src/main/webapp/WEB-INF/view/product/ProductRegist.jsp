@@ -64,7 +64,7 @@ body { margin:0; padding:0; font-family:'맑은 고딕', verdana; }
         <div class="nav_container">
          <h7 style ="color:white; margin:3px; font-size:40px; font-weight:bold;">베이직 스터디 카페</h7>
         <div class="cafe_menus">
-                    <img src="" class="logo_image" width="40" height="40" >
+				<img src="/StudyCafeManagement/resources/images/logo.jpg" class="logo_image" width="40" height="40">
                     <a href="/" class="Seat" >좌석</a>
                     <a href="/" class="Product" >상품</a>
                     <a href="/" class="Community" >커뮤니티</a>
@@ -83,26 +83,26 @@ body { margin:0; padding:0; font-family:'맑은 고딕', verdana; }
 			<hr>
 			<br>
 				<ul>
-					
-					<li><a href="/shop/list?c=100&l=1">과자</a>
-				
+					<br>
+					<li><a href="search_type_product_form()" >과자</a>
 						<ul class="low">
-							<li><a href="/shop/list?c=101&l=2">베스트과자</a></li>
-							<li><a href="/shop/list?c=102&l=2">달콤한과자</a></li>
-							<li><a href="/shop/list?c=103&l=2">그냥과자</a></li>
+							<li><a href="ProductTypeList?prod_type = 베스트 과자">베스트과자</a></li>
+							<li><a href="ProductTypeList?prod_type = 달콤한 과자">달콤한과자</a></li>
 						</ul>
-						
-					</li>
-					<li><a href="/shop/list?c=200&l=1">빵</a></li>
-					<li><a href="/shop/list?c=300&l=1">음료</a></li>
+						</li>
+					<li><a href="search_type_product_form()" >빵</a></li>
+					<li><a href="ProductTypeList?prod_type =라면">라면</a></li>
+					<li><a href="ProductTypeList?prod_type ='햄버거'">햄버거</a></li>
+					<li><a href="ProductTypeList?prod_type =음료">음료</a>
 						<ul class="low">
-								<li><a href="/shop/list?c=101&l=2">탄산음료</a></li>
-								<li><a href="/shop/list?c=102&l=2">주스</a></li>
-								<li><a href="/shop/list?c=103&l=2">음류수</a></li>
-							</ul>
-					<li><a href="/shop/list?c=400&l=1">커피</a></li>
-					<li><a href="/shop/list?c=400&l=1">티,스무디</a></li>
-					<li><a href="/shop/list?c=400&l=1">기타</a></li>
+								<li><a href="ProductTypeList?prod_type =탄산음료">탄산음료</a></li>
+								<li><a href="ProductTypeList?prod_type =주스">주스</a></li>
+								<li><a href="ProductTypeList?prod_type =음류수">음류수</a></li>
+						</ul>
+						</li>
+					<li><a href="ProductTypeList?prod_type = 커피">커피</a></li>
+					<li><a href="ProductTypeList?prod_type =티">티</a></li>
+					<li><a href="ProductTypeList?prod_type =기타">기타</a></li>
 					
 				</ul>
 			<br>
@@ -145,7 +145,10 @@ body { margin:0; padding:0; font-family:'맑은 고딕', verdana; }
 			</tr>
 			
 			<tr>
-				<td colspan="3"><input type="submit" value="상품 등록"></td>
+				<td colspan="3"><input type="submit" value="상품 등록">
+				<input type="submit" href="ProductListAdmin" value="취소">
+				</td>
+				
 			</tr>
 		</table>
 	</form>
@@ -162,7 +165,7 @@ body { margin:0; padding:0; font-family:'맑은 고딕', verdana; }
 			        
 	
 	<footer id = "content" style = "">
-		<a href="" style = "float:right" > 취소 </a>
+
 
  	</footer>
 </body>

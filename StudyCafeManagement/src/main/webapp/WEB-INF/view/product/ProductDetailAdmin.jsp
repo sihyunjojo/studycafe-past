@@ -89,7 +89,7 @@ body { margin:0; padding:0; font-family:'맑은 고딕', verdana; }
 		<div id="container_box">
 		
 		<aside id="aside">
-				<h3>카테고리</h3>
+				<h3>카테고리</h3>				
 			<hr>
 				
 			 <ul>
@@ -122,7 +122,7 @@ body { margin:0; padding:0; font-family:'맑은 고딕', verdana; }
 			
 	<section id = "content">
  
-      <h3> ${product.prod_name } 관리</h3>
+      <h3> ${product.prod_name } 관리</h3>      
       <hr>
       
       <td><input type="hidden" name="user_id"
@@ -136,6 +136,7 @@ body { margin:0; padding:0; font-family:'맑은 고딕', verdana; }
 	            <img src = "/StudyCafeManagement/resources/images/${product.prod_image }" class = "productImage" width="300"/></tr>
 				<br><tr>상품 이름: ${product.prod_name }</tr>
 				<br><tr>상품 종류: ${product.prod_type }</tr>
+				<br><tr>상품 수량: ${product.prod_amount }</tr>
 				<br><tr>상품 가격: ${product.prod_price }원</tr>
 				<br><tr>상품 내용: ${product.prod_content }</tr>
 				<br><tr>조회수 : ${product.prod_readcount } </tr>

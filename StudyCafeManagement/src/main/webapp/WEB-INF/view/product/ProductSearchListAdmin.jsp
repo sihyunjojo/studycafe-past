@@ -11,10 +11,6 @@
 	function fn_insert_form(){
 		location.href = "BoardInsert";
 	}
-	function search_type_product_form(){
-		String product_type= "빵";
-		location.href = "ProductTypeList?prod_type = product_type"
-	}
 </script>
 
 <style>
@@ -98,8 +94,6 @@ body { margin:0; padding:0; font-family:'맑은 고딕', verdana; }
 			<br>
 			<hr>
 				
-				<a href="ProductDetail?prod_number=${product.prod_number}">
-				
 				<ul>
 					<br>
 					<li><a href="search_type_product_form()" >과자</a>
@@ -130,34 +124,34 @@ body { margin:0; padding:0; font-family:'맑은 고딕', verdana; }
 			
 <section id = "content">
 
-			<h3>관리자 상품 목록</h3>
+			<h3>검색된 상품 목록</h3>
 			<a href="ProductRegist">상품 등록</a>
-			
-			<br>
-		    <hr>
+						
+		      <hr>
 				   
 				   
-		<c:if test="${empty productList }">
+		<c:if test="${empty productSearchList }">
 		     <h1>등록된 상품 정보가 없습니다.</h1>
 		</c:if>
 				   
 				   
 				   
-	<c:if test="${not empty productList }">  	
+	<c:if test="${not empty productSearchList }">  	
+	
+	<input type="hidden" name="user_id" value="${sessionScope.user_id}" />
 	
       <table>
 			<td>
-			<c:forEach var = "product" items = "${productList}" varStatus="status">
+			<c:forEach var = "product" items = "${productSearchList }" varStatus="status">
 		         <!-- varStatus : forEach 블록에서 반복 상태를 저장하는 속성 -->
 					
 					<td>
-					<br>
-					<tr>상품 번호: ${product.prod_number }
-					</tr>
 					<tr>
 		            <a href="ProductDetail?prod_number=${product.prod_number}&&user_id=${sessionScope.user_id}">
 		            <img src = "/StudyCafeManagement/resources/images/${product.prod_image }" class = "productImage" width="200"/></a>
 		            </tr><br>
+					<tr>상품 번호: ${product.prod_number }
+					</tr><br>
 					<tr><a href="ProductDetail?prod_number=${product.prod_number}&&user_id=${sessionScope.user_id}">
 					상품이름 : ${product.prod_name }</a>
 					</tr><br>
@@ -165,8 +159,8 @@ body { margin:0; padding:0; font-family:'맑은 고딕', verdana; }
 					</tr><br>
 					</td>
 					<hr>
-					 <c:if test="${(status.index + 1) % 5 == 0}">
-				     </c:if>
+					 <%-- <c:if test="${(status.index + 1) % 5 == 0}">
+				     </c:if> --%>
 				    
 			</c:forEach>
 			</td>
@@ -176,7 +170,7 @@ body { margin:0; padding:0; font-family:'맑은 고딕', verdana; }
 	<form action="ProductSearchList" method="POST">
 		<select name="search_option">
 			<option value="prod_name">상품 이름</option>
-			<option value="prod_tpye">상품 종류</option>			
+			<option value="prod_tpye">상품 종류</option>
 		</select> 
 			<input type="hidden" name="user_id" value="${sessionScope.user_id}" />
 			<input type="text" name="keyword"> <input type="submit" value="검색">

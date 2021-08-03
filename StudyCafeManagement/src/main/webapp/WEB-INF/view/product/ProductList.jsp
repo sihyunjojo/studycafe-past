@@ -84,7 +84,6 @@ body { margin:0; padding:0; font-family:'맑은 고딕', verdana; }
 					<a href="/StudyCafeManagement/board/BoardList" class="Community">커뮤니티</a>
 					<a href="/StudyCafeManagement/notice/NoticeList?user_id=${sessionScope.user_id}" class="Notice">공지사항</a>
 					<a href="/" class="Message">메시지</a>
-					<h3 style = "display:inline">id = ${sessionScope.user_id}</h3>
 			</div>
 
 		</div>
@@ -172,8 +171,9 @@ body { margin:0; padding:0; font-family:'맑은 고딕', verdana; }
 	<form action="ProductSearchList" method="POST">
 		<select name="search_option">
 			<option value="prod_name">상품 이름</option>
-			<option value="prod_tpye">상품 종류</option>
+			<option value="prod_tpye">상품 종류</option>			
 		</select> 
+			<input type="hidden" name="user_id" value="${sessionScope.user_id}" />
 			<input type="text" name="keyword"> <input type="submit" value="검색">
 	</form> 
 	 
