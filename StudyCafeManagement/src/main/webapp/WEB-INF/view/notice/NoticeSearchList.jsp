@@ -27,7 +27,7 @@
 
 	<div class="container">
 
-		<h1> 게시판</h1>
+		<h1> 공지사항</h1>
 		
 		<hr />
 		

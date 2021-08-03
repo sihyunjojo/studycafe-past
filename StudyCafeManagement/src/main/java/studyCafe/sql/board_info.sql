@@ -23,7 +23,7 @@ begin
 	end loop; 
 end;
 /
-commit
+commit;
 
 INSERT INTO board_info VALUES(Board_info_seq.nextval, 'admin', 'test', sysdate, 0, 'test_content');
 
