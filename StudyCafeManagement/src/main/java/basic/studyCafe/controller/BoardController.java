@@ -1,6 +1,9 @@
 package basic.studyCafe.controller;
 
+import java.io.PrintWriter;
 import java.util.List;
+
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -56,7 +59,17 @@ public class BoardController {
 	}
 	
 	@RequestMapping(value = "/BoardInsert", method = RequestMethod.GET)
-	public String boardWriteForm(@ModelAttribute("cri") Criteria cri, Model model) {
+	public String boardWriteForm(@ModelAttribute("cri") Criteria cri, Model model,
+			@RequestParam(defaultValue = "null") String user_id, 
+			HttpServletResponse response) throws Exception {
+		
+		response.setContentType("text/html; charset=UTF-8");
+		PrintWriter out = response.getWriter();
+		if(user_id.equals("null")) {
+			out.println("<script>alert('경고!! 로그인이 필요합니다.');history.back()</script>");
+			out.flush();
+		}
+		
 		return "/board/BoardWriteForm";
 	}
 

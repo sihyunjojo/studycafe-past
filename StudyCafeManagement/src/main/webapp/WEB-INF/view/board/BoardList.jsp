@@ -33,7 +33,7 @@
 		<div>
 			
 			<ul>
-				<li><a href="BoardInsert${pageMaker.makeQuery(pageMaker.cri.page)}">글쓰기</a></li>
+				<li><a href="BoardInsert${pageMaker.makeQuery(pageMaker.cri.page)}&user_id=${sessionScope.user_id}">글쓰기</a></li>
 				<li><a href="/StudyCafeManagement/common/LoginMain">메인화면</a></li>
 			</ul>
 			
