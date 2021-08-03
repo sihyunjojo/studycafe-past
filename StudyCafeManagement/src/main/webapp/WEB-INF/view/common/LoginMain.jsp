@@ -313,18 +313,18 @@ ul li a:hover, ul li a:focus {
   		
   		<div>
 				<ul>
-					<c:if test="${pageMaker.prev}">
-    					<li><a href="LoginMain${pageMaker.makeQuery(pageMaker.startPage - 1)}">&laquo;</a></li>
+					<c:if test="${boardPageMaker.prev}">
+    					<li><a href="LoginMain${boardPageMaker.makeBoardQuery(boardPageMaker.startPage - 1)}">&laquo;</a></li>
     				</c:if> 
 
-    				<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
+    				<c:forEach begin="${boardPageMaker.startPage}" end="${boardPageMaker.endPage}" var="idx">
     					<li> 
-    						<a href="LoginMain${pageMaker.makeQuery(idx)}">${idx}</a>
+    						<a href="LoginMain${boardPageMaker.makeBoardQuery(idx)}">${idx}</a>
     					</li>
     				</c:forEach>
 
-    				<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-				    	<li><a href="LoginMain${pageMaker.makeQuery(pageMaker.endPage + 1)}">&raquo;</a></li>
+    				<c:if test="${boardPageMaker.next && boardPageMaker.endPage > 0}">
+				    	<li><a href="LoginMain${boardPageMaker.makeBoardQuery(boardPageMaker.endPage + 1)}">&raquo;</a></li>
 				    </c:if> 
 				</ul>
 		</div>
@@ -411,18 +411,18 @@ ul li a:hover, ul li a:focus {
   		
 		<div>
 				<ul>
-					<c:if test="${pageMaker.prev}">
-    					<li><a href="LoginMain${pageMaker.makeQuery(pageMaker.startPage - 1)}">&laquo;</a></li>
+					<c:if test="${noticePageMaker.prev}">
+    					<li><a href="LoginMain${noticePageMaker.makeNoticeQuery(noticePageMaker.startPage - 1)}">&laquo;</a></li>
     				</c:if> 
 
-    				<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
+    				<c:forEach begin="${noticePageMaker.startPage}" end="${noticePageMaker.endPage}" var="idx">
     					<li> 
-    						<a href="LoginMain${pageMaker.makeQuery(idx)}">${idx}</a>
+    						<a href="LoginMain${noticePageMaker.makeNoticeQuery(idx)}">${idx}</a>
     					</li>
     				</c:forEach>
 
-    				<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-				    	<li><a href="LoginMain${pageMaker.makeQuery(pageMaker.endPage + 1)}">&raquo;</a></li>
+    				<c:if test="${noticePageMaker.next && noticePageMaker.endPage > 0}">
+				    	<li><a href="LoginMain${noticePageMaker.makeNoticeQuery(noticePageMaker.endPage + 1)}">&raquo;</a></li>
 				    </c:if> 
 				</ul>
 		</div>
