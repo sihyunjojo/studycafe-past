@@ -151,32 +151,11 @@ body { margin:0; padding:0; font-family:'맑은 고딕', verdana; }
     <div style = "clear: both;">
 		<span id = "footer" style = "font-size: xx-large;  margin-left:400px; float:right; clear:both;">
 	
-		<input type="submit" href="product/ProductList" value="쇼핑 계속하기" style = "margin-right:100px;">
 		
-		<form action="addCartProduct" method = "post" name = "addCartProductForm">		
-			<input type="hidden" name="prod_number" id="prod_name"
-					value="${product.prod_number}" >
-			<input type="hidden" name="user_id" id="user_id" 
-					value="${sessionScope.user_id}" >
-			<input type = "submit" value = "장바구니 담기"/>
-		</form>
+		<a href="ProductListAdmin" style = "color:#0d1d1f; text-decoration:none; margin-right: 20px">목록 보기</a>
+		<a href="ProductUpdate?prod_number=${product.prod_number}" style = "color:#0d1d1f; text-decoration:none; margin-right: 20px">상품 수정</a>
+		<a href="ProductDelete?prod_number=${product.prod_number}" style = "color:#0d1d1f; text-decoration:none;">상품 삭제</a>
 		
-		<a href="ProductUpdate?prod_number=${product.prod_number}" >상품 수정</a>
-		<a href="ProductDelete?prod_number=${product.prod_number}" >상품 삭제</a>
-		
-			
-		
-			
-		     
-		
-		
-			<%-- <form action="reserve" method = "post" name = "reserveForm">
-				<label>좌석 번호 : </label><input type = "text" name = "seatNum" id ="seatNum">
-				<input type="hidden" name="user_id"
-							value="${sessionScope.user_id}" />
-				<br>
-				
-			</form> --%>
 		
 		</span>
 	</div>
