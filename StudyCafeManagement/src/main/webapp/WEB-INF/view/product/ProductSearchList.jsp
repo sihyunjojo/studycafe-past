@@ -141,7 +141,7 @@ body { margin:0; padding:0; font-family:'맑은 고딕', verdana; }
       <table>
 			<td>
 			<c:forEach var = "product" items = "${productSearchList }" varStatus="status">
-		         <!-- varStatus : forEach 블록에서 반복 상태를 저장하는 속성 -->
+		         <!-- varStatus : forEach 블록에서 반복 상태를 저장하는 속성 123 -->
 					
 					<td>
 					<tr>
@@ -163,8 +163,7 @@ body { margin:0; padding:0; font-family:'맑은 고딕', verdana; }
 			</c:forEach>
 			</td>
 		</table>		
-	</c:if>
-	
+	</c:if> 
 	<form action="ProductSearchList" method="POST">
 		<select name="search_option">
 			<option value="prod_name">상품 이름</option>
