@@ -276,7 +276,7 @@ ul li a:hover, ul li a:focus {
 					<a href="/StudyCafeManagement/product/ProductList?user_id=${sessionScope.user_id}" class="Product">상품</a> 
 					<a href="/StudyCafeManagement/board/BoardList" class="Community">커뮤니티</a>
 					<a href="/StudyCafeManagement/notice/NoticeList?user_id=${sessionScope.user_id}" class="Notice">공지사항</a>
-					<a href="/StudyCafeManagement/message/Chat?user_id=${sessionScope.user_id}" class="Message">메시지</a>
+					<a href="/StudyCafeManagement/message/Chat?user_id=${sessionScope.user_id}" class="Message">메시지</a> 
 			</div>
 
 		</div>
