@@ -91,6 +91,7 @@ div {
 	width: 1500px;
 	height: 1200px;
 	margin: auto;
+	
 	display: grid;
 	align-items: stretch;
 	grid-template-columns: 1fr 1fr 1fr 1fr;
@@ -281,6 +282,7 @@ ul li a:hover, ul li a:focus {
 
 		</div>
 	</header>
+	
 	<section>
 		<div class="section-container">
 			<div class="temp-box">
